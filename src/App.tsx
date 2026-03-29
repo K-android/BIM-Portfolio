@@ -272,7 +272,7 @@ export default function App() {
       icon: <Layers className="w-6 h-6 text-gray-400" />,
       color: "gray-400",
       metric: "Experiential",
-      gifUrl: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJqZ3R6Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/3o7TKMGpxXfQC9cc4o/giphy.gif",
+      gifUrl: "https://media.giphy.com/media/3o7TKMGpxXfQC9cc4o/giphy.gif",
       tags: ["Concept Design", "Human Scale", "Modeling"],
       workflow: {
         screenshotUrl: "https://picsum.photos/seed/arch-workflow-1/800/450?grayscale",
@@ -291,7 +291,7 @@ export default function App() {
       icon: <Box className="w-6 h-6 text-gray-400" />,
       color: "gray-400",
       metric: "Materiality",
-      gifUrl: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJqZ3R6Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/l41lTfuxR4R8E/giphy.gif",
+      gifUrl: "https://media.giphy.com/media/l41lTfuxR4R8E/giphy.gif",
       tags: ["Fabrication", "Detailing", "Structure"],
       workflow: {
         screenshotUrl: "https://picsum.photos/seed/arch-workflow-2/800/450?grayscale",
@@ -350,7 +350,7 @@ export default function App() {
       icon: <Hammer className="w-6 h-6 text-gray-400" />,
       color: "gray-400",
       metric: "Upcycled",
-      gifUrl: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJqZ3R6Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/l41lTfuxR4R8E/giphy.gif",
+      gifUrl: "https://media.giphy.com/media/l41lTfuxR4R8E/giphy.gif",
       tags: ["Fabrication", "Materiality", "On-Site Assembly"],
       category: "Fabrication",
       details: {
@@ -369,7 +369,7 @@ export default function App() {
       icon: <Hammer className="w-6 h-6 text-gray-400" />,
       color: "gray-400",
       metric: "Sustainable",
-      gifUrl: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJqZ3R6Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/l41lTfuxR4R8E/giphy.gif",
+      gifUrl: "https://media.giphy.com/media/l41lTfuxR4R8E/giphy.gif",
       tags: ["Bamboo", "Parametric Design", "Hands-on"],
       category: "Fabrication",
       details: {
@@ -392,7 +392,7 @@ export default function App() {
       color: "neon-cyan",
       metric: "Firm-Wide Scale",
       content: <CodeSnippet />,
-      gifUrl: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJqZ3R6Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/3o7TKMGpxXfQC9cc4o/giphy.gif",
+      gifUrl: "https://media.giphy.com/media/3o7TKMGpxXfQC9cc4o/giphy.gif",
       tags: ["Revit API", "Dynamo", "Python"],
       workflow: {
         screenshotUrl: "https://picsum.photos/seed/workflow-1/800/450?grayscale",
@@ -414,7 +414,7 @@ export default function App() {
       color: "neon-orange",
       metric: "100% Accuracy",
       content: <DataTable />,
-      gifUrl: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJqZ3R6Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/l41lTfuxR4R8E/giphy.gif",
+      gifUrl: "https://media.giphy.com/media/l41lTfuxR4R8E/giphy.gif",
       tags: ["Dynamo", "Excel"],
       workflow: {
         screenshotUrl: "https://picsum.photos/seed/workflow-2/800/450?grayscale",
@@ -435,7 +435,7 @@ export default function App() {
       icon: <Layers className="w-6 h-6 text-neon-blue" />,
       color: "neon-blue",
       metric: "Computational",
-      gifUrl: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJqZ3R6Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/3o7TKMGpxXfQC9cc4o/giphy.gif",
+      gifUrl: "https://media.giphy.com/media/3o7TKMGpxXfQC9cc4o/giphy.gif",
       tags: ["Rhino", "Grasshopper"],
       workflow: {
         screenshotUrl: "https://picsum.photos/seed/workflow-3/800/450?grayscale",
@@ -483,7 +483,7 @@ export default function App() {
       icon: <Cpu className="w-6 h-6 text-neon-orange" />,
       color: "neon-orange",
       metric: "Dynamic",
-      gifUrl: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJqZ3R6Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/3o7TKMGpxXfQC9cc4o/giphy.gif",
+      gifUrl: "https://media.giphy.com/media/3o7TKMGpxXfQC9cc4o/giphy.gif",
       tags: ["Vectorworks", "Marionette", "Space Tool"],
       workflow: {
         screenshotUrl: "https://picsum.photos/seed/workflow-5/800/450?grayscale",
@@ -500,7 +500,7 @@ export default function App() {
       title: "The 4D Matrix (TimeLiner)",
       role: "Simulation Lead",
       hook: "Visualizing construction sequences over time.",
-      description: "Integrating project schedules with 3D models to simulate construction sequences, identifying logistical bottlenecks before they happen on site.",
+      description: "I integrated project schedules with 3D models to simulate construction sequences, identifying logistical bottlenecks before they happen on site.",
       icon: <ShieldCheck className="w-6 h-6 text-neon-blue" />,
       color: "neon-blue",
       metric: "4D Simulation",
@@ -521,11 +521,11 @@ export default function App() {
       title: "Climate Automation",
       role: "Simulation Lead",
       hook: "Automating environmental and solar analysis.",
-      description: "Automating environmental and solar analysis to achieve Net-Zero performance targets at the massing stage.",
+      description: "I automated environmental and solar analysis to achieve Net-Zero performance targets at the massing stage.",
       icon: <ShieldCheck className="w-6 h-6 text-neon-blue" />,
       color: "neon-blue",
       metric: "Net-Zero",
-      gifUrl: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJqZ3R6Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/l41lTfuxR4R8E/giphy.gif",
+      gifUrl: "https://media.giphy.com/media/l41lTfuxR4R8E/giphy.gif",
       tags: ["Ladybug", "Honeybee", "Net-Zero"],
       workflow: {
         screenshotUrl: "https://picsum.photos/seed/workflow-7/800/450?grayscale",
@@ -542,7 +542,7 @@ export default function App() {
       title: "Corporate Data Standards",
       role: "Information Manager",
       hook: "ISO 19650 Information Management (Expert).",
-      description: "Implementing ISO 19650 compliant workflows for large-scale corporate asset portfolios. Certified expert.",
+      description: "I implemented ISO 19650 compliant workflows for large-scale corporate asset portfolios. I am a certified expert.",
       icon: <FileText className="w-6 h-6 text-neon-cyan" />,
       color: "neon-cyan",
       metric: "ISO 19650",
@@ -564,7 +564,7 @@ export default function App() {
       title: "Constructability Proof",
       role: "VDC Engineer",
       hook: "Bridging computational data with physical assembly.",
-      description: "Bridging the gap between design and fabrication through detailed assembly modeling and site-ready shop drawings.",
+      description: "I bridged the gap between design and fabrication through detailed assembly modeling and site-ready shop drawings.",
       icon: <Hammer className="w-6 h-6 text-neon-orange" />,
       color: "neon-orange",
       metric: "Site-Ready",
@@ -858,18 +858,12 @@ export default function App() {
                 {isArch ? (
                   <img 
                     key="arch-hero-gif"
-                    src="https://drive.google.com/uc?id=1pkQRJn2lKbEQIqKWvgq9_5Xg6Wi-jfSh" 
+                    src="https://lh3.googleusercontent.com/d/1-BhZKRQJEpkQhE8Kuq6BURh0UYO7qYrH" 
                     alt="Arch Hero GIF"
                     referrerPolicy="no-referrer"
                     className="w-full h-full object-cover opacity-100 transition-all duration-1000 pointer-events-none select-none"
                     onContextMenu={(e) => e.preventDefault()}
                     onDragStart={(e) => e.preventDefault()}
-                    onLoad={() => console.log("GIF Loaded")}
-                    onError={(e) => {
-                      console.error("GIF Load Error");
-                      // Fallback to another format if it fails
-                      (e.target as HTMLImageElement).src = "https://lh3.googleusercontent.com/d/1pkQRJn2lKbEQIqKWvgq9_5Xg6Wi-jfSh";
-                    }}
                   />
                 ) : (
                   <video 
