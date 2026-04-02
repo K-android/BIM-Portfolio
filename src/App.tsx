@@ -50,11 +50,34 @@ const SoftwareStack = ({ isArch }: { isArch: boolean }) => {
 
   const tools = isArch ? archTools : bimTools;
 
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.05
+      }
+    }
+  };
+
+  const item = {
+    hidden: { opacity: 0, y: 10 },
+    show: { opacity: 1, y: 0 }
+  };
+
   return (
-    <div className="flex flex-wrap justify-center lg:justify-start gap-3 mt-8">
+    <motion.div 
+      key={isArch ? 'arch' : 'bim'}
+      variants={container}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true }}
+      className="flex flex-wrap justify-center lg:justify-start gap-3 mt-8"
+    >
       {tools.map((tool) => (
-        <div 
-          key={tool.name}
+        <motion.div 
+          key={`${isArch ? 'arch' : 'bim'}-${tool.name}`}
+          variants={item}
           className={`px-3 py-1 border text-[10px] font-mono transition-all duration-700 ${
             isArch 
             ? "border-gray-100 bg-gray-50 text-gray-500" 
@@ -62,9 +85,9 @@ const SoftwareStack = ({ isArch }: { isArch: boolean }) => {
           }`}
         >
           {tool.name} <span className="opacity-30 ml-1">[{tool.category}]</span>
-        </div>
+        </motion.div>
       ))}
-    </div>
+    </motion.div>
   );
 };
 
@@ -274,6 +297,7 @@ export default function App() {
       metric: "Experiential",
       gifUrl: "https://media.giphy.com/media/3o7TKMGpxXfQC9cc4o/giphy.gif",
       tags: ["Concept Design", "Human Scale", "Modeling"],
+      category: "Conceptual",
       workflow: {
         screenshotUrl: "https://picsum.photos/seed/arch-workflow-1/800/450?grayscale",
         steps: [
@@ -293,6 +317,7 @@ export default function App() {
       metric: "Materiality",
       gifUrl: "https://media.giphy.com/media/l41lTfuxR4R8E/giphy.gif",
       tags: ["Fabrication", "Detailing", "Structure"],
+      category: "Research",
       workflow: {
         screenshotUrl: "https://picsum.photos/seed/arch-workflow-2/800/450?grayscale",
         steps: [
@@ -627,10 +652,13 @@ export default function App() {
   ];
 
   const handleSectionChange = (index: number) => {
-    const sectionId = SECTIONS[index].toLowerCase();
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+    const visibleSections = SECTIONS.filter(s => isArch || s !== 'fabrication');
+    if (index >= 0 && index < visibleSections.length) {
+      const sectionId = visibleSections[index].toLowerCase();
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
     }
   };
 
@@ -681,10 +709,10 @@ export default function App() {
           {SECTIONS.filter(s => isArch || s !== 'fabrication').map((s, i) => (
             <button 
               key={s}
-              onClick={() => handleSectionChange(SECTIONS.indexOf(s))}
-              className={`hover:text-neon-cyan transition-colors ${activeSection === SECTIONS.indexOf(s) ? (isArch ? "text-black font-bold" : "text-neon-cyan") : ""}`}
+              onClick={() => handleSectionChange(i)}
+              className={`hover:text-neon-cyan transition-colors ${activeSection === i ? (isArch ? "text-black font-bold" : "text-neon-cyan") : ""}`}
             >
-              {isArch ? (s === 'arsenal' ? 'projects' : s === 'terminal' ? 'about me' : s === 'fabrication' ? 'fabrication' : s) : s}
+              {isArch ? (s === 'arsenal' ? 'projects' : s === 'terminal' ? 'about me' : s === 'fabrication' ? 'fabrication' : s) : (s === 'arsenal' ? 'workflows' : s)}
             </button>
           ))}
         </div>
@@ -718,12 +746,12 @@ export default function App() {
                 <button 
                   key={s}
                   onClick={() => {
-                    handleSectionChange(SECTIONS.indexOf(s));
+                    handleSectionChange(i);
                     setIsMenuOpen(false);
                   }}
-                  className={`hover:scale-110 transition-transform ${activeSection === SECTIONS.indexOf(s) ? "font-bold underline underline-offset-8" : ""}`}
+                  className={`hover:scale-110 transition-transform ${activeSection === i ? "font-bold underline underline-offset-8" : ""}`}
                 >
-                  {isArch ? (s === 'arsenal' ? 'projects' : s === 'terminal' ? 'about me' : s === 'fabrication' ? 'fabrication' : s) : s}
+                  {isArch ? (s === 'arsenal' ? 'projects' : s === 'terminal' ? 'about me' : s === 'fabrication' ? 'fabrication' : s) : (s === 'arsenal' ? 'workflows' : s)}
                 </button>
               ))}
               <div className="mt-8 flex flex-col items-center gap-4">
@@ -822,7 +850,7 @@ export default function App() {
                     : "bg-neon-cyan text-black hover:bg-white"
                   }`}
                 >
-                  {isArch ? "Explore Works" : "Initialize Arsenal"}
+                  {isArch ? "Explore Works" : "Initialize Workflows"}
                   <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </button>
 
@@ -891,20 +919,51 @@ export default function App() {
         <ParallaxSection id="arsenal" index={1} setActiveSection={setActiveSection}>
           <div>
             <div className="mb-12">
-              <h2 className={`text-xs font-mono uppercase tracking-[0.3em] mb-4 transition-colors duration-700 ${isArch ? "text-gray-800" : "text-neon-cyan"}`}>
+              <motion.h2 
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                className={`text-xs font-mono uppercase tracking-[0.3em] mb-4 transition-colors duration-700 ${isArch ? "text-gray-800" : "text-neon-cyan"}`}
+              >
                 {isArch ? "Section_01 // Projects" : "Section_01 // Automation_Stack"}
-              </h2>
+              </motion.h2>
               {!isArch && (
-                <h3 className={`text-xl md:text-2xl font-medium tracking-tighter transition-colors duration-700 ${isArch ? "text-black font-serif italic" : "text-white font-sans"}`}>
-                  The Arsenal
-                </h3>
+                <motion.h3 
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.2 }}
+                  className={`text-xl md:text-2xl font-medium tracking-tighter transition-colors duration-700 ${isArch ? "text-black font-serif italic" : "text-white font-sans"}`}
+                >
+                  The Workflows
+                </motion.h3>
               )}
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            <motion.div 
+              key={`arsenal-${isArch}`}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, amount: 0.05 }}
+              variants={{
+                hidden: { opacity: 0 },
+                show: {
+                  opacity: 1,
+                  transition: {
+                    staggerChildren: 0.05
+                  }
+                }
+              }}
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
+            >
               {arsenal.filter(item => !isArch || item.category !== 'Fabrication').map((item) => (
                 <motion.div 
                   key={item.id}
+                  variants={{
+                    hidden: { opacity: 0, y: 10 },
+                    show: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } }
+                  }}
                   whileHover={{ y: -5 }}
                   onClick={() => setSelectedArsenalItem(item)}
                   className={`group relative overflow-hidden border transition-all duration-700 cursor-pointer ${
@@ -980,7 +1039,7 @@ export default function App() {
                   </div>
                 </motion.div>
               ))}
-            </div>
+            </motion.div>
           </div>
         </ParallaxSection>
 
@@ -988,23 +1047,48 @@ export default function App() {
           <ParallaxSection id="fabrication" index={2} setActiveSection={setActiveSection}>
             <div>
               <div className="mb-12">
-                <h2 className={`text-xs font-mono uppercase tracking-[0.3em] mb-4 transition-colors duration-700 ${isArch ? "text-gray-800" : "text-neon-cyan"}`}>
-                  Section_02 // Fabrication & Hands-on
-                </h2>
-              </div>
+              <motion.h2 
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                className={`text-xs font-mono uppercase tracking-[0.3em] mb-4 transition-colors duration-700 ${isArch ? "text-gray-800" : "text-neon-cyan"}`}
+              >
+                Section_02 // Fabrication & Hands-on
+              </motion.h2>
+            </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-                {arsenal.filter(item => item.category === 'Fabrication').map((item) => (
-                  <motion.div 
-                    key={item.id}
-                    whileHover={{ y: -5 }}
-                    onClick={() => setSelectedArsenalItem(item)}
-                    className={`group relative overflow-hidden border transition-all duration-700 cursor-pointer ${
-                      isArch 
-                      ? "border-gray-100 bg-white hover:border-black" 
-                      : "border-terminal-border bg-black/40 hover:border-neon-cyan"
-                    }`}
-                  >
+            <motion.div 
+              key={`fabrication-${isArch}`}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, amount: 0.05 }}
+              variants={{
+                hidden: { opacity: 0 },
+                show: {
+                  opacity: 1,
+                  transition: {
+                    staggerChildren: 0.05
+                  }
+                }
+              }}
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
+            >
+              {arsenal.filter(item => item.category === 'Fabrication').map((item) => (
+                <motion.div 
+                  key={item.id}
+                  variants={{
+                    hidden: { opacity: 0, y: 10 },
+                    show: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } }
+                  }}
+                  whileHover={{ y: -5 }}
+                  onClick={() => setSelectedArsenalItem(item)}
+                  className={`group relative overflow-hidden border transition-all duration-700 cursor-pointer ${
+                    isArch 
+                    ? "border-gray-100 bg-white hover:border-black" 
+                    : "border-terminal-border bg-black/40 hover:border-neon-cyan"
+                  }`}
+                >
                     <div className="aspect-video md:aspect-square overflow-hidden relative">
                       <img 
                         src={item.gifUrl} 
@@ -1072,7 +1156,7 @@ export default function App() {
                     </div>
                   </motion.div>
                 ))}
-              </div>
+              </motion.div>
             </div>
           </ParallaxSection>
         )}
@@ -1080,21 +1164,54 @@ export default function App() {
         <ParallaxSection id="experience" index={isArch ? 3 : 2} setActiveSection={setActiveSection}>
           <div className="w-full max-w-4xl mx-auto">
             <div className="mb-8 md:mb-12 text-center">
-              <h2 className={`text-[10px] md:text-xs font-mono uppercase tracking-[0.3em] mb-2 md:mb-4 transition-colors duration-700 ${isArch ? "text-gray-800" : "text-neon-blue"}`}>
+              <motion.h2 
+                initial={{ opacity: 0, y: -10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                className={`text-[10px] md:text-xs font-mono uppercase tracking-[0.3em] mb-2 md:mb-4 transition-colors duration-700 ${isArch ? "text-gray-800" : "text-neon-blue"}`}
+              >
                 {isArch ? "Section_03 // Career_Path" : "Section_03 // Deployment_History"}
-              </h2>
-              <h3 className={`text-lg md:text-2xl font-medium tracking-tighter transition-colors duration-700 ${isArch ? "text-black font-serif italic" : "text-white font-sans"}`}>
+              </motion.h2>
+              <motion.h3 
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className={`text-lg md:text-2xl font-medium tracking-tighter transition-colors duration-700 ${isArch ? "text-black font-serif italic" : "text-white font-sans"}`}
+              >
                 Professional Experience
-              </h3>
+              </motion.h3>
             </div>
 
             <div className="max-w-3xl mx-auto relative px-4 md:px-0">
               {/* Timeline Line */}
               <div className={`absolute left-4 md:left-1/2 top-0 bottom-0 w-px transition-colors duration-700 ${isArch ? "bg-gray-100" : "bg-terminal-border"}`} />
               
-              <div className="space-y-8 md:space-y-12">
+              <motion.div 
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true, amount: 0.05 }}
+                variants={{
+                  hidden: { opacity: 0 },
+                  show: {
+                    opacity: 1,
+                    transition: {
+                      staggerChildren: 0.05
+                    }
+                  }
+                }}
+                className="space-y-8 md:space-y-12"
+              >
                 {experience.map((exp, idx) => (
-                  <div key={idx} className={`relative flex flex-col md:flex-row gap-4 md:gap-8 ${idx % 2 === 0 ? "md:flex-row-reverse" : ""}`}>
+                  <motion.div 
+                    key={idx} 
+                    variants={{
+                      hidden: { opacity: 0, x: idx % 2 === 0 ? 50 : -50 },
+                      show: { opacity: 1, x: 0, transition: { duration: 0.8, ease: "easeOut" } }
+                    }}
+                    className={`relative flex flex-col md:flex-row gap-4 md:gap-8 ${idx % 2 === 0 ? "md:flex-row-reverse" : ""}`}
+                  >
                     {/* Timeline Dot */}
                     <div className={`absolute left-4 md:left-1/2 w-3 h-3 -translate-x-[6px] mt-1.5 border transition-all duration-700 z-10 ${
                       isArch 
@@ -1117,79 +1234,88 @@ export default function App() {
                       </p>
                     </div>
                     <div className="hidden md:block md:w-1/2" />
-                  </div>
+                  </motion.div>
                 ))}
-              </div>
+              </motion.div>
+            </div>
 
-              {/* Certification Badge */}
-              <div className="mt-12 md:mt-20 flex flex-col items-center">
-                <motion.div 
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  className={`p-1 rounded-full ${isArch ? "bg-gray-50" : "bg-neon-cyan/10 shadow-[0_0_20px_rgba(0,255,255,0.1)]"}`}
-                >
-                  <div className={`border-2 border-dashed p-3 md:p-4 rounded-full flex items-center justify-center ${isArch ? "border-gray-200" : "border-neon-cyan/30"}`}>
-                    <img 
-                      src="https://lh3.googleusercontent.com/d/1szL-O1_LuUqLzzsL3lJqB2JzX4K39dnt" 
-                      alt="ISO 19650 Certification" 
-                      onContextMenu={(e) => e.preventDefault()}
-                      onDragStart={(e) => e.preventDefault()}
-                      className={`w-16 h-16 md:w-24 md:h-24 object-contain pointer-events-none select-none ${isArch ? "grayscale opacity-80" : "brightness-110"}`}
-                      referrerPolicy="no-referrer"
-                    />
-                  </div>
-                </motion.div>
-                <div className="mt-4 text-center px-6">
-                  <div className={`text-[8px] md:text-[10px] font-mono uppercase tracking-[0.2em] mb-1 ${isArch ? "text-gray-400" : "text-neon-cyan"}`}>
-                    Verified Credential
-                  </div>
-                  <div className={`text-xs md:text-sm font-medium ${isArch ? "text-black font-serif italic" : "text-white font-sans"}`}>
-                    ISO 19650 Information Management Expert (Level 3)
-                  </div>
-                  <div className={`text-[8px] md:text-[10px] font-mono mt-1 ${isArch ? "text-gray-400" : "text-gray-500"}`}>
-                    Powered by Plannerly
-                  </div>
+            {/* Certification Badge */}
+            <div className="mt-12 md:mt-20 flex flex-col items-center">
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                className={`p-1 rounded-full ${isArch ? "bg-gray-50" : "bg-neon-cyan/10 shadow-[0_0_20px_rgba(0,255,255,0.1)]"}`}
+              >
+                <div className={`border-2 border-dashed p-3 md:p-4 rounded-full flex items-center justify-center ${isArch ? "border-gray-200" : "border-neon-cyan/30"}`}>
+                  <img 
+                    src="https://lh3.googleusercontent.com/d/1szL-O1_LuUqLzzsL3lJqB2JzX4K39dnt" 
+                    alt="ISO 19650 Certification" 
+                    onContextMenu={(e) => e.preventDefault()}
+                    onDragStart={(e) => e.preventDefault()}
+                    className={`w-16 h-16 md:w-24 md:h-24 object-contain pointer-events-none select-none ${isArch ? "grayscale opacity-80" : "brightness-110"}`}
+                    referrerPolicy="no-referrer"
+                  />
+                </div>
+              </motion.div>
+              <div className="mt-4 text-center px-6">
+                <div className={`text-[8px] md:text-[10px] font-mono uppercase tracking-[0.2em] mb-1 ${isArch ? "text-gray-400" : "text-neon-cyan"}`}>
+                  Verified Credential
+                </div>
+                <div className={`text-xs md:text-sm font-medium ${isArch ? "text-black font-serif italic" : "text-white font-sans"}`}>
+                  ISO 19650 Information Management Expert (Level 3)
+                </div>
+                <div className={`text-[8px] md:text-[10px] font-mono mt-1 ${isArch ? "text-gray-400" : "text-gray-500"}`}>
+                  Powered by Plannerly
                 </div>
               </div>
+            </div>
 
-              {/* Mode Switcher CTA */}
-              <div className="mt-12 md:mt-20 flex flex-col items-center gap-6 px-6">
-                <div className={`text-[8px] md:text-[10px] font-mono uppercase tracking-[0.3em] transition-colors duration-700 ${isArch ? "text-gray-300" : "text-neon-cyan/40"}`}>
-                  {isArch ? "Explore the VDC Core" : "Return to Arch Studio"}
-                </div>
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={() => {
-                    setMode(isArch ? 'bim' : 'arch');
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                  }}
-                  className={`w-full sm:w-auto px-8 py-4 border font-mono text-xs uppercase tracking-[0.2em] transition-all duration-700 flex items-center justify-center gap-3 ${
-                    isArch 
-                    ? "border-black bg-black text-white hover:bg-white hover:text-black" 
-                    : "brutalist-border bg-neon-cyan/10 text-neon-cyan hover:bg-neon-cyan hover:text-black shadow-[0_0_20px_rgba(0,255,255,0.2)]"
-                  }`}
-                >
-                  {isArch ? (
-                    <>
-                      <Zap className="w-4 h-4" />
-                      Initialize BIM Mode
-                    </>
-                  ) : (
-                    <>
-                      <Layers className="w-4 h-4" />
-                      Initialize Arch Mode
-                    </>
-                  )}
-                </motion.button>
+            {/* Mode Switcher CTA */}
+            <div className="mt-12 md:mt-20 flex flex-col items-center gap-6 px-6">
+              <div className={`text-[8px] md:text-[10px] font-mono uppercase tracking-[0.3em] transition-colors duration-700 ${isArch ? "text-gray-300" : "text-neon-cyan/40"}`}>
+                {isArch ? "Explore the VDC Core" : "Return to Arch Studio"}
               </div>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => {
+                  setMode(isArch ? 'bim' : 'arch');
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+                className={`w-full sm:w-auto px-8 py-4 border font-mono text-xs uppercase tracking-[0.2em] transition-all duration-700 flex items-center justify-center gap-3 ${
+                  isArch 
+                  ? "border-black bg-black text-white hover:bg-white hover:text-black" 
+                  : "brutalist-border bg-neon-cyan/10 text-neon-cyan hover:bg-neon-cyan hover:text-black shadow-[0_0_20px_rgba(0,255,255,0.2)]"
+                }`}
+              >
+                {isArch ? (
+                  <>
+                    <Zap className="w-4 h-4" />
+                    Initialize BIM Mode
+                  </>
+                ) : (
+                  <>
+                    <Layers className="w-4 h-4" />
+                    Initialize Arch Mode
+                  </>
+                )}
+              </motion.button>
             </div>
           </div>
         </ParallaxSection>
 
         <ParallaxSection id="terminal" index={isArch ? 4 : 3} setActiveSection={setActiveSection}>
-          <div className="w-full">
+          <motion.div 
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.05 }}
+            variants={{
+              hidden: { opacity: 0, y: 10 },
+              show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+            }}
+            className="w-full"
+          >
             <div className={`border p-4 md:p-6 font-mono text-xs relative overflow-hidden transition-all duration-700 ${
               isArch 
               ? "border-gray-100 bg-white" 
@@ -1377,11 +1503,11 @@ export default function App() {
                 </div>
               </div>
             </footer>
-          </div>
+          </motion.div>
         </ParallaxSection>
       </main>
 
-      {/* Arsenal Detail Modal */}
+      {/* Workflows Detail Modal */}
       <AnimatePresence>
         {selectedArsenalItem && (
           <motion.div
@@ -1411,7 +1537,7 @@ export default function App() {
                       {selectedArsenalItem.title}
                     </h4>
                     <div className="text-[8px] md:text-[10px] font-mono text-gray-500 uppercase tracking-widest">
-                      {isArch ? "Arsenal_Record_v1.0" : "VDC_Arsenal_Data"} // {selectedArsenalItem.id}
+                      {isArch ? "Workflow_Record_v1.0" : "VDC_Workflow_Data"} // {selectedArsenalItem.id}
                     </div>
                   </div>
                 </div>
@@ -1435,7 +1561,7 @@ export default function App() {
                       <div className={`aspect-video border relative overflow-hidden transition-all duration-700 ${isArch ? "border-gray-100 bg-gray-50" : "brutalist-border bg-black"}`}>
                         <img 
                           src={selectedArsenalItem.gifUrl} 
-                          alt="Arsenal GIF"
+                          alt="Workflow GIF"
                           onContextMenu={(e) => e.preventDefault()}
                           onDragStart={(e) => e.preventDefault()}
                           className={`w-full h-full object-cover transition-all duration-700 pointer-events-none select-none ${isArch ? "opacity-100" : "opacity-60"}`}
@@ -1449,21 +1575,23 @@ export default function App() {
                       </div>
                     </div>
 
-                    <div className="space-y-4 md:space-y-6">
-                      <div className={`text-[10px] font-mono uppercase tracking-widest border-b pb-2 transition-colors duration-700 ${isArch ? "text-black border-gray-100" : "text-white border-terminal-border"}`}>
-                        02_{isArch ? "Methodology" : "Execution_Logic"}
-                      </div>
-                      <div className="space-y-3 md:space-y-4">
-                        {selectedArsenalItem.workflow.steps.map((step, i) => (
-                          <div key={i} className="flex gap-3 md:gap-4 items-start">
-                            <div className={`font-mono text-[10px] md:text-xs pt-0.5 md:pt-1 ${isArch ? "text-black font-semibold" : "text-neon-cyan"}`}>0{i + 1}</div>
-                            <div className={`text-xs md:text-sm font-mono leading-relaxed transition-colors duration-700 ${isArch ? "text-gray-500 italic" : "text-gray-400"}`}>
-                              {step}
+                    {selectedArsenalItem.workflow && (
+                      <div className="space-y-4 md:space-y-6">
+                        <div className={`text-[10px] font-mono uppercase tracking-widest border-b pb-2 transition-colors duration-700 ${isArch ? "text-black border-gray-100" : "text-white border-terminal-border"}`}>
+                          02_{isArch ? "Methodology" : "Execution_Logic"}
+                        </div>
+                        <div className="space-y-3 md:space-y-4">
+                          {selectedArsenalItem.workflow.steps.map((step, i) => (
+                            <div key={i} className="flex gap-3 md:gap-4 items-start">
+                              <div className={`font-mono text-[10px] md:text-xs pt-0.5 md:pt-1 ${isArch ? "text-black font-semibold" : "text-neon-cyan"}`}>0{i + 1}</div>
+                              <div className={`text-xs md:text-sm font-mono leading-relaxed transition-colors duration-700 ${isArch ? "text-gray-500 italic" : "text-gray-400"}`}>
+                                {step}
+                              </div>
                             </div>
-                          </div>
-                        ))}
+                          ))}
+                        </div>
                       </div>
-                    </div>
+                    )}
 
                     {!isArch && selectedArsenalItem.content && (
                       <div className="space-y-4">
