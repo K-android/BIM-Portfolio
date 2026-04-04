@@ -250,6 +250,43 @@ export default function App() {
   const [selectedArsenalItem, setSelectedArsenalItem] = useState<ArsenalItem | null>(null);
   const [mode, setMode] = useState<'bim' | 'arch'>('bim');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [formState, setFormState] = useState({ name: '', email: '', message: '' });
+  const [isSending, setIsSending] = useState(false);
+  const [isSent, setIsSent] = useState(false);
+  const [formError, setFormError] = useState<string | null>(null);
+
+  const handleFormSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSending(true);
+    setFormError(null);
+    
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formState),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to transmit message');
+      }
+
+      setIsSent(true);
+      setFormState({ name: '', email: '', message: '' });
+      
+      // Reset success message after 5 seconds
+      setTimeout(() => setIsSent(false), 5000);
+    } catch (err) {
+      console.error('Transmission error:', err);
+      setFormError(err instanceof Error ? err.message : 'CONNECTION_ERROR: UNABLE_TO_REACH_VDC_CORE');
+    } finally {
+      setIsSending(false);
+    }
+  };
 
   const isArch = mode === 'arch';
 
@@ -1425,50 +1462,96 @@ export default function App() {
                 </div>
 
                 <div className={`mt-4 p-4 md:p-6 border transition-all duration-700 ${isArch ? "border-gray-100 bg-gray-50/30" : "border-neon-cyan/20 bg-black/40"}`}>
-                  <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div className="space-y-1">
-                        <label className={`text-[8px] md:text-[10px] uppercase tracking-widest ${isArch ? "text-gray-400" : "text-neon-cyan/50"}`}>Name</label>
-                        <input 
-                          type="text" 
-                          placeholder="ENTER_NAME"
-                          className={`w-full bg-transparent border-b p-2 outline-none transition-all duration-700 text-[10px] md:text-xs ${
-                            isArch ? "border-gray-200 focus:border-black text-black" : "border-terminal-border focus:border-neon-cyan text-white"
-                          }`}
-                        />
-                      </div>
-                      <div className="space-y-1">
-                        <label className={`text-[8px] md:text-[10px] uppercase tracking-widest ${isArch ? "text-gray-400" : "text-neon-cyan/50"}`}>Email</label>
-                        <input 
-                          type="email" 
-                          placeholder="ENTER_EMAIL"
-                          className={`w-full bg-transparent border-b p-2 outline-none transition-all duration-700 text-[10px] md:text-xs ${
-                            isArch ? "border-gray-200 focus:border-black text-black" : "border-terminal-border focus:border-neon-cyan text-white"
-                          }`}
-                        />
-                      </div>
-                    </div>
-                    <div className="space-y-1">
-                      <label className={`text-[8px] md:text-[10px] uppercase tracking-widest ${isArch ? "text-gray-400" : "text-neon-cyan/50"}`}>Message</label>
-                      <textarea 
-                        rows={3}
-                        placeholder="ENTER_MESSAGE_CONTENT"
-                        className={`w-full bg-transparent border-b p-2 outline-none transition-all duration-700 text-[10px] md:text-xs resize-none ${
-                          isArch ? "border-gray-200 focus:border-black text-black" : "border-terminal-border focus:border-neon-cyan text-white"
-                        }`}
-                      />
-                    </div>
-                    <button 
-                      type="submit"
-                      className={`w-full py-3 border font-mono text-[10px] md:text-xs uppercase tracking-widest transition-all duration-700 ${
-                        isArch 
-                        ? "bg-black text-white hover:bg-gray-800" 
-                        : "bg-neon-cyan/10 text-neon-cyan border-neon-cyan/30 hover:bg-neon-cyan hover:text-black"
-                      }`}
+                  {isSent ? (
+                    <motion.div 
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="py-8 text-center space-y-4"
                     >
-                      Transmit_Message
-                    </button>
-                  </form>
+                      <div className={`text-2xl ${isArch ? "text-black" : "text-neon-cyan"}`}>✓</div>
+                      <div className={`font-mono text-xs uppercase tracking-widest ${isArch ? "text-black" : "text-white"}`}>
+                        MESSAGE_TRANSMITTED_SUCCESSFULLY
+                      </div>
+                      <p className={`text-[10px] font-mono ${isArch ? "text-gray-400" : "text-gray-500"}`}>
+                        ACKNOWLEDGMENT_ID: {Math.random().toString(16).substring(2, 10).toUpperCase()}
+                      </p>
+                    </motion.div>
+                  ) : (
+                    <form className="space-y-4" onSubmit={handleFormSubmit}>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="space-y-1">
+                          <label className={`text-[8px] md:text-[10px] uppercase tracking-widest ${isArch ? "text-gray-400" : "text-neon-cyan/50"}`}>Name</label>
+                          <input 
+                            type="text" 
+                            required
+                            value={formState.name}
+                            onChange={(e) => setFormState(prev => ({ ...prev, name: e.target.value }))}
+                            placeholder="ENTER_NAME"
+                            className={`w-full bg-transparent border-b p-2 outline-none transition-all duration-700 text-[10px] md:text-xs ${
+                              isArch ? "border-gray-200 focus:border-black text-black" : "border-terminal-border focus:border-neon-cyan text-white"
+                            }`}
+                          />
+                        </div>
+                        <div className="space-y-1">
+                          <label className={`text-[8px] md:text-[10px] uppercase tracking-widest ${isArch ? "text-gray-400" : "text-neon-cyan/50"}`}>Email</label>
+                          <input 
+                            type="email" 
+                            required
+                            value={formState.email}
+                            onChange={(e) => setFormState(prev => ({ ...prev, email: e.target.value }))}
+                            placeholder="ENTER_EMAIL"
+                            className={`w-full bg-transparent border-b p-2 outline-none transition-all duration-700 text-[10px] md:text-xs ${
+                              isArch ? "border-gray-200 focus:border-black text-black" : "border-terminal-border focus:border-neon-cyan text-white"
+                            }`}
+                          />
+                        </div>
+                      </div>
+                      <div className="space-y-1">
+                        <label className={`text-[8px] md:text-[10px] uppercase tracking-widest ${isArch ? "text-gray-400" : "text-neon-cyan/50"}`}>Message</label>
+                        <textarea 
+                          rows={3}
+                          required
+                          value={formState.message}
+                          onChange={(e) => setFormState(prev => ({ ...prev, message: e.target.value }))}
+                          placeholder="ENTER_MESSAGE_CONTENT"
+                          className={`w-full bg-transparent border-b p-2 outline-none transition-all duration-700 text-[10px] md:text-xs resize-none ${
+                            isArch ? "border-gray-200 focus:border-black text-black" : "border-terminal-border focus:border-neon-cyan text-white"
+                          }`}
+                        />
+                      </div>
+                      <button 
+                        type="submit"
+                        disabled={isSending}
+                        className={`w-full py-3 border font-mono text-[10px] md:text-xs uppercase tracking-widest transition-all duration-700 flex items-center justify-center gap-2 ${
+                          isSending ? "opacity-50 cursor-not-allowed" : ""
+                        } ${
+                          isArch 
+                          ? "bg-black text-white hover:bg-gray-800" 
+                          : "bg-neon-cyan/10 text-neon-cyan border-neon-cyan/30 hover:bg-neon-cyan hover:text-black"
+                        }`}
+                      >
+                        {isSending ? (
+                          <>
+                            <motion.div 
+                              animate={{ rotate: 360 }}
+                              transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                              className="w-3 h-3 border-2 border-current border-t-transparent rounded-full"
+                            />
+                            TRANSMITTING...
+                          </>
+                        ) : "Transmit_Message"}
+                      </button>
+                      {formError && (
+                        <motion.div 
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          className="text-[10px] font-mono text-red-500 uppercase tracking-widest text-center mt-2"
+                        >
+                          ERROR: {formError}
+                        </motion.div>
+                      )}
+                    </form>
+                  )}
                 </div>
 
                 <div className="flex gap-2 mt-6">
