@@ -269,17 +269,25 @@ export default function App() {
         body: JSON.stringify(formState),
       });
 
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || 'Failed to transmit message');
+      // Check if response is JSON
+      const contentType = response.headers.get("content-type");
+      if (contentType && contentType.includes("application/json")) {
+        const data = await response.json();
+        if (!response.ok) {
+          throw new Error(data.error || 'Failed to transmit message');
+        }
+        setIsSent(true);
+        setFormState({ name: '', email: '', message: '' });
+        setTimeout(() => setIsSent(false), 5000);
+      } else {
+        // Handle non-JSON responses (like 404 HTML pages)
+        const text = await response.text();
+        console.error('Non-JSON response:', text);
+        if (response.status === 404) {
+          throw new Error('API_NOT_FOUND: The backend server is not responding to this route.');
+        }
+        throw new Error(`SERVER_ERROR: Received unexpected response format (${response.status})`);
       }
-
-      setIsSent(true);
-      setFormState({ name: '', email: '', message: '' });
-      
-      // Reset success message after 5 seconds
-      setTimeout(() => setIsSent(false), 5000);
     } catch (err) {
       console.error('Transmission error:', err);
       setFormError(err instanceof Error ? err.message : 'CONNECTION_ERROR: UNABLE_TO_REACH_VDC_CORE');

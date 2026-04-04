@@ -12,8 +12,14 @@ async function startServer() {
 
   app.use(express.json());
 
+  // Health Check
+  app.get("/api/health", (req, res) => {
+    res.json({ status: "ok", time: new Date().toISOString() });
+  });
+
   // API Route for Contact Form
   app.post("/api/contact", async (req, res) => {
+    console.log("Received contact request:", req.body);
     const { name, email, message } = req.body;
 
     if (!name || !email || !message) {
@@ -64,6 +70,12 @@ async function startServer() {
       console.error("Error sending email:", error);
       res.status(500).json({ error: "Failed to send message. Please try again later." });
     }
+  });
+
+  // Catch-all for API routes to ensure they always return JSON
+  app.all("/api/*", (req, res) => {
+    console.warn(`Unmatched API request: ${req.method} ${req.url}`);
+    res.status(404).json({ error: `API route not found: ${req.method} ${req.url}` });
   });
 
   // Vite middleware for development
