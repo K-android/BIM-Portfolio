@@ -1,8 +1,8 @@
 import express from "express";
 import { createServer as createViteServer } from "vite";
-import path from "path";
-import nodemailer from "nodemailer";
+import path from "node:path";
 import dotenv from "dotenv";
+import contactHandler from "./api/contact.ts"; // Import the handler
 
 dotenv.config();
 
@@ -17,58 +17,16 @@ async function startServer() {
     res.json({ status: "ok", time: new Date().toISOString() });
   });
 
-  // API Route for Contact Form
+  // API Route for Contact Form - Use the shared handler
   app.post("/api/contact", async (req, res) => {
     console.log("Received contact request:", req.body);
-    const { name, email, message } = req.body;
-
-    if (!name || !email || !message) {
-      return res.status(400).json({ error: "Missing required fields" });
-    }
-
-    // SMTP Configuration from Environment Variables
-    const smtpHost = process.env.SMTP_HOST;
-    const smtpPort = parseInt(process.env.SMTP_PORT || "587");
-    const smtpUser = process.env.SMTP_USER;
-    const smtpPass = process.env.SMTP_PASS;
-    const receiverEmail = process.env.RECEIVER_EMAIL || smtpUser;
-
-    if (!smtpHost || !smtpUser || !smtpPass) {
-      console.error("SMTP configuration is missing in .env");
-      return res.status(500).json({ error: "Server configuration error. Please check SMTP settings." });
-    }
-
     try {
-      const transporter = nodemailer.createTransport({
-        host: smtpHost,
-        port: smtpPort,
-        secure: smtpPort === 465, // true for 465, false for other ports
-        auth: {
-          user: smtpUser,
-          pass: smtpPass,
-        },
-      });
-
-      const mailOptions = {
-        from: `"${name}" <${smtpUser}>`, // Sender address (often must be the authenticated user)
-        replyTo: email, // User's email for direct replies
-        to: receiverEmail,
-        subject: `New Portfolio Message from ${name}`,
-        text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
-        html: `
-          <h3>New Message from Portfolio</h3>
-          <p><strong>Name:</strong> ${name}</p>
-          <p><strong>Email:</strong> ${email}</p>
-          <p><strong>Message:</strong></p>
-          <p>${message.replace(/\n/g, "<br>")}</p>
-        `,
-      };
-
-      await transporter.sendMail(mailOptions);
-      res.json({ success: true, message: "Message sent successfully" });
+      await contactHandler(req, res);
     } catch (error) {
-      console.error("Error sending email:", error);
-      res.status(500).json({ error: "Failed to send message. Please try again later." });
+      console.error("Handler error:", error);
+      if (!res.headersSent) {
+        res.status(500).json({ error: "Internal Server Error" });
+      }
     }
   });
 
