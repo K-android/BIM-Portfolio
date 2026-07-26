@@ -13,7 +13,8 @@ import {
   Layers, 
   Workflow, 
   RefreshCw,
-  FolderOpen
+  FolderOpen,
+  Github
 } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { AECWorkflowHub } from "./AECWorkflowHub.tsx";
@@ -230,21 +231,32 @@ export const AECWebAppsCabinet: React.FC = () => {
             </div>
 
             {/* Glowing Interactive Portal & Vercel Launcher Buttons */}
-            <div className="mt-8 pt-4 border-t border-white/10 flex flex-col md:flex-row gap-4 items-center justify-between">
+            <div className="mt-8 pt-4 border-t border-white/10 flex flex-col xl:flex-row gap-4 items-center justify-between">
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 rounded-full bg-neon-orange animate-pulse" />
                 <span className="font-sans text-xs text-gray-400  tracking-widest">Status: Production Live</span>
               </div>
-              <a
-                href="https://aec-auto-hub.vercel.app/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full md:w-auto font-sans text-xs px-5 py-2.5 bg-neon-orange/15 hover:bg-neon-orange border border-neon-orange/30 text-neon-orange hover:text-black rounded font-bold transition-all flex items-center justify-center gap-2 shadow-[0_0_15px_rgba(249,115,22,0.1)] active:scale-95"
-              >
-                <Globe className="w-4 h-4" />
-                <span>Launch Live Website</span>
-                <ExternalLink className="w-3.5 h-3.5" />
-              </a>
+              <div className="flex gap-2 w-full xl:w-auto mt-4 md:mt-0">
+                <a
+                  href="https://github.com/K-android/AEC-Auto-Hub"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 md:flex-none font-sans text-xs px-3 py-2 bg-gray-800/50 hover:bg-gray-700 border border-white/10 text-white rounded font-bold transition-all flex items-center justify-center gap-1.5 active:scale-95"
+                >
+                  <Github className="w-3.5 h-3.5" />
+                  <span>Repo</span>
+                </a>
+                <a
+                  href="https://aec-auto-hub.vercel.app/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 md:flex-none font-sans text-xs px-3 py-2 bg-neon-orange/15 hover:bg-neon-orange border border-neon-orange/30 text-neon-orange hover:text-black rounded font-bold transition-all flex items-center justify-center gap-1.5 shadow-[0_0_15px_rgba(249,115,22,0.1)] active:scale-95"
+                >
+                  <Globe className="w-3.5 h-3.5" />
+                  <span>Live App</span>
+                  
+                </a>
+              </div>
             </div>
           </div>
         </motion.div>
@@ -266,9 +278,14 @@ export const AECWebAppsCabinet: React.FC = () => {
           
           <div className="p-5 flex flex-col relative z-10">
             <div className="flex justify-between items-start mb-3">
-              <span className="text-[9px] md:text-xs font-sans font-bold px-2 py-0.5 rounded tracking-widest  transition-colors duration-700 text-[#3B82F6] bg-[#3B82F6]/10 border border-white/10/20">
-                APP
-              </span>
+              <div className="flex items-center gap-2">
+                <span className="text-[9px] md:text-xs font-sans font-bold px-2 py-0.5 rounded tracking-widest  transition-colors duration-700 text-[#3B82F6] bg-[#3B82F6]/10 border border-white/10/20">
+                  APP
+                </span>
+                <span className="text-[9px] md:text-xs font-sans font-bold px-2 py-0.5 rounded tracking-widest transition-colors duration-700 text-amber-400 bg-amber-400/10 border border-amber-400/20">
+                  [ PROOF OF CONCEPT ]
+                </span>
+              </div>
               <span className="text-xs font-sans tracking-widest text-gray-500">
                 DESK_APP_02
               </span>
@@ -284,8 +301,6 @@ export const AECWebAppsCabinet: React.FC = () => {
             {/* Visual Engineering Grid Background */}
             <div className="absolute inset-0 bg-grid-pattern opacity-[0.06] pointer-events-none z-10" />
             
-
-
             {/* Actual Google Drive Hero Image */}
             <img loading="lazy" 
               src="https://drive.google.com/thumbnail?id=13Rvm3c9bgRm3vDWsufo4b4pvnWvIoCDo&sz=w1000"
@@ -346,7 +361,7 @@ export const AECWebAppsCabinet: React.FC = () => {
                       className="space-y-3"
                     >
                       <p className="text-gray-300 text-sm leading-relaxed font-sans font-medium">
-                        A live connected Virtual Design & Construction (VDC) data hub designed to eliminate the traditional 3-day wait time for drawing coordination and cost takeoffs by streaming local BIM telemetry straight to a high-availability cloud database.
+                        An R&amp;D prototype built to validate real-time ISO 19650 metadata streaming and cloud telemetry workflows. A live connected Virtual Design &amp; Construction (VDC) data hub designed to eliminate the traditional wait time for drawing coordination and cost takeoffs.
                       </p>
                       <div className="text-[#3B82F6] text-[10.5px] border-l-2 border-white/10 pl-3 py-1 bg-neon-cyan/[0.01]">
                         // Cutting data extraction latency down to absolute zero — synchronizing quantities straight from building design saved states to server nodes.
@@ -417,18 +432,29 @@ export const AECWebAppsCabinet: React.FC = () => {
             </div>
 
             {/* Glowing Website Launcher Button */}
-            <div className="mt-8 pt-4 border-t border-white/10 flex flex-col md:flex-row gap-4 items-center justify-between">
-              <span className="text-xs text-gray-500 font-sans tracking-wider">// CLOUD RUN METRIC GATEWAY</span>
-              <a
-                href="https://bim-metric-portal-boqs-tracker-111136556527.asia-southeast1.run.app/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full md:w-auto font-sans text-xs px-5 py-2.5 bg-neon-cyan/15 hover:bg-neon-cyan border border-white/10/30 text-[#3B82F6] hover:text-black rounded font-bold transition-all flex items-center justify-center gap-2 shadow-[0_0_15px_rgba(0,242,255,0.1)] active:scale-95"
-              >
-                <Globe className="w-4 h-4" />
-                <span>Launch Live Website</span>
-                <ExternalLink className="w-3.5 h-3.5" />
-              </a>
+            <div className="mt-8 pt-4 border-t border-white/10 flex flex-col xl:flex-row gap-4 items-center justify-between">
+              <span className="text-xs text-gray-500 font-sans tracking-wider">// CLOUD RUN</span>
+              <div className="flex gap-2 w-full xl:w-auto mt-4 md:mt-0">
+                <a
+                  href="https://github.com/K-android/BIM-MetricPortal--Automated-Takeoff"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 md:flex-none font-sans text-xs px-3 py-2 bg-gray-800/50 hover:bg-gray-700 border border-white/10 text-white rounded font-bold transition-all flex items-center justify-center gap-1.5 active:scale-95"
+                >
+                  <Github className="w-3.5 h-3.5" />
+                  <span>Repo</span>
+                </a>
+                <a
+                  href="https://bim-metric-portal-boqs-tracker-111136556527.asia-southeast1.run.app/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 md:flex-none font-sans text-xs px-3 py-2 bg-neon-cyan/15 hover:bg-neon-cyan border border-white/10/30 text-[#3B82F6] hover:text-black rounded font-bold transition-all flex items-center justify-center gap-1.5 shadow-[0_0_15px_rgba(0,242,255,0.1)] active:scale-95"
+                >
+                  <Globe className="w-3.5 h-3.5" />
+                  <span>Live App</span>
+                  
+                </a>
+              </div>
             </div>
           </div>
         </motion.div>
@@ -477,7 +503,7 @@ export const AECWebAppsCabinet: React.FC = () => {
             <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent z-10 pointer-events-none" />
             <div className="absolute top-3 left-3 z-20 bg-black/80 backdrop-blur-sm border border-white/10 px-2.5 py-1 rounded text-[9.5px] font-sans text-gray-300  tracking-wider flex items-center gap-1.5 font-semibold">
               <span className="w-1.5 h-1.5 bg-[#b4ff39] rounded-full animate-pulse" />
-              Live Server Connection
+              Local Server Connection
             </div>
           </div>
 
@@ -594,18 +620,29 @@ export const AECWebAppsCabinet: React.FC = () => {
             </div>
 
             {/* Glowing Website Launcher Button */}
-            <div className="mt-8 pt-4 border-t border-white/10 flex flex-col md:flex-row gap-4 items-center justify-between">
+            <div className="mt-8 pt-4 border-t border-white/10 flex flex-col xl:flex-row gap-4 items-center justify-between">
               <span className="text-xs text-gray-500 font-sans tracking-wider">// VERCEL HOSTED</span>
-              <a
-                href="https://rhino-gh-sync-web-console.vercel.app/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full md:w-auto font-sans text-xs px-5 py-2.5 bg-[#b4ff39]/15 hover:bg-[#b4ff39] border border-[#b4ff39]/30 text-[#b4ff39] hover:text-black rounded font-bold transition-all flex items-center justify-center gap-2 shadow-[0_0_15px_rgba(180,255,57,0.1)] active:scale-95"
-              >
-                <Globe className="w-4 h-4" />
-                <span>Launch Web Console</span>
-                <ExternalLink className="w-3.5 h-3.5" />
-              </a>
+              <div className="flex gap-2 w-full xl:w-auto">
+                <a
+                  href="https://github.com/K-android/Rhino.GH-Sync-Web-Console"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 md:flex-none font-sans text-xs px-3 py-2 bg-gray-800/50 hover:bg-gray-700 border border-white/10 text-white rounded font-bold transition-all flex items-center justify-center gap-1.5 active:scale-95"
+                >
+                  <Github className="w-3.5 h-3.5" />
+                  <span>Repo</span>
+                </a>
+                <a
+                  href="https://rhino-gh-sync-web-console.vercel.app/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 md:flex-none font-sans text-xs px-3 py-2 bg-[#b4ff39]/15 hover:bg-[#b4ff39] border border-[#b4ff39]/30 text-[#b4ff39] hover:text-black rounded font-bold transition-all flex items-center justify-center gap-1.5 shadow-[0_0_15px_rgba(180,255,57,0.1)] active:scale-95"
+                >
+                  <Globe className="w-3.5 h-3.5" />
+                  <span>Live App</span>
+                  
+                </a>
+              </div>
             </div>
           </div>
         </motion.div>

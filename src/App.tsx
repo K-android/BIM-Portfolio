@@ -2205,33 +2205,33 @@ export default function App() {
   const experience: ExperienceData[] = [
     {
       year: "Dec 2025 - June 2026",
-      company: "IMK Architects",
+      company: "IMK Architects, Mumbai",
       role: "Architectural Intern",
-      description: "Assisting with large-scale design coordination and modeling pipelines. Writing custom scripts to automate repetitive drawing and data entry tasks."
+      description: "Coordinating architectural GFC sets and MEP layouts for high-end residential villas. Creating custom automation scripts for drawing production while managing detailed interior and furniture documentation."
     },
     {
       year: "Jan 2025 - Present",
       company: "Self-Employed",
       role: "3D Visualizer",
-      description: "Modeling and rendering detailed, photorealistic 3D spaces for client projects using Twinmotion and D5."
+      description: "Modeling and rendering detailed, photorealistic 3D spaces for client projects using Twinmotion, D5, and Enscape."
     },
     {
       year: "July 2025 - Sept 2025",
-      company: "E.D.P Consultants",
+      company: "E.D.P Consultants, Bangalore",
       role: "Architectural Intern",
       description: "Created construction drawing sets, layouts, and high-quality 3D renders for residential client presentations."
     },
     {
       year: "Sept 2024 - May 2025",
-      company: "Anvaya",
+      company: "Solar Decathlon India",
       role: "Simulation Lead",
-      description: "Managed energy-efficiency simulations and environmental studies for housing designs."
+      description: "Managed energy-efficiency simulations and environmental studies for construction worker housing designs."
     },
     {
       year: "Dec 2021 - July 2026",
       company: "BMS College of Architecture, Design and Planning",
       role: "Bachelor of Architecture (B.Arch)",
-      description: "Studying modern architectural systems and automated modeling workflows."
+      description: "Completing core architectural design, structural engineering, and sustainable design coursework with a strong focus on computational design and VDC integration."
     }
   ];
 
@@ -2711,7 +2711,7 @@ export default function App() {
             </div>
             
             {/* HARDWARE & SOFTWARE TELEMETRY */}
-            <div className="pt-16 mt-16 md:mt-24 border-t border-white/10 w-full mb-6">
+            <div id="skills" className="pt-16 mt-16 md:mt-24 border-t border-white/10 w-full mb-6">
               <h2 className="text-[10px] md:text-xs font-mono tracking-[0.2em] text-[#3B82F6] mb-4 uppercase">
                 // TECHNICAL ARCHITECTURE & STACK
               </h2>
