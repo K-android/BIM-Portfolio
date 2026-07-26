@@ -44,7 +44,7 @@ export default function VDCSection({
                   Building automated workflows to expedite projects. Using reliable data models to ensure simple and scalable delivery.
                 </p>
                 
-                <div className="mt-4" id="skills">
+                <div className="mt-4 scroll-mt-32" id="skills">
                   <div className="font-sans text-[9px] text-[#3B82F6]/40 mb-2 tracking-[0.2em] ">
                     [STACK_COMPONENTS]
                   </div>

@@ -221,8 +221,8 @@ export const AECWebAppsCabinet: React.FC = () => {
 
               {/* Stack tags */}
               <div className="flex flex-wrap gap-2 mt-6">
-                {["React", "Tailwind CSS", "Vercel Deployment", "VDC Strategy", "Generative Design Logic", "LLM API Integration (Gemini)", "Carbon Analytics (LCA) Frameworks"].map((tag) => (
-                  <span key={tag} className="text-[9px] font-sans px-2 py-0.5 border border-white/5 text-gray-500 rounded">
+                {["React", "Tailwind CSS", "Vercel Deployment", "VDC Strategy", "Generative Design Logic", "LLM API Integration (Gemini)", "Carbon Analytics (LCA) Frameworks"].map((tag, idx) => (
+                  <span key={`${tag}-${idx}`} className="text-[9px] font-sans px-2 py-0.5 border border-white/5 text-gray-500 rounded">
                     {tag}
                   </span>
                 ))}
@@ -408,8 +408,8 @@ export const AECWebAppsCabinet: React.FC = () => {
 
               {/* Stack tags */}
               <div className="flex flex-wrap gap-2 mt-6">
-                {["Node.js API", "Firestore", "React Interface", "Revit & Dynamo Integration", "ISO-19650 Compliance"].map((tag) => (
-                  <span key={tag} className="text-[9px] font-sans px-2 py-0.5 border border-white/5 text-gray-500 rounded">
+                {["Node.js API", "Firestore", "React Interface", "Revit & Dynamo Integration", "ISO-19650 Compliance"].map((tag, idx) => (
+                  <span key={`${tag}-${idx}`} className="text-[9px] font-sans px-2 py-0.5 border border-white/5 text-gray-500 rounded">
                     {tag}
                   </span>
                 ))}
@@ -585,8 +585,8 @@ export const AECWebAppsCabinet: React.FC = () => {
 
               {/* Stack tags */}
               <div className="flex flex-wrap gap-2 mt-6">
-                {["Rhino.Compute", "Grasshopper", "REST API", "ngrok", "React Web UI", "Parametric Models"].map((tag) => (
-                  <span key={tag} className="text-[9px] font-sans px-2 py-0.5 border border-white/5 text-gray-500 rounded">
+                {["Rhino.Compute", "Grasshopper", "REST API", "ngrok", "React Web UI", "Parametric Models"].map((tag, idx) => (
+                  <span key={`${tag}-${idx}`} className="text-[9px] font-sans px-2 py-0.5 border border-white/5 text-gray-500 rounded">
                     {tag}
                   </span>
                 ))}

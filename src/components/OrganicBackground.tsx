@@ -48,6 +48,7 @@ export const OrganicBackground = () => {
       density: number;
       angle: number;
       speed: number;
+      currentAlpha: number;
 
       constructor(x: number, y: number) {
         this.x = x;
@@ -58,14 +59,22 @@ export const OrganicBackground = () => {
         this.density = (Math.random() * 30) + 1;
         this.angle = Math.random() * 360;
         this.speed = Math.random() * 0.01 + 0.005;
+        this.currentAlpha = 0.5;
       }
 
       draw() {
-        ctx!.fillStyle = 'rgba(59, 130, 246, 0.5)';
+        ctx!.fillStyle = `rgba(59, 130, 246, ${this.currentAlpha})`;
+        if (this.currentAlpha > 0.5) {
+          ctx!.shadowBlur = 15;
+          ctx!.shadowColor = 'rgba(59, 130, 246, 0.8)';
+        } else {
+          ctx!.shadowBlur = 0;
+        }
         ctx!.beginPath();
         ctx!.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx!.closePath();
         ctx!.fill();
+        ctx!.shadowBlur = 0; // reset for lines
       }
 
       update() {
@@ -86,9 +95,11 @@ export const OrganicBackground = () => {
         let directionY = forceDirectionY * force * this.density;
 
         if (distance < maxDistance) {
+          this.currentAlpha = 0.5 + (force * 0.5);
           this.x -= directionX;
           this.y -= directionY;
         } else {
+          this.currentAlpha = 0.5;
           if (this.x !== this.baseX) {
             let dx = this.x - this.baseX;
             this.x -= dx / 30;

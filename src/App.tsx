@@ -1179,31 +1179,41 @@ export default function App() {
       id: 1,
       title: "BIM DATA & COORDINATION",
       icon: <Layers className="w-4 h-4" />,
-      pills: ['Revit', 'Navisworks Manage', 'Vectorworks', 'Excel', 'ISO 19650 Standards', '5D Quantity Harvesting']
+      summary: "Structuring multi-disciplinary BIM models up to LOD 400, setting up ISO 19650 Common Data Environments (CDE), and automating 5D quantity takeoffs.",
+      core: ['Revit', 'Navisworks Manage', 'Autodesk Construction Cloud (ACC)', 'BIM Collaborate Pro', 'Vectorworks', 'Excel'],
+      methods: ['ISO 19650 Standards', 'Cloud CDE Setup & Governance', '5D Quantity Harvesting', 'Clash Coordination Matrix']
     },
     {
       id: 2,
-      title: "Automation & Runtime API",
+      title: "AUTOMATION & RUNTIME API",
       icon: <Terminal className="w-4 h-4" />,
-      pills: ['Python', 'Dynamo', 'Revit API core', 'Data Serialization (JSON)', 'Workflow Automation']
+      summary: "Developing custom automation scripts and extracting metadata via Revit APIs to drastically reduce manual repetitive drafting.",
+      core: ['Python', 'pyRevit', 'Revit API', 'Dynamo', 'Vectorworks Marionette', 'Rhino.Inside.Revit'],
+      methods: ['Custom C#/Python Add-ins', 'UI/UX Ribbon Extension', 'Automated QA/QC Auditing', 'Data Serialization (JSON)']
     },
     {
       id: 3,
       title: "COMPUTATIONAL DESIGN & SIMULATION",
       icon: <Component className="w-4 h-4" />,
-      pills: ['Rhino 3D', 'Grasshopper', 'Evolutionary Solvers (Wallacei/Galapagos)', 'Ladybug Tools', 'Rhino.Inside.Revit']
+      summary: "Utilizing algorithmic design and evolutionary solvers to generate, analyze, and optimize complex spatial geometries.",
+      core: ['Rhino 3D', 'Grasshopper', 'Ladybug Tools', 'DesignBuilder', 'Autodesk Forma', 'Rhino.Inside.Revit'],
+      methods: ['Evolutionary Solvers (Wallacei)', 'Parametric Optimization', 'Computational Fluid Dynamics (CFD)', 'Building Performance Simulation (BPS)']
     },
     {
       id: 4,
       title: "DISTRIBUTED WEB APPLICATIONS",
       icon: <Cpu className="w-4 h-4" />,
-      pills: ['React', 'TypeScript', 'Tailwind CSS', 'Node.js REST APIs', 'Cloud Databases (Firestore)', 'Vercel Deployment']
+      summary: "Building scalable full-stack web applications and custom AEC dashboards with modern frontend frameworks.",
+      core: ['React', 'TypeScript', 'Tailwind CSS', 'Node.js REST APIs', 'Three.js / WebGL'],
+      methods: ['Cloud Databases (Firestore)', 'Vercel Deployment', 'Serverless Functions', 'Real-time BIM Telemetry']
     },
     {
       id: 5,
-      title: "Reality Capture & Rendering",
+      title: "REALITY CAPTURE & RENDERING",
       icon: <Monitor className="w-4 h-4" />,
-      pills: ['D5 Render', 'Twinmotion', 'Enscape', 'Adobe Creative Suite', 'Generative AI (Stable Diffusion)']
+      summary: "Transforming 3D models into immersive visual experiences and utilizing generative AI for rapid conceptual imagery.",
+      core: ['D5 Render', 'Twinmotion', 'Enscape', 'Adobe Creative Cloud', 'Meshroom'],
+      methods: ['Photogrammetry & 3D Mesh Reconstruction', 'Photorealistic Visualization', 'Generative AI Workflows', 'Post-Production & Compositing']
     }
   ];
   const [hoveredSide, setHoveredSide] = useState<'left' | 'right' | null>(null);
@@ -2702,34 +2712,57 @@ export default function App() {
             
             {/* HARDWARE & SOFTWARE TELEMETRY */}
             <div className="pt-16 mt-16 md:mt-24 border-t border-white/10 w-full mb-6">
-              <h2 className="text-[10px] md:text-xs font-mono tracking-[0.2em] text-[#3B82F6] mb-8 uppercase">
+              <h2 className="text-[10px] md:text-xs font-mono tracking-[0.2em] text-[#3B82F6] mb-4 uppercase">
                 // TECHNICAL ARCHITECTURE & STACK
               </h2>
+              
+              <div className="flex flex-wrap gap-2 mb-8">
+                {['Python', 'Dynamo', 'Revit API', 'Rhino.Inside', 'React', 'TypeScript', 'Node.js', 'Vectorworks'].map((tech, idx) => (
+                  <span key={`${tech}-${idx}`} className="px-2.5 py-1 bg-white/5 border border-white/10 rounded text-[10px] font-mono text-gray-400">
+                    {tech}
+                  </span>
+                ))}
+              </div>
+
               <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 pb-12 md:pb-20">
-                
-                {/* Left Column: Domain List */}
-                <div className="md:col-span-5 lg:col-span-4 flex flex-col gap-2">
+                            {/* Left Column: Domain List */}
+                <div className="md:col-span-5 lg:col-span-4 flex flex-col gap-2 relative">
+                  <div className="text-[10px] text-gray-500 font-mono mb-2 uppercase tracking-widest pl-4 hidden md:block">
+                    Select a domain to view stack
+                  </div>
                   {telemetryDomains.map((domain, idx) => {
                     const isActive = activeTelemetry === idx;
                     return (
                       <button
                         key={domain.id}
                         onClick={() => setActiveTelemetry(idx)}
-                        className={`w-full flex items-center justify-between p-4 text-left transition-all duration-300 border-l-2 ${
+                        className={`group w-full flex items-center justify-between p-4 text-left transition-all duration-300 border-l-2 ${
                           isActive 
                             ? "bg-[#3B82F6]/10 border-[#3B82F6] text-white" 
-                            : "border-transparent text-gray-500 hover:text-gray-300 hover:bg-white/5"
+                            : "border-transparent text-gray-500 hover:text-gray-300 hover:bg-white/5 hover:border-white/20"
                         }`}
                       >
-                        <div className="flex items-center gap-3">
-                          <span className={`${isActive ? "text-[#3B82F6]" : "text-gray-600"}`}>
-                            {domain.icon}
-                          </span>
-                          <span className="font-mono text-[11px] md:text-xs tracking-wider uppercase">
-                            0{domain.id} // {domain.title}
-                          </span>
+                        <div className="flex flex-col gap-1.5">
+                          <div className="flex items-center gap-3">
+                            <span className={`transition-colors ${isActive ? "text-[#3B82F6]" : "text-gray-600 group-hover:text-gray-400"}`}>
+                              {domain.icon}
+                            </span>
+                            <span className="font-mono text-[11px] md:text-xs tracking-wider uppercase">
+                              0{domain.id} // {domain.title}
+                            </span>
+                          </div>
+                          {/* Visibility cue for top technologies inside */}
+                          {!isActive && (
+                            <div className="pl-7 opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-[9px] font-mono text-gray-500 truncate max-w-[200px]">
+                              {domain.core.slice(0, 3).join(', ')}...
+                            </div>
+                          )}
                         </div>
-                        {isActive && <ChevronRight className="w-4 h-4 text-[#3B82F6]" />}
+                        {isActive ? (
+                           <ChevronRight className="w-4 h-4 text-[#3B82F6]" />
+                        ) : (
+                           <ChevronRight className="w-4 h-4 text-gray-700 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
+                        )}
                       </button>
                     );
                   })}
@@ -2746,7 +2779,7 @@ export default function App() {
                       transition={{ duration: 0.2 }}
                       className="w-full border border-white/5 bg-zinc-900/30 p-8 md:p-12 rounded-xl backdrop-blur-sm"
                     >
-                      <div className="flex items-center gap-4 mb-8">
+                      <div className="flex items-center gap-4 mb-4">
                          <div className="p-3 bg-[#3B82F6]/10 text-[#3B82F6] rounded-lg">
                            {telemetryDomains[activeTelemetry].icon}
                          </div>
@@ -2755,12 +2788,32 @@ export default function App() {
                          </h3>
                       </div>
                       
-                      <div className="flex flex-wrap gap-3">
-                        {telemetryDomains[activeTelemetry].pills.map(t => (
-                          <span key={t} className="px-4 py-2 bg-black/40 border border-white/10 rounded-md text-[11px] md:text-xs font-mono text-gray-300 shadow-sm">
-                            {t}
-                          </span>
-                        ))}
+                      <p className="text-gray-400 text-sm mb-8 leading-relaxed font-sans max-w-2xl">
+                        {telemetryDomains[activeTelemetry].summary}
+                      </p>
+                        
+                      <div className="space-y-6">
+                        <div>
+                          <div className="text-[10px] font-mono text-gray-500 uppercase tracking-widest mb-3">Core Software & Languages</div>
+                          <div className="flex flex-wrap gap-2.5">
+                            {telemetryDomains[activeTelemetry].core.map((t, idx) => (
+                              <span key={`${t}-${idx}`} className="px-3.5 py-1.5 bg-[#3B82F6]/10 border border-[#3B82F6]/30 rounded-md text-[11px] md:text-xs font-mono text-blue-300 shadow-sm">
+                                {t}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                        
+                        <div>
+                          <div className="text-[10px] font-mono text-gray-500 uppercase tracking-widest mb-3">Standards & Deliverables</div>
+                          <div className="flex flex-wrap gap-2">
+                            {telemetryDomains[activeTelemetry].methods.map((t, idx) => (
+                              <span key={`${t}-${idx}`} className="px-3 py-1 bg-black/40 border border-white/10 rounded-md text-[10px] md:text-[11px] font-mono text-gray-400">
+                                {t}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
                       </div>
                     </motion.div>
                   </AnimatePresence>
@@ -2772,19 +2825,23 @@ export default function App() {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 pt-8 mt-8 md:mt-12 border-t border-white/10">
               <div>
                 <div className="text-3xl md:text-5xl font-black text-[#3B82F6] tracking-tighter mb-1">11+</div>
-                <div className="text-[10px] md:text-xs font-bold tracking-widest text-gray-500 uppercase">Automation Scripts</div>
+                <div className="text-[10px] md:text-xs font-bold tracking-widest text-gray-400 uppercase">PyRevit & Dynamo Scripts</div>
+                <div className="text-[9px] md:text-[10px] font-mono text-gray-500 mt-1">Saved ~40+ hours/project</div>
               </div>
               <div>
                 <div className="text-3xl md:text-5xl font-black text-[#3B82F6] tracking-tighter mb-1">100%</div>
-                <div className="text-[10px] md:text-xs font-bold tracking-widest text-gray-500 uppercase">ISO 19650 Compliant</div>
+                <div className="text-[10px] md:text-xs font-bold tracking-widest text-gray-400 uppercase">ISO 19650 Compliant</div>
+                <div className="text-[9px] md:text-[10px] font-mono text-gray-500 mt-1">Zero-clash model coordination</div>
               </div>
               <div>
                 <div className="text-3xl md:text-5xl font-black text-[#3B82F6] tracking-tighter mb-1">Python</div>
-                <div className="text-[10px] md:text-xs font-bold tracking-widest text-gray-500 uppercase">Dynamo & APIs</div>
+                <div className="text-[10px] md:text-xs font-bold tracking-widest text-gray-400 uppercase">Data Pipelines</div>
+                <div className="text-[9px] md:text-[10px] font-mono text-gray-500 mt-1">Automated JSON metadata extraction</div>
               </div>
               <div>
                 <div className="text-3xl md:text-5xl font-black text-[#3B82F6] tracking-tighter mb-1">LOD 350</div>
-                <div className="text-[10px] md:text-xs font-bold tracking-widest text-gray-500 uppercase">MODELING PRECISION</div>
+                <div className="text-[10px] md:text-xs font-bold tracking-widest text-gray-400 uppercase">Modeling Precision</div>
+                <div className="text-[9px] md:text-[10px] font-mono text-gray-500 mt-1">High-fidelity 5D quantity takeoffs</div>
               </div>
             </div>
 

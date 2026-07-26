@@ -631,8 +631,8 @@ export const AECWorkflowHub: React.FC = () => {
                     {/* Technology Badge listing */}
                     <div className="flex flex-wrap gap-2 mb-6 font-sans text-[9px] text-gray-400">
                       <span>Stack Profile:</span>
-                      {selectedConcept.tech.map((tech) => (
-                        <span key={tech} className="bg-white/5 border border-white/10 px-1.5 py-0.5 rounded text-gray-300">
+                      {selectedConcept.tech.map((tech, idx) => (
+                        <span key={`${tech}-${idx}`} className="bg-white/5 border border-white/10 px-1.5 py-0.5 rounded text-gray-300">
                           {tech}
                         </span>
                       ))}
@@ -779,9 +779,9 @@ export const AECWorkflowHub: React.FC = () => {
                       <span className="text-[9px] font-sans text-gray-500  tracking-widest block font-bold">
                         Choose Template Task:
                       </span>
-                      {templates.map((tmpl) => (
+                      {templates.map((tmpl, idx) => (
                         <button
-                          key={tmpl}
+                          key={`${tmpl}-${idx}`}
                           onClick={() => {
                             setUserInput(tmpl);
                             handleAskAdvisor(tmpl);
