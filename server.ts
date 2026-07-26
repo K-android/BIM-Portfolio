@@ -3,7 +3,6 @@ import { createServer as createViteServer } from "vite";
 import path from "node:path";
 import dotenv from "dotenv";
 import contactHandler from "./api/contact.ts"; // Import the handler
-import advisorHandler from "./api/advisor.ts"; // Import the advisor handler
 
 dotenv.config();
 
@@ -31,18 +30,6 @@ async function startServer() {
     }
   });
 
-  // API Route for AEC Advisor
-  app.post("/api/advisor", async (req, res) => {
-    console.log("Received AEC Automation Advisor request:", req.body);
-    try {
-      await advisorHandler(req, res);
-    } catch (error) {
-      console.error("Advisor handler error:", error);
-      if (!res.headersSent) {
-        res.status(500).json({ error: "Internal Server Error" });
-      }
-    }
-  });
 
   // Catch-all for API routes to ensure they always return JSON
   app.all("/api/*", (req, res) => {

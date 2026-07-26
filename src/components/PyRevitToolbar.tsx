@@ -48,19 +48,19 @@ export const PyRevitToolbar = ({ onShowVideo }: { onShowVideo?: () => void }) =>
   return (
     <div className="mb-16 border border-white/10 rounded-xl bg-[#0a0a0c]/90 backdrop-blur-xl overflow-hidden font-sans shadow-[0_20px_60px_-15px_rgba(0,0,0,1)] ring-1 ring-white/5 relative group/toolbar">
       {/* Decorative Header */}
-      <div className="bg-[#12141a]/90 border-b border-white/5 px-4 py-3 flex items-center justify-between relative overflow-x-auto">
+      <div className="bg-[#12141a]/90 border-b border-white/5 px-4 py-3 flex flex-col md:flex-row items-start md:items-center justify-between relative gap-3 md:gap-0">
         <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
-        <div className="flex items-center gap-3 relative z-10 shrink-0 pr-4">
+        <div className="flex items-center gap-3 relative z-10 shrink-0 w-full md:w-auto">
           <img 
             src="https://raw.githubusercontent.com/pyrevitlabs/pyRevit/master/docs/static/pyRevitLogo.svg" 
             alt="pyRevit" 
             className="w-5 h-5 drop-shadow-[0_0_8px_rgba(255,204,0,0.5)]" 
           />
-          <h3 className="text-sm font-semibold tracking-wide text-gray-200 flex items-center gap-2 whitespace-nowrap">
-            AEC Automator <span className="text-gray-600 font-normal">|</span> PyRevit AI Suite
+          <h3 className="text-sm font-semibold tracking-wide text-gray-200 flex flex-wrap items-center gap-1.5 md:gap-2">
+            <span>AEC Automator</span> <span className="text-gray-600 font-normal">|</span> <span>PyRevit AI Suite</span>
           </h3>
         </div>
-        <div className="flex items-center gap-2 md:gap-3 shrink-0">
+        <div className="flex items-center gap-2 md:gap-3 shrink-0 w-full md:w-auto flex-wrap">
           {onShowVideo && (
             <button 
               onClick={onShowVideo}
@@ -138,15 +138,15 @@ export const PyRevitToolbar = ({ onShowVideo }: { onShowVideo?: () => void }) =>
           {/* Subtle top glow */}
           <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
 
-          <div className="flex w-full divide-x divide-white/5 relative z-10">
+          <div className="grid grid-cols-2 md:flex w-full gap-3 md:gap-0 md:divide-x divide-white/5 relative z-10 p-3 md:p-0">
             {tools.map((tool) => (
               <button
                 key={tool.id}
                 onClick={() => setActiveTool(activeTool === tool.id ? null : tool.id)}
-                className={`flex-1 flex flex-col items-center justify-center gap-4 py-8 px-2 transition-all duration-300 relative group overflow-hidden
+                className={`flex-1 flex flex-col items-center justify-center gap-2 md:gap-4 p-3 md:py-8 md:px-2 min-h-[90px] md:min-h-0 rounded-lg md:rounded-none transition-all duration-300 relative group overflow-hidden
                   ${activeTool === tool.id 
-                    ? 'bg-gradient-to-b from-black/40 to-neon-cyan/5 text-white' 
-                    : 'text-gray-400 hover:bg-white/5 hover:text-white'
+                    ? 'bg-gradient-to-b from-black/40 to-neon-cyan/5 text-white border border-neon-cyan/20 md:border-none' 
+                    : 'bg-black/20 md:bg-transparent text-gray-400 hover:bg-white/5 hover:text-white border border-white/5 md:border-none md:border-transparent'
                   }
                 `}
               >
@@ -154,7 +154,7 @@ export const PyRevitToolbar = ({ onShowVideo }: { onShowVideo?: () => void }) =>
                 {activeTool === tool.id && (
                   <motion.div 
                     layoutId="activeToolGlow"
-                    className="absolute top-0 left-0 w-full h-full bg-neon-cyan/5 pointer-events-none"
+                    className="absolute top-0 left-0 w-full h-full bg-neon-cyan/5 pointer-events-none md:rounded-none rounded-lg"
                   >
                     <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-px bg-neon-cyan shadow-[0_0_15px_2px_rgba(0,243,255,0.8)]"></div>
                   </motion.div>
@@ -163,7 +163,7 @@ export const PyRevitToolbar = ({ onShowVideo }: { onShowVideo?: () => void }) =>
                 <div className={`transition-all duration-300 relative z-10 ${activeTool === tool.id ? 'scale-110 text-neon-cyan drop-shadow-[0_0_8px_rgba(0,243,255,0.6)]' : 'text-gray-500 group-hover:scale-105 group-hover:text-gray-300'}`}>
                   {tool.icon}
                 </div>
-                <span className={`text-[13px] tracking-wide text-center leading-tight transition-all duration-300 relative z-10 ${activeTool === tool.id ? 'font-semibold text-neon-cyan' : 'font-medium'}`}>
+                <span className={`text-xs break-words hyphens-auto w-full tracking-wide text-center leading-tight transition-all duration-300 relative z-10 ${activeTool === tool.id ? 'font-semibold text-neon-cyan' : 'font-medium'}`}>
                   {tool.title}
                 </span>
               </button>

@@ -11,8 +11,6 @@ import {
   TrendingUp, 
   CheckCircle2, 
   Compass, 
-  HelpCircle, 
-  Send, 
   ArrowRight, 
   Activity, 
   ArrowRightLeft,
@@ -139,7 +137,7 @@ const CONCEPT_IDEAS = [
 ];
 
 export const AECWorkflowHub: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<"pipelines" | "discovery" | "advisor">("pipelines");
+  const [activeTab, setActiveTab] = useState<"pipelines" | "discovery" >("pipelines");
 
   // Pipeline State
   const [pipelines, setPipelines] = useState<PipelineItem[]>(INITIAL_PIPELINES);
@@ -153,17 +151,6 @@ export const AECWorkflowHub: React.FC = () => {
   const [isSimulating, setIsSimulating] = useState(false);
   const [simLog, setSimLog] = useState<string[]>([]);
 
-  // Advisor State
-  const [userInput, setUserInput] = useState("");
-  const [advisorOutput, setAdvisorOutput] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-
-  // Quick Templates for Advisor
-  const templates = [
-    "How can I automate wall-to-floor join cleanup in Revit?",
-    "How do I build a real-time carbon tracking plugin in Rhino?",
-    "How can I automate MEP cable tray clearances based on building codes?"
-  ];
 
   // Run Duplicate Cleaner Automation
   const handleCleanDuplicates = () => {
@@ -211,77 +198,6 @@ export const AECWorkflowHub: React.FC = () => {
     });
   };
 
-  // Run Advisor API
-  const handleAskAdvisor = async (overridePrompt?: string) => {
-    const promptToSubmit = overridePrompt || userInput;
-    if (!promptToSubmit.trim() || isLoading) return;
-
-    setIsLoading(true);
-    setAdvisorOutput("");
-
-    try {
-      const res = await fetch("/api/advisor", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ task: promptToSubmit })
-      });
-      const data = await res.json();
-      setAdvisorOutput(data.response || "No response received.");
-    } catch (err: any) {
-      console.error(err);
-      setAdvisorOutput("An error occurred while connecting with the computational design advisor: " + err.message);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  // Quick helper to render marked response manually so we don't need heavyweight MD dependencies
-  const formatMarkdown = (text: string) => {
-    if (!text) return null;
-    const lines = text.split("\n");
-    return lines.map((line, idx) => {
-      if (line.startsWith("###")) {
-        return <h4 key={idx} className="text-sm font-semibold tracking-wide text-neon-orange mt-6 mb-2 font-sans  pb-1 border-b border-white/10">{line.replace("###", "").trim()}</h4>;
-      }
-      if (line.startsWith("##")) {
-        return <h3 key={idx} className="text-base font-bold tracking-widest text-[#3B82F6] mt-6 mb-2 font-sans  pb-1 border-b border-white/10">{line.replace("##", "").trim()}</h3>;
-      }
-      if (line.startsWith("- ")) {
-        return (
-          <div key={idx} className="flex gap-2 items-start py-0.5 pl-2">
-            <span className="text-neon-orange font-sans mt-1 text-xs">•</span>
-            <span className="text-xs text-gray-400 font-sans">{line.replace("- ", "").trim()}</span>
-          </div>
-        );
-      }
-      if (line.match(/^\d+\./)) {
-        return (
-          <div key={idx} className="flex gap-2 items-start py-1 pl-2">
-            <span className="text-[#3B82F6] font-sans text-xs font-bold">{line.match(/^\d+\./)?.[0]}</span>
-            <span className="text-xs text-gray-400 font-sans">{line.replace(/^\d+\./, "").trim()}</span>
-          </div>
-        );
-      }
-      if (line.startsWith("```")) {
-        // Just bypass code block lines
-        return null;
-      }
-      // Detect inline backticks
-      if (line.includes("`")) {
-        const parts = line.split("`");
-        return (
-          <p key={idx} className="text-xs font-sans text-gray-300 leading-relaxed py-0.5">
-            {parts.map((part, pIdx) => (
-              pIdx % 2 === 1 
-                ? <code key={pIdx} className="bg-terminal-block/80 border border-white/10 px-1 py-0.5 rounded font-sans text-[11px] text-[#3B82F6]">{part}</code>
-                : part
-            ))}
-          </p>
-        );
-      }
-      return <p key={idx} className="text-xs font-sans text-gray-400 leading-relaxed py-0.5">{line}</p>;
-    });
-  };
 
   return (
     <div className="w-full bg-terminal-block/10 border border-white/10 rounded-lg overflow-hidden flex flex-col min-h-[600px] text-left">
@@ -324,17 +240,6 @@ export const AECWorkflowHub: React.FC = () => {
           >
             <Compass className="w-3.5 h-3.5" />
             <span>Live Discovery (AI Workflows)</span>
-          </button>
-          <button
-            onClick={() => setActiveTab("advisor")}
-            className={`px-3 py-1.5 transition-all flex items-center gap-2 rounded ${
-              activeTab === "advisor"
-                ? "bg-neon-blue/15 text-neon-blue border border-neon-blue/20"
-                : "text-gray-400 hover:text-white"
-            }`}
-          >
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>AI Automation Advisor</span>
           </button>
         </div>
       </div>
@@ -751,125 +656,6 @@ export const AECWorkflowHub: React.FC = () => {
             </motion.div>
           )}
 
-          {/* TAB 3: INTERACTIVE AUTOMATION ADVISOR */}
-          {activeTab === "advisor" && (
-            <motion.div
-              key="advisor"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              className="grid grid-cols-1 xl:grid-cols-3 gap-6"
-            >
-              {/* Left Form Panel */}
-              <div className="xl:col-span-1 space-y-6">
-                <div className="bg-black/35 border border-white/10 rounded p-4 h-full flex flex-col justify-between">
-                  <div className="space-y-4">
-                    <div>
-                      <h5 className="font-sans text-xs text-white  font-bold flex items-center gap-2">
-                        <Sparkles className="w-3.5 h-3.5 text-neon-blue animate-pulse" />
-                        Advisor Command Console
-                      </h5>
-                      <p className="text-xs text-gray-400 font-sans mt-0.5">
-                        Describe any manual, repetitive AEC design drafting, scheduling, structural task, or parameter check to generate a bespoke computational script model.
-                      </p>
-                    </div>
-
-                    {/* Pre-built prompts */}
-                    <div className="space-y-2">
-                      <span className="text-[9px] font-sans text-gray-500  tracking-widest block font-bold">
-                        Choose Template Task:
-                      </span>
-                      {templates.map((tmpl, idx) => (
-                        <button
-                          key={`${tmpl}-${idx}`}
-                          onClick={() => {
-                            setUserInput(tmpl);
-                            handleAskAdvisor(tmpl);
-                          }}
-                          className="w-full text-left p-3 rounded font-sans text-xs bg-black/45 border border-white/10 hover:border-neon-blue/30 text-gray-300 hover:text-white transition-all text-xs"
-                        >
-                          {tmpl}
-                        </button>
-                      ))}
-                    </div>
-
-                    {/* Custom Input */}
-                    <div className="space-y-2">
-                      <span className="text-[9px] font-sans text-gray-500  tracking-widest block font-bold">
-                        Describe Custom Design Obstacle:
-                      </span>
-                      <textarea
-                        value={userInput}
-                        onChange={(e) => setUserInput(e.target.value)}
-                        placeholder="E.g., How can I automate exporting Revit room ceiling heights directly into an excel sheet using Python?"
-                        rows={5}
-                        className="w-full bg-[#05080a] border border-white/10 hover:border-white/10 focus:border-neon-blue/50 text-xs font-sans text-gray-200 p-3 rounded outline-none resize-none leading-relaxed"
-                      />
-                    </div>
-                  </div>
-
-                  <button
-                    onClick={() => handleAskAdvisor()}
-                    disabled={isLoading || !userInput.trim()}
-                    className="w-full font-sans text-xs py-3 bg-neon-blue/20 hover:bg-neon-blue text-neon-blue hover:text-white border border-neon-blue/35 rounded font-bold transition-all mt-4 flex items-center justify-center gap-2 disabled:opacity-40"
-                  >
-                    {isLoading ? (
-                      <>
-                        <Activity className="w-3.5 h-3.5 animate-spin" />
-                        <span>Generating Actionable Blueprint...</span>
-                      </>
-                    ) : (
-                      <>
-                        <Send className="w-3.5 h-3.5" />
-                        <span>Query Gemini Design Broker</span>
-                      </>
-                    )}
-                  </button>
-                </div>
-              </div>
-
-              {/* Right Output Panels */}
-              <div className="xl:col-span-2 space-y-6">
-                <div className="bg-black/35 border border-white/10 rounded p-5 h-full flex flex-col justify-between">
-                  <div>
-                    <div className="flex justify-between items-center pb-2.5 border-b border-white/10 mb-4 text-xs font-sans">
-                      <span className="text-gray-400 font-bold  tracking-wider flex items-center gap-1.5">
-                        <Terminal className="w-3.5 h-3.5 text-neon-blue" />
-                        Actionable Solution Blueprint
-                      </span>
-                      <span className="text-xs bg-neon-blue/15 text-neon-blue/80 border border-neon-blue/20 px-1.5 py-0.5 rounded font-bold">
-                        GEMINI COGNITIVE LAYER
-                      </span>
-                    </div>
-
-                    <div className="font-sans text-xs max-h-[460px] overflow-y-auto pr-2 space-y-4 py-1">
-                      {isLoading ? (
-                        <div className="flex flex-col items-center justify-center h-[300px] gap-3">
-                          <Cpu className="w-8 h-8 text-neon-blue animate-spin" />
-                          <p className="text-xs text-gray-400 font-sans tracking-wide animate-pulse">
-                            [THINKING] Formulating step-by-step computational routine...
-                          </p>
-                        </div>
-                      ) : advisorOutput ? (
-                        <div className="text-left space-y-3">
-                          {formatMarkdown(advisorOutput)}
-                        </div>
-                      ) : (
-                        <div className="text-gray-500 italic text-xs h-[300px] flex flex-col items-center justify-center gap-2">
-                          <HelpCircle className="w-8 h-8 text-gray-600" />
-                          <span>Awaiting automation query input... Load a template or type your challenge.</span>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-
-                  <div className="font-sans text-xs text-gray-500 border-t border-white/10 pt-3 leading-relaxed">
-                    <strong>Note:</strong> Strategies generated compile compliant API guidelines across standard models. Review assemblies in localized sandbox folders before executing Revit database transactions.
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          )}
         </AnimatePresence>
       </div>
     </div>

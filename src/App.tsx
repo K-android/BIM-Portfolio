@@ -537,6 +537,7 @@ const WorkloadGif = ({
           style={{ pointerEvents: 'none', backgroundColor: 'transparent' }}
         />
       )}
+      <MobileDesktopToast />
     </div>
   );
 };
@@ -549,6 +550,7 @@ const ProjectCard = ({
   onShowVideo
 }: any) => {
   const [isHovered, setIsHovered] = useState(false);
+  const [showDetails, setShowDetails] = useState(false);
 
   return (
     <motion.div 
@@ -650,30 +652,78 @@ const ProjectCard = ({
           )}
         </div>
 
-        {item.problem && item.solution ? (
-          <div className="flex flex-col gap-4 mb-6">
-            <div className="flex flex-col gap-1.5">
-              <span className={`text-[9px] font-mono tracking-widest uppercase ${isArch ? "text-gray-400" : "text-[#3B82F6]"}`}>Problem</span>
-              <p className={`text-sm leading-relaxed ${isArch ? "text-gray-600 italic font-serif" : "text-gray-300 font-sans"}`}>{item.problem}</p>
-            </div>
-            <div className="flex flex-col gap-1.5">
-              <span className={`text-[9px] font-mono tracking-widest uppercase ${isArch ? "text-gray-400" : "text-[#00f2ff]"}`}>Solution</span>
-              <p className={`text-sm leading-relaxed ${isArch ? "text-gray-600 italic font-serif" : "text-gray-300 font-sans"}`}>{item.solution}</p>
-            </div>
-          </div>
-        ) : (
-          <>
-            {item.hook && (
-              <div className={`text-[10px] md:text-[11px] font-mono mb-4 py-2 border-y transition-colors duration-700 border-dashed ${isArch ? "text-gray-600 italic border-gray-100" : "text-neon-cyan border-white/5"}`}>
-                {`// ${item.hook}`}
+        <div className="hidden md:block">
+          {item.problem && item.solution ? (
+            <div className="flex flex-col gap-4 mb-6">
+              <div className="flex flex-col gap-1.5">
+                <span className={`text-[9px] font-mono tracking-widest uppercase ${isArch ? "text-gray-400" : "text-[#3B82F6]"}`}>Problem</span>
+                <p className={`text-sm leading-relaxed ${isArch ? "text-gray-600 italic font-serif" : "text-gray-300 font-sans"}`}>{item.problem}</p>
               </div>
+              <div className="flex flex-col gap-1.5">
+                <span className={`text-[9px] font-mono tracking-widest uppercase ${isArch ? "text-gray-400" : "text-[#00f2ff]"}`}>Solution</span>
+                <p className={`text-sm leading-relaxed ${isArch ? "text-gray-600 italic font-serif" : "text-gray-300 font-sans"}`}>{item.solution}</p>
+              </div>
+            </div>
+          ) : (
+            <>
+              {item.hook && (
+                <div className={`text-[10px] md:text-[11px] font-mono mb-4 py-2 border-y transition-colors duration-700 border-dashed ${isArch ? "text-gray-600 italic border-gray-100" : "text-neon-cyan border-white/5"}`}>
+                  {`// ${item.hook}`}
+                </div>
+              )}
+                 
+              <p className={`text-sm md:text-base mb-8 line-clamp-3 leading-relaxed transition-colors duration-700 ${isArch ? "text-gray-500 italic" : "text-gray-400 font-mono"}`}>
+                {item.description}
+              </p>
+            </>
+          )}
+        </div>
+
+        <div className="md:hidden flex flex-col mb-6">
+          <button 
+            onClick={(e) => { e.stopPropagation(); setShowDetails(!showDetails); }}
+            className={`text-[10px] font-mono tracking-widest uppercase w-full text-left py-3 border-y border-dashed ${isArch ? "text-gray-600 border-gray-200" : "text-neon-cyan border-white/10"} transition-colors`}
+          >
+            {showDetails ? "[ HIDE DETAILS ]" : (isArch ? "[ VIEW PROJECT DETAILS ]" : "[ VIEW PIPELINE DETAILS ]")}
+          </button>
+          <AnimatePresence>
+            {showDetails && (
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: "auto", opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                className="overflow-hidden"
+              >
+                <div className="pt-4">
+                  {item.problem && item.solution ? (
+                    <div className="flex flex-col gap-4">
+                      <div className="flex flex-col gap-1.5">
+                        <span className={`text-[9px] font-mono tracking-widest uppercase ${isArch ? "text-gray-400" : "text-[#3B82F6]"}`}>Problem</span>
+                        <p className={`text-sm leading-relaxed ${isArch ? "text-gray-600 italic font-serif" : "text-gray-300 font-sans"}`}>{item.problem}</p>
+                      </div>
+                      <div className="flex flex-col gap-1.5">
+                        <span className={`text-[9px] font-mono tracking-widest uppercase ${isArch ? "text-gray-400" : "text-[#00f2ff]"}`}>Solution</span>
+                        <p className={`text-sm leading-relaxed ${isArch ? "text-gray-600 italic font-serif" : "text-gray-300 font-sans"}`}>{item.solution}</p>
+                      </div>
+                    </div>
+                  ) : (
+                    <>
+                      {item.hook && (
+                        <div className={`text-[10px] font-mono mb-4 py-2 border-y transition-colors duration-700 border-dashed ${isArch ? "text-gray-600 italic border-gray-100" : "text-neon-cyan border-white/5"}`}>
+                          {`// ${item.hook}`}
+                        </div>
+                      )}
+                         
+                      <p className={`text-sm mb-4 leading-relaxed transition-colors duration-700 ${isArch ? "text-gray-500 italic" : "text-gray-400 font-mono"}`}>
+                        {item.description}
+                      </p>
+                    </>
+                  )}
+                </div>
+              </motion.div>
             )}
-            
-            <p className={`text-sm md:text-base mb-8 line-clamp-3 leading-relaxed transition-colors duration-700 ${isArch ? "text-gray-500 italic" : "text-gray-400 font-mono"}`}>
-              {item.description}
-            </p>
-          </>
-        )}
+          </AnimatePresence>
+        </div>
 
         <div className="mt-auto">
           <div className="flex flex-wrap gap-2 mb-6">
@@ -693,7 +743,7 @@ const ProjectCard = ({
 
               if (isProfessional || isCompetition) {
                  return (
-                  <span key={`${item.id}-${tag}-${idx}`} className={`text-[8px] md:text-[9px] font-mono px-2 py-0.5 border transition-colors duration-700 ${
+                  <span key={`${item.id}-${tag}-${idx}`} className={`text-[10px] md:text-[9px] px-2 py-0.5 font-mono border transition-colors duration-700 ${
                     isArch 
                       ? isProfessional ? "bg-black text-white border-black font-bold" 
                         : isCompetition ? "bg-amber-100 text-amber-800 border-amber-400 font-bold"
@@ -709,7 +759,7 @@ const ProjectCard = ({
               
               return (
                 <div key={`${item.id}-${tag}-${idx}`} 
-                  className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full border text-[9px] font-mono tracking-wider transition-all duration-300 ${
+                  className={`flex items-center gap-1.5 px-2 py-0.5 md:px-2.5 md:py-1 rounded-full border text-[10px] md:text-[9px] font-mono tracking-wider transition-all duration-300 ${
                     isArch 
                       ? "bg-gray-50/50 border-gray-200 text-gray-600 hover:border-black hover:text-black hover:bg-white"
                       : "bg-[#0a0a0c]/80 border-white/5 text-zinc-500 group-hover:border-white/20 group-hover:text-white"
@@ -740,7 +790,7 @@ const CodeSnippet = () => (
       <div className="w-2 h-2 rounded-full bg-yellow-500" />
       <div className="w-2 h-2 rounded-full bg-green-500" />
     </div>
-    <pre className="overflow-x-auto">
+    <pre className="overflow-x-auto text-[10px] md:text-xs whitespace-pre-wrap break-words">
       {`def generate_geometry(params):
     # Algorithmic spatial generation
     mesh = Revit.CreateMesh(params)
@@ -793,6 +843,7 @@ const HeroTerminal = () => {
         </motion.div>
       ))}
       <div className="w-1 h-3 bg-neon-cyan/50 animate-pulse inline-block ml-1" />
+      <MobileDesktopToast />
     </div>
   );
 };
@@ -862,7 +913,8 @@ interface ArsenalItem {
     images?: string[];
     captions?: string[];
     slideDecks?: { title: string; images: string[] }[];
-    presentationGrids?: { title: string; buttonLabel: string; images: string[] }[];
+    presentationGrids?: { title: string; buttonLabel: string; images: string[]; externalUrl?: string; }[];
+    autoCarousels?: { title: string; images: string[]; titles?: string[]; folderUrl?: string; }[];
     reportUrl?: string;
     reportLabel?: string;
     videoUrl?: string;
@@ -914,6 +966,7 @@ const AmbientBackground = ({ isArch }: { isArch: boolean }) => {
           ))}
         </div>
       </div>
+      <MobileDesktopToast />
     </div>
   );
 };
@@ -956,6 +1009,8 @@ const ParallaxSection = ({ children, id, index, setActiveSection }: { children: 
 
 const VDCSection = React.lazy(() => import('./components/VDCSection'));
 const ArchSection = React.lazy(() => import('./components/ArchSection'));
+
+import MobileDesktopToast from "./components/MobileDesktopToast";
 
 export default function App() {
   const [activeSection, setActiveSection] = useState(0);
@@ -2716,12 +2771,21 @@ export default function App() {
                 // TECHNICAL ARCHITECTURE & STACK
               </h2>
               
-              <div className="flex flex-wrap gap-2 mb-8">
+              <div className="hidden md:flex flex-wrap gap-2 mb-8 pb-3 md:pb-0">
                 {['Python', 'Dynamo', 'Revit API', 'Rhino.Inside', 'React', 'TypeScript', 'Node.js', 'Vectorworks'].map((tech, idx) => (
                   <span key={`${tech}-${idx}`} className="px-2.5 py-1 bg-white/5 border border-white/10 rounded text-[10px] font-mono text-gray-400">
                     {tech}
                   </span>
                 ))}
+              </div>
+              <div className="md:hidden overflow-hidden w-full mb-8 relative" style={{ WebkitMaskImage: "linear-gradient(to right, transparent, black 5%, black 95%, transparent)" }}>
+                <div className="carousel-track flex gap-2 w-max" style={{ animationDuration: "15s" }}>
+                  {[...['Python', 'Dynamo', 'Revit API', 'Rhino.Inside', 'React', 'TypeScript', 'Node.js', 'Vectorworks'], ...['Python', 'Dynamo', 'Revit API', 'Rhino.Inside', 'React', 'TypeScript', 'Node.js', 'Vectorworks']].map((tech, idx) => (
+                    <span key={`mobile-${tech}-${idx}`} className="shrink-0 px-2.5 py-1 bg-white/5 border border-white/10 rounded text-[10px] font-mono text-gray-400">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 pb-12 md:pb-20">
@@ -2733,43 +2797,84 @@ export default function App() {
                   {telemetryDomains.map((domain, idx) => {
                     const isActive = activeTelemetry === idx;
                     return (
-                      <button
-                        key={domain.id}
-                        onClick={() => setActiveTelemetry(idx)}
-                        className={`group w-full flex items-center justify-between p-4 text-left transition-all duration-300 border-l-2 ${
-                          isActive 
-                            ? "bg-[#3B82F6]/10 border-[#3B82F6] text-white" 
-                            : "border-transparent text-gray-500 hover:text-gray-300 hover:bg-white/5 hover:border-white/20"
-                        }`}
-                      >
-                        <div className="flex flex-col gap-1.5">
-                          <div className="flex items-center gap-3">
-                            <span className={`transition-colors ${isActive ? "text-[#3B82F6]" : "text-gray-600 group-hover:text-gray-400"}`}>
-                              {domain.icon}
-                            </span>
-                            <span className="font-mono text-[11px] md:text-xs tracking-wider uppercase">
-                              0{domain.id} // {domain.title}
-                            </span>
-                          </div>
-                          {/* Visibility cue for top technologies inside */}
-                          {!isActive && (
-                            <div className="pl-7 opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-[9px] font-mono text-gray-500 truncate max-w-[200px]">
-                              {domain.core.slice(0, 3).join(', ')}...
+                      <div key={domain.id} className="flex flex-col">
+                        <button
+                          onClick={() => setActiveTelemetry(idx)}
+                          className={`group w-full flex items-center justify-between p-4 text-left transition-all duration-300 border-l-2 ${
+                            isActive 
+                              ? "bg-[#3B82F6]/10 border-[#3B82F6] text-white" 
+                              : "border-transparent text-gray-500 hover:text-gray-300 hover:bg-white/5 hover:border-white/20"
+                          }`}
+                        >
+                          <div className="flex flex-col gap-1.5">
+                            <div className="flex items-center gap-3">
+                              <span className={`transition-colors ${isActive ? "text-[#3B82F6]" : "text-gray-600 group-hover:text-gray-400"}`}>
+                                {domain.icon}
+                              </span>
+                              <span className="font-mono text-[11px] md:text-xs tracking-wider uppercase">
+                                0{domain.id} // {domain.title}
+                              </span>
                             </div>
+                            {/* Visibility cue for top technologies inside */}
+                            {!isActive && (
+                              <div className="pl-7 opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-[9px] font-mono text-gray-500 truncate max-w-[200px]">
+                                {domain.core.slice(0, 3).join(', ')}...
+                              </div>
+                            )}
+                          </div>
+                          {isActive ? (
+                             <ChevronRight className="w-4 h-4 text-[#3B82F6] md:rotate-0 rotate-90 transition-transform" />
+                          ) : (
+                             <ChevronRight className="w-4 h-4 text-gray-700 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
                           )}
-                        </div>
-                        {isActive ? (
-                           <ChevronRight className="w-4 h-4 text-[#3B82F6]" />
-                        ) : (
-                           <ChevronRight className="w-4 h-4 text-gray-700 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
-                        )}
-                      </button>
+                        </button>
+                        
+                        {/* Mobile Accordion Content */}
+                        <AnimatePresence>
+                          {isActive && (
+                            <motion.div
+                              initial={{ height: 0, opacity: 0 }}
+                              animate={{ height: "auto", opacity: 1 }}
+                              exit={{ height: 0, opacity: 0 }}
+                              className="md:hidden overflow-hidden"
+                            >
+                              <div className="p-4 pt-2 border-l-2 border-[#3B82F6] bg-[#3B82F6]/[0.02]">
+                                <p className="text-gray-400 text-[13px] mb-5 leading-relaxed font-sans">
+                                  {domain.summary}
+                                </p>
+                                <div className="space-y-5">
+                                  <div>
+                                    <div className="text-[10px] font-mono text-gray-500 uppercase tracking-widest mb-2.5">Core Software</div>
+                                    <div className="flex flex-wrap gap-2">
+                                      {domain.core.map((t, i) => (
+                                        <span key={`${t}-${i}`} className="px-2.5 py-1 bg-[#3B82F6]/10 border border-[#3B82F6]/30 rounded-md text-xs font-mono text-blue-300 shadow-sm whitespace-nowrap">
+                                          {t}
+                                        </span>
+                                      ))}
+                                    </div>
+                                  </div>
+                                  <div>
+                                    <div className="text-[10px] font-mono text-gray-500 uppercase tracking-widest mb-2.5">Deliverables</div>
+                                    <div className="flex flex-wrap gap-2">
+                                      {domain.methods.map((t, i) => (
+                                        <span key={`${t}-${i}`} className="px-2.5 py-1 bg-black/40 border border-white/10 rounded-md text-xs font-mono text-gray-400 whitespace-nowrap">
+                                          {t}
+                                        </span>
+                                      ))}
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </div>
                     );
                   })}
                 </div>
 
                 {/* Right Column: Active Domain Data */}
-                <div className="md:col-span-7 lg:col-span-8 flex items-center">
+                <div className="hidden md:flex md:col-span-7 lg:col-span-8 items-center">
                   <AnimatePresence mode="wait">
                     <motion.div
                       key={activeTelemetry}
@@ -2795,9 +2900,9 @@ export default function App() {
                       <div className="space-y-6">
                         <div>
                           <div className="text-[10px] font-mono text-gray-500 uppercase tracking-widest mb-3">Core Software & Languages</div>
-                          <div className="flex flex-wrap gap-2.5">
+                          <div className="flex flex-wrap gap-2">
                             {telemetryDomains[activeTelemetry].core.map((t, idx) => (
-                              <span key={`${t}-${idx}`} className="px-3.5 py-1.5 bg-[#3B82F6]/10 border border-[#3B82F6]/30 rounded-md text-[11px] md:text-xs font-mono text-blue-300 shadow-sm">
+                              <span key={`${t}-${idx}`} className="px-2.5 py-1 bg-[#3B82F6]/10 border border-[#3B82F6]/30 rounded-md text-xs font-mono text-blue-300 shadow-sm">
                                 {t}
                               </span>
                             ))}
@@ -2808,7 +2913,7 @@ export default function App() {
                           <div className="text-[10px] font-mono text-gray-500 uppercase tracking-widest mb-3">Standards & Deliverables</div>
                           <div className="flex flex-wrap gap-2">
                             {telemetryDomains[activeTelemetry].methods.map((t, idx) => (
-                              <span key={`${t}-${idx}`} className="px-3 py-1 bg-black/40 border border-white/10 rounded-md text-[10px] md:text-[11px] font-mono text-gray-400">
+                              <span key={`${t}-${idx}`} className="px-2.5 py-1 bg-black/40 border border-white/10 rounded-md text-xs font-mono text-gray-400">
                                 {t}
                               </span>
                             ))}
@@ -2872,7 +2977,7 @@ export default function App() {
 
         <ParallaxSection id="terminal" index={visibleSections.indexOf('terminal')} setActiveSection={setActiveSection}>
           <motion.div
-            className="w-full pt-32 pb-20 px-6 md:px-12 max-w-7xl mx-auto" 
+            className="w-full py-4 md:py-12 px-0 md:px-6 max-w-7xl mx-auto" 
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.05 }}
@@ -2881,7 +2986,7 @@ export default function App() {
               show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
             }}
             >
-            <div className={`border p-4 md:p-6 font-mono text-xs relative overflow-hidden transition-all duration-700 ${
+            <div className={`border p-6 md:p-8 font-mono text-xs relative overflow-hidden transition-all duration-700 ${
               isArch 
               ? "border-gray-100 bg-white" 
               : "brutalist-border rounded-2xl overflow-hidden bg-[#0a0a0c]"
@@ -2928,20 +3033,39 @@ export default function App() {
                   </div>
                 </div>
 
-                <div className="space-y-2">
+                <div className="space-y-4">
                   <div className={`text-xs uppercase tracking-widest font-bold ${isArch ? "text-black" : "text-neon-cyan"}`}>Contact</div>
-                  <div className="flex flex-col sm:flex-row flex-wrap gap-4 md:gap-6">
-                    <a href="mailto:karthikraj.v.nadar@gmail.com" className={`flex items-center gap-2 hover:underline transition-colors duration-700 text-sm ${isArch ? "text-gray-700" : "text-gray-400 hover:text-[#6366F1]"}`}>
-                      <Mail className="w-5 h-5" /> karthikraj.v.nadar@gmail.com
+                  <div className="flex flex-col sm:flex-row flex-wrap gap-3 md:gap-6">
+                    <a href="mailto:karthikraj.v.nadar@gmail.com" className={`flex flex-col sm:flex-row sm:items-center gap-1.5 sm:gap-2 hover:underline transition-all duration-700 text-sm p-3 sm:p-0 w-full sm:w-auto rounded-xl sm:rounded-none border sm:border-0 sm:border-transparent sm:bg-transparent ${isArch ? "text-gray-700 bg-gray-50 border-gray-200" : "text-gray-400 hover:text-[#6366F1] bg-neutral-900/60 border-white/10"}`}>
+                      <div className="flex items-center gap-2 text-xs sm:text-sm font-bold sm:font-normal">
+                        <Mail className="w-4 h-4 sm:w-5 sm:h-5 shrink-0" />
+                        <span className="sm:hidden tracking-wider uppercase text-[10px]">Email Me</span>
+                      </div>
+                      <span className="text-xs sm:text-sm truncate break-all sm:break-normal opacity-80 sm:opacity-100 pl-6 sm:pl-0">karthikraj.v.nadar@gmail.com</span>
                     </a>
-                    <div className={`flex items-center gap-2 transition-colors duration-700 text-sm ${isArch ? "text-gray-700" : "text-gray-400"}`}>
-                      <Phone className="w-5 h-5" /> 8779228622
+                    
+                    <div className={`flex flex-col sm:flex-row sm:items-center gap-1.5 sm:gap-2 transition-all duration-700 text-sm p-3 sm:p-0 w-full sm:w-auto rounded-xl sm:rounded-none border sm:border-0 sm:border-transparent sm:bg-transparent ${isArch ? "text-gray-700 bg-gray-50 border-gray-200" : "text-gray-400 bg-neutral-900/60 border-white/10"}`}>
+                      <div className="flex items-center gap-2 text-xs sm:text-sm font-bold sm:font-normal">
+                        <Phone className="w-4 h-4 sm:w-5 sm:h-5 shrink-0" />
+                        <span className="sm:hidden tracking-wider uppercase text-[10px]">Phone</span>
+                      </div>
+                      <span className="text-xs sm:text-sm truncate break-all sm:break-normal opacity-80 sm:opacity-100 pl-6 sm:pl-0">8779228622</span>
                     </div>
-                    <a href="https://www.linkedin.com/in/karthikraj-nadar-07083526a" className={`flex items-center gap-2 hover:underline transition-colors duration-700 text-sm ${isArch ? "text-gray-700" : "text-gray-400 hover:text-[#6366F1]"}`}>
-                      <Linkedin className="w-5 h-5" /> linkedin.com/in/karthikraj-nadar-07083526a
+
+                    <a href="https://www.linkedin.com/in/karthikraj-nadar-07083526a" target="_blank" rel="noopener noreferrer" className={`flex flex-col sm:flex-row sm:items-center gap-1.5 sm:gap-2 hover:underline transition-all duration-700 text-sm p-3 sm:p-0 w-full sm:w-auto rounded-xl sm:rounded-none border sm:border-0 sm:border-transparent sm:bg-transparent ${isArch ? "text-gray-700 bg-gray-50 border-gray-200" : "text-gray-400 hover:text-[#6366F1] bg-neutral-900/60 border-white/10"}`}>
+                      <div className="flex items-center gap-2 text-xs sm:text-sm font-bold sm:font-normal">
+                        <Linkedin className="w-4 h-4 sm:w-5 sm:h-5 shrink-0" />
+                        <span className="sm:hidden tracking-wider uppercase text-[10px]">LinkedIn Profile</span>
+                      </div>
+                      <span className="text-xs sm:text-sm truncate break-all sm:break-normal opacity-80 sm:opacity-100 pl-6 sm:pl-0">linkedin.com/in/karthikraj-nadar-07083526a</span>
                     </a>
-                    <a href="https://github.com/k-android" target="_blank" rel="noopener noreferrer" className={`flex items-center gap-2 hover:underline transition-colors duration-700 text-sm ${isArch ? "text-gray-700" : "text-gray-400 hover:text-[#6366F1]"}`}>
-                      <Github className="w-5 h-5" /> github.com/k-android
+
+                    <a href="https://github.com/k-android" target="_blank" rel="noopener noreferrer" className={`flex flex-col sm:flex-row sm:items-center gap-1.5 sm:gap-2 hover:underline transition-all duration-700 text-sm p-3 sm:p-0 w-full sm:w-auto rounded-xl sm:rounded-none border sm:border-0 sm:border-transparent sm:bg-transparent ${isArch ? "text-gray-700 bg-gray-50 border-gray-200" : "text-gray-400 hover:text-[#6366F1] bg-neutral-900/60 border-white/10"}`}>
+                      <div className="flex items-center gap-2 text-xs sm:text-sm font-bold sm:font-normal">
+                        <Github className="w-4 h-4 sm:w-5 sm:h-5 shrink-0" />
+                        <span className="sm:hidden tracking-wider uppercase text-[10px]">GitHub Portfolio</span>
+                      </div>
+                      <span className="text-xs sm:text-sm truncate break-all sm:break-normal opacity-80 sm:opacity-100 pl-6 sm:pl-0">github.com/k-android</span>
                     </a>
                   </div>
                 </div>
@@ -3127,13 +3251,13 @@ export default function App() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-black/90 backdrop-blur-xl"
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-6 bg-black/90 backdrop-blur-xl"
           >
             <motion.div
               initial={{ scale: 0.9, opacity: 0, y: 20 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.9, opacity: 0, y: 20 }}
-              className={`w-full max-w-7xl border overflow-hidden flex flex-col h-full md:max-h-[92vh] transition-all duration-700 ${
+              className={`w-full max-w-7xl border overflow-hidden flex flex-col max-h-[85vh] md:max-h-[92vh] transition-all duration-700 ${
                 isModalArch ? "bg-white border-gray-200 shadow-2xl" : "bg-[#0a0a0c] border-white/5 shadow-[0_0_50px_rgba(0,0,0,0.8)]"
               }`}
             >
@@ -3364,7 +3488,7 @@ export default function App() {
 
                   {/* Right: Detailed Content */}
                   <div className="space-y-10">
-                    {selectedArsenalItem.ledger && (
+                    {!isArch && selectedArsenalItem.ledger && (
                       <div className="space-y-3">
                         <div className={`text-[10px] font-mono uppercase tracking-widest transition-colors duration-700 ${isArch ? "text-gray-500" : "text-neon-cyan"}`}>
                           // 03 . {isArch ? "PROJECT LEDGER" : "TECHNICAL LEDGER"}
@@ -3377,7 +3501,7 @@ export default function App() {
                           {/* Inputs */}
                           <div className={`flex flex-col space-y-1 pr-2 ${
                             isArch ? "border-stone-200" : "border-white/10"
-                          } border-r-0 md:border-r border-dashed last:border-0`}>
+                          } border-b md:border-b-0 border-r-0 md:border-r border-dashed pb-3 md:pb-0 mb-3 md:mb-0 last:border-0 last:pb-0 last:mb-0`}>
                             <span className={`text-[8px] font-mono font-bold tracking-widest uppercase ${isArch ? "text-stone-500" : "text-neon-cyan"}`}>
                               INPUTS
                             </span>
@@ -3389,7 +3513,7 @@ export default function App() {
                           {/* Engine / Process */}
                           <div className={`flex flex-col space-y-1 pr-2 ${
                             isArch ? "border-stone-200" : "border-white/10"
-                          } border-r-0 md:border-r border-dashed last:border-0`}>
+                          } border-b md:border-b-0 border-r-0 md:border-r border-dashed pb-3 md:pb-0 mb-3 md:mb-0 last:border-0 last:pb-0 last:mb-0`}>
                             <span className={`text-[8px] font-mono font-bold tracking-widest uppercase ${isArch ? "text-stone-500" : "text-neon-orange"}`}>
                               {isArch ? "PROCESS" : "ENGINE"}
                             </span>
@@ -3413,20 +3537,81 @@ export default function App() {
 
 
 
-                    {selectedArsenalItem.details && (
+                    {isArch && selectedArsenalItem.details && (
+                      <div className="space-y-10">
+                        {/* 01. KEY SPATIAL & DESIGN SPECS */}
+                        <div className="space-y-4">
+                          <div className="text-[10px] font-mono uppercase tracking-widest text-black font-bold border-b border-gray-200 pb-2">
+                            // 01 . KEY SPATIAL & DESIGN SPECS
+                          </div>
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-stone-50 border border-stone-200 p-4 rounded-xl">
+                            <div>
+                              <span className="block text-[9px] font-mono text-stone-500 uppercase tracking-widest mb-1">Role / Scope</span>
+                              <span className="text-xs font-sans text-stone-800 font-semibold">{selectedArsenalItem.role || "Lead Designer"}</span>
+                            </div>
+                            <div>
+                              <span className="block text-[9px] font-mono text-stone-500 uppercase tracking-widest mb-1">Project Typology</span>
+                              <span className="text-xs font-sans text-stone-800 font-semibold">{selectedArsenalItem.category || "Architecture"} {selectedArsenalItem.metric ? `• ${selectedArsenalItem.metric}` : ""}</span>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* 02. SOFTWARE & DELIVERY BADGES */}
+                        <div className="space-y-4">
+                          <div className="text-[10px] font-mono uppercase tracking-widest text-black font-bold border-b border-gray-200 pb-2">
+                            // 02 . SOFTWARE & DELIVERY BADGES
+                          </div>
+                          <div className="flex flex-wrap gap-2">
+                            {selectedArsenalItem.tags?.map((tag: string, idx: number) => (
+                               <span key={`arch-tag-${idx}`} className="bg-white text-stone-800 border border-stone-300 shadow-sm px-2.5 py-1 text-[10px] font-mono rounded-md font-semibold">
+                                 {tag}
+                               </span>
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* 03. PROJECT STORY / NARRATIVE */}
+                        <div className="space-y-4">
+                          <div className="text-[10px] font-mono uppercase tracking-widest text-black font-bold border-b border-gray-200 pb-2">
+                            // 03 . PROJECT STORY / NARRATIVE
+                          </div>
+                          <div className="space-y-5">
+                            {selectedArsenalItem.details.overview && (
+                              <p className="text-xs tracking-wide leading-relaxed text-gray-700 font-sans">
+                                {selectedArsenalItem.details.overview}
+                              </p>
+                            )}
+                            {selectedArsenalItem.details.challenge && (
+                              <div>
+                                 <strong className="block text-[10px] font-mono text-stone-500 uppercase tracking-widest mb-1">The Challenge</strong>
+                                 <p className="text-xs tracking-wide leading-relaxed text-gray-700 font-sans">
+                                   {selectedArsenalItem.details.challenge}
+                                 </p>
+                              </div>
+                            )}
+                            {selectedArsenalItem.details.solution && (
+                              <div>
+                                 <strong className="block text-[10px] font-mono text-stone-500 uppercase tracking-widest mb-1">The Solution & Execution</strong>
+                                 <p className="text-xs tracking-wide leading-relaxed text-gray-700 font-sans">
+                                   {selectedArsenalItem.details.solution}
+                                 </p>
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    {!isArch && selectedArsenalItem.details && (
                       <>
                         {selectedArsenalItem.details.publication && (
-                          <div className={`p-4 border rounded-md flex items-start gap-3 transition-colors duration-700 ${
-                            isArch 
-                              ? "bg-amber-50/50 border-amber-200/60 text-amber-900" 
-                              : "bg-[#00f3ff]/5 border-[#00f3ff]/20 text-[#00f3ff]"
-                          }`}>
+                          <div className={`p-4 border rounded-md flex items-start gap-3 transition-colors duration-700 bg-[#00f3ff]/5 border-[#00f3ff]/20 text-[#00f3ff]`}>
                             <Award className="w-5 h-5 shrink-0 mt-0.5 animate-pulse" />
                             <div className="space-y-1">
                               <div className="text-[10px] font-mono uppercase tracking-wider opacity-75">
                                 Publication Record
                               </div>
-                              <p className={`text-xs md:text-sm leading-relaxed ${isArch ? "font-sans font-medium text-stone-700" : "font-mono"}`}>
+                              <p className={`text-xs leading-relaxed font-mono`}>
                                 {selectedArsenalItem.details.publication}
                               </p>
                             </div>
@@ -3434,28 +3619,28 @@ export default function App() {
                         )}
 
                         <div className="space-y-4">
-                          <div className={`text-[10px] font-mono uppercase tracking-widest transition-colors duration-700 ${isArch ? "text-black font-bold" : "text-neon-cyan"}`}>
+                          <div className={`text-[10px] font-mono uppercase tracking-widest transition-colors duration-700 text-neon-cyan`}>
                             // 04 . PROJECT OVERVIEW
                           </div>
-                          <p className={`text-xs tracking-wide leading-relaxed transition-colors duration-700 ${isArch ? "text-gray-700 italic font-serif" : "text-zinc-400 font-mono"}`}>
+                          <p className={`text-xs tracking-wide leading-relaxed transition-colors duration-700 text-zinc-400 font-mono`}>
                             {selectedArsenalItem.details.overview}
                           </p>
                         </div>
 
                         <div className="space-y-4">
-                          <div className={`text-[10px] font-mono uppercase tracking-widest transition-colors duration-700 ${isArch ? "text-black font-bold" : "text-neon-orange"}`}>
+                          <div className={`text-[10px] font-mono uppercase tracking-widest transition-colors duration-700 text-neon-orange`}>
                             // 05 . THE CHALLENGE
                           </div>
-                          <p className={`text-xs tracking-wide leading-relaxed transition-colors duration-700 ${isArch ? "text-gray-700 italic font-serif" : "text-zinc-400 font-mono"}`}>
+                          <p className={`text-xs tracking-wide leading-relaxed transition-colors duration-700 text-zinc-400 font-mono`}>
                             {selectedArsenalItem.details.challenge}
                           </p>
                         </div>
 
                         <div className="space-y-4">
-                          <div className={`text-[10px] font-mono uppercase tracking-widest transition-colors duration-700 ${isArch ? "text-black font-bold" : "text-neon-cyan"}`}>
+                          <div className={`text-[10px] font-mono uppercase tracking-widest transition-colors duration-700 text-neon-cyan`}>
                             // 06 . THE SOLUTION
                           </div>
-                          <p className={`text-xs tracking-wide leading-relaxed transition-colors duration-700 ${isArch ? "text-gray-700 italic font-serif" : "text-zinc-400 font-mono"}`}>
+                          <p className={`text-xs tracking-wide leading-relaxed transition-colors duration-700 text-zinc-400 font-mono`}>
                             {selectedArsenalItem.details.solution}
                           </p>
                         </div>
@@ -3555,7 +3740,7 @@ export default function App() {
                             <div className={`text-[10px] font-mono uppercase tracking-widest transition-colors duration-700 ${isArch ? "text-black" : "text-neon-cyan"}`}>
                               // 08 . KEY METRICS & PERFORMANCE IMPACT
                             </div>
-                            <div className="overflow-x-auto border brutalist-border rounded-2xl overflow-hidden bg-[#0a0a0c]/80">
+                            <div className="hidden md:block overflow-x-auto border brutalist-border rounded-2xl overflow-hidden bg-[#0a0a0c]/80">
                               <table className={`w-full text-left font-mono text-xs border-collapse ${isArch ? "border-gray-200" : "border-white/10"}`}>
                                 <thead>
                                   <tr className={isArch ? "bg-gray-100/80 border-b border-gray-200" : "bg-[#0a0a0c]/95 border-b border-white/10"}>
@@ -3587,6 +3772,23 @@ export default function App() {
                                   ))}
                                 </tbody>
                               </table>
+                            </div>
+                            <div className="md:hidden flex flex-col gap-3">
+                              {selectedArsenalItem.details.comparisonTable.rows.map((row, rIdx) => (
+                                <div key={`mob-row-${rIdx}`} className={`p-3 rounded-lg border flex flex-col gap-2 ${isArch ? "bg-white border-gray-200" : "bg-[#0a0a0c]/80 border-white/10"}`}>
+                                  <div className={`font-bold font-mono text-xs ${isArch ? "text-black" : "text-white"}`}>{row[0]}</div>
+                                  <div className="flex flex-col gap-1.5 text-[10px] font-mono">
+                                    <div className="flex flex-col gap-1 pb-2 border-b border-gray-500/20">
+                                      <span className="text-gray-500">{selectedArsenalItem.details.comparisonTable.headers[1]}</span>
+                                      <span className={isArch ? "text-gray-700" : "text-gray-300"}>{row[1]}</span>
+                                    </div>
+                                    <div className="flex flex-col gap-1 pt-1">
+                                      <span className="text-gray-500">{selectedArsenalItem.details.comparisonTable.headers[2]}</span>
+                                      <span className={isArch ? "text-emerald-600 font-bold" : "text-neon-orange font-bold"}>{row[2]}</span>
+                                    </div>
+                                  </div>
+                                </div>
+                              ))}
                             </div>
                           </div>
                         )}
@@ -3727,7 +3929,7 @@ export default function App() {
                   <div className={`space-y-6 pt-10 mt-10 border-t transition-all duration-700 ${isArch ? "border-gray-200" : "border-white/10"}`}>
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b pb-3">
                       <div className={`text-[10px] font-mono uppercase tracking-widest transition-colors duration-700 ${isArch ? "text-stone-900 font-bold" : "text-neon-cyan"}`}>
-                        // 11 . {isArch ? "TECHNICAL GALLERY & VISUALS" : "SYSTEM DRAWINGS & ANALYTICS"}
+                        // {isArch ? "04 . HIGH-RES GALLERY & AUTO CAROUSEL" : "11 . SYSTEM DRAWINGS & ANALYTICS"}
                       </div>
                       
                       {/* Gallery Navigation Tabs (Renders vs. Drawings) */}
@@ -4183,7 +4385,7 @@ export default function App() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.9 }}
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className={`fixed bottom-6 right-6 md:bottom-10 md:right-10 z-50 p-3 md:p-4 rounded-full shadow-lg border transition-all duration-300 ${
+            className={`hidden md:flex items-center justify-center fixed bottom-6 right-6 md:bottom-10 md:right-10 z-50 p-3 md:p-4 rounded-full shadow-lg border transition-all duration-300 ${
               isArch 
                 ? "bg-white text-black border-gray-200 hover:shadow-2xl hover:-translate-y-1" 
                 : "bg-[#0a0a0c]/95 text-neon-cyan border-white/10 hover:border-white/10 hover:shadow-[0_0_20px_rgba(0,255,255,0.4)] hover:-translate-y-1 backdrop-blur-sm"
@@ -4193,6 +4395,7 @@ export default function App() {
           </motion.button>
         )}
       </AnimatePresence>
+      <MobileDesktopToast />
     </div>
   );
 }

@@ -221,15 +221,17 @@ export default function VDCSection({
                     className={`relative flex flex-col md:flex-row gap-4 md:gap-8 ${idx % 2 === 0 ? "md:flex-row-reverse" : ""}`}
                   >
                     <div className="absolute left-4 md:left-1/2 w-3 h-3 -translate-x-[6px] mt-1.5 border bg-[#0a0a0c] border-white/10 shadow-[0_0_10px_rgba(0,255,255,0.5)] z-10" />
-                    <div className={`pl-10 md:pl-0 md:w-1/2 ${idx % 2 === 0 ? "md:pl-12" : "md:pr-12 text-left md:text-right"}`}>
-                      <span className="text-xs md:text-xs font-sans mb-1 block text-neon-orange">
-                        {exp.year}
-                      </span>
-                      <h4 className="text-base md:text-lg font-sans font-medium mb-1 text-white">
-                        {exp.company}
-                      </h4>
-                      <div className="text-xs md:text-xs font-sans mb-2 md:mb-3 text-neon-blue">
-                        {exp.role}
+                    <div className={`pl-10 md:pl-0 md:w-1/2 flex flex-col ${idx % 2 === 0 ? "md:pl-12" : "md:pr-12 text-left md:text-right"}`}>
+                      <div className="flex flex-col gap-1 mb-2 md:mb-3">
+                        <span className="text-xs md:text-xs font-sans text-neon-orange font-semibold tracking-wider">
+                          {exp.year}
+                        </span>
+                        <h4 className="text-base md:text-lg font-sans font-bold text-white whitespace-normal break-words">
+                          {exp.company}
+                        </h4>
+                        <div className="text-xs md:text-xs font-sans text-neon-blue whitespace-normal break-words">
+                          {exp.role}
+                        </div>
                       </div>
                       <p className="text-xs md:text-sm leading-relaxed text-gray-400 font-sans">
                         {exp.description}

@@ -79,10 +79,7 @@ export const AECWebAppsCabinet: React.FC = () => {
           <div className="h-1.5 w-full transition-all duration-700 bg-neon-orange opacity-20 group-hover:opacity-100" />
           
           <div className="p-5 flex flex-col relative z-10">
-            <div className="flex justify-between items-start mb-3">
-              <span className="text-[9px] md:text-xs font-sans font-bold px-2 py-0.5 rounded tracking-widest  transition-colors duration-700 text-neon-orange bg-neon-orange/10 border border-neon-orange/20">
-                APP
-              </span>
+            <div className="flex justify-end items-start mb-3">
               <span className="text-xs font-sans tracking-widest text-gray-500">
                 DESK_APP_01
               </span>
@@ -94,7 +91,7 @@ export const AECWebAppsCabinet: React.FC = () => {
           </div>
 
           {/* Interactive Screen Layout Mockup / Hero Image Column */}
-          <div className="relative aspect-[16/8] overflow-hidden group border-b border-white/10 bg-black/95">
+          <div className="relative max-h-[180px] md:max-h-none aspect-video md:aspect-[16/8] overflow-hidden group border-b border-white/10 bg-black/95">
             {/* Visual Engineering Grid Background */}
             <div className="absolute inset-0 bg-grid-pattern opacity-[0.06] pointer-events-none z-10" />
             
@@ -122,10 +119,10 @@ export const AECWebAppsCabinet: React.FC = () => {
           <div className="p-6 md:p-8 flex-grow flex flex-col justify-between">
             <div>
               {/* App Navigation Tab Buttons */}
-              <div className="flex bg-black/90 border border-white/10 p-1 rounded font-sans text-xs mb-6 inline-flex max-w-xs font-bold leading-none">
+              <div className="flex w-full md:inline-flex md:w-auto bg-black/90 border border-white/10 p-1 rounded font-sans text-xs mb-6 font-bold leading-none">
                 <button
                   onClick={() => setCurrentTab1("desc")}
-                  className={`px-3 py-1.5 transition-all text-xs rounded  font-bold tracking-wider ${
+                  className={`flex-1 md:flex-none text-center px-2 md:px-3 py-1.5 transition-all text-xs rounded  font-bold tracking-wider ${
                     currentTab1 === "desc" ? "bg-neon-orange/15 text-neon-orange border border-neon-orange/20" : "text-gray-400 hover:text-white"
                   }`}
                 >
@@ -133,15 +130,15 @@ export const AECWebAppsCabinet: React.FC = () => {
                 </button>
                 <button
                   onClick={() => setCurrentTab1("features")}
-                  className={`px-3 py-1.5 transition-all text-xs rounded  font-bold tracking-wider ${
+                  className={`flex-1 md:flex-none text-center px-2 md:px-3 py-1.5 transition-all text-xs rounded  font-bold tracking-wider ${
                     currentTab1 === "features" ? "bg-neon-orange/15 text-neon-orange border border-neon-orange/20" : "text-gray-400 hover:text-white"
                   }`}
                 >
-                  Key Highlights
+                  Highlights
                 </button>
                 <button
                   onClick={() => setCurrentTab1("process")}
-                  className={`px-3 py-1.5 transition-all text-xs rounded  font-bold tracking-wider ${
+                  className={`flex-1 md:flex-none text-center px-2 md:px-3 py-1.5 transition-all text-xs rounded  font-bold tracking-wider ${
                     currentTab1 === "process" ? "bg-neon-orange/15 text-neon-orange border border-neon-orange/20" : "text-gray-400 hover:text-white"
                   }`}
                 >
@@ -187,12 +184,6 @@ export const AECWebAppsCabinet: React.FC = () => {
                           <strong>AI-Agentic System Frameworks</strong>: Conceptualized and mapped out next-generation integration pipelines, including autonomous regulatory code compliance engines using LLMs and live generative carbon tracking.
                         </div>
                       </div>
-                      <div className="flex gap-2 items-start">
-                        <CheckCircle2 className="w-4 h-4 text-neon-orange shrink-0 mt-0.5" />
-                        <div>
-                          <strong>Interactive Automation Advisor</strong>: Integrated an intelligent interface utilizing large language models to provide on-demand workflow strategies for manual desktop CAD problems.
-                        </div>
-                      </div>
                     </motion.div>
                   )}
 
@@ -223,7 +214,7 @@ export const AECWebAppsCabinet: React.FC = () => {
               {/* Stack tags */}
               <div className="flex flex-wrap gap-2 mt-6">
                 {["React", "Tailwind CSS", "Vercel Deployment", "VDC Strategy", "Generative Design Logic", "LLM API Integration (Gemini)", "Carbon Analytics (LCA) Frameworks"].map((tag, idx) => (
-                  <span key={`${tag}-${idx}`} className="text-[9px] font-sans px-2 py-0.5 border border-white/5 text-gray-500 rounded">
+                  <span key={`${tag}-${idx}`} className="text-[10px] font-sans px-2 py-1 flex-shrink-0 border border-white/5 text-gray-500 rounded">
                     {tag}
                   </span>
                 ))}
@@ -241,7 +232,7 @@ export const AECWebAppsCabinet: React.FC = () => {
                   href="https://github.com/K-android/AEC-Auto-Hub"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 md:flex-none font-sans text-xs px-3 py-2 bg-gray-800/50 hover:bg-gray-700 border border-white/10 text-white rounded font-bold transition-all flex items-center justify-center gap-1.5 active:scale-95"
+                  className="flex-1 md:flex-none font-sans text-xs px-2 md:px-3 py-2 bg-gray-800/50 hover:bg-gray-700 border border-white/10 text-white rounded font-bold transition-all flex items-center justify-center gap-1.5 active:scale-95"
                 >
                   <Github className="w-3.5 h-3.5" />
                   <span>Repo</span>
@@ -250,7 +241,7 @@ export const AECWebAppsCabinet: React.FC = () => {
                   href="https://aec-auto-hub.vercel.app/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 md:flex-none font-sans text-xs px-3 py-2 bg-neon-orange/15 hover:bg-neon-orange border border-neon-orange/30 text-neon-orange hover:text-black rounded font-bold transition-all flex items-center justify-center gap-1.5 shadow-[0_0_15px_rgba(249,115,22,0.1)] active:scale-95"
+                  className="flex-1 md:flex-none font-sans text-xs px-2 md:px-3 py-2 bg-neon-orange/15 hover:bg-neon-orange border border-neon-orange/30 text-neon-orange hover:text-black rounded font-bold transition-all flex items-center justify-center gap-1.5 shadow-[0_0_15px_rgba(249,115,22,0.1)] active:scale-95"
                 >
                   <Globe className="w-3.5 h-3.5" />
                   <span>Live App</span>
@@ -279,10 +270,7 @@ export const AECWebAppsCabinet: React.FC = () => {
           <div className="p-5 flex flex-col relative z-10">
             <div className="flex justify-between items-start mb-3">
               <div className="flex items-center gap-2">
-                <span className="text-[9px] md:text-xs font-sans font-bold px-2 py-0.5 rounded tracking-widest  transition-colors duration-700 text-[#3B82F6] bg-[#3B82F6]/10 border border-white/10/20">
-                  APP
-                </span>
-                <span className="text-[9px] md:text-xs font-sans font-bold px-2 py-0.5 rounded tracking-widest transition-colors duration-700 text-amber-400 bg-amber-400/10 border border-amber-400/20">
+                <span className="text-[10px] md:text-xs font-sans font-bold px-2 py-1 rounded tracking-widest transition-colors duration-700 flex-wrap break-words text-amber-400 bg-amber-400/10 border border-amber-400/20">
                   [ PROOF OF CONCEPT ]
                 </span>
               </div>
@@ -297,7 +285,7 @@ export const AECWebAppsCabinet: React.FC = () => {
           </div>
 
           {/* Real-time Telemetry Screen Mockup / Hero Image Column */}
-          <div className="relative aspect-[16/8] overflow-hidden group border-b border-white/10 bg-black/95">
+          <div className="relative max-h-[180px] md:max-h-none aspect-video md:aspect-[16/8] overflow-hidden group border-b border-white/10 bg-black/95">
             {/* Visual Engineering Grid Background */}
             <div className="absolute inset-0 bg-grid-pattern opacity-[0.06] pointer-events-none z-10" />
             
@@ -323,10 +311,10 @@ export const AECWebAppsCabinet: React.FC = () => {
           <div className="p-6 md:p-8 flex-grow flex flex-col justify-between">
             <div>
               {/* App Navigation Tab Buttons */}
-              <div className="flex bg-black/90 border border-white/10 p-1 rounded font-sans text-xs mb-6 inline-flex max-w-xs">
+              <div className="flex w-full md:inline-flex md:w-auto bg-black/90 border border-white/10 p-1 rounded font-sans text-xs mb-6 font-bold leading-none">
                 <button
                   onClick={() => setCurrentTab2("desc")}
-                  className={`px-3 py-1.5 transition-all text-xs rounded  font-bold tracking-wider ${
+                  className={`flex-1 md:flex-none text-center px-2 md:px-3 py-1.5 transition-all text-xs rounded  font-bold tracking-wider ${
                     currentTab2 === "desc" ? "bg-[#6366F1]/15 text-[#6366F1] border border-[#6366F1]/30" : "text-gray-400 hover:text-white"
                   }`}
                 >
@@ -334,19 +322,19 @@ export const AECWebAppsCabinet: React.FC = () => {
                 </button>
                 <button
                   onClick={() => setCurrentTab2("features")}
-                  className={`px-3 py-1.5 transition-all text-xs rounded  font-bold tracking-wider ${
+                  className={`flex-1 md:flex-none text-center px-2 md:px-3 py-1.5 transition-all text-xs rounded  font-bold tracking-wider ${
                     currentTab2 === "features" ? "bg-[#6366F1]/15 text-[#6366F1] border border-[#6366F1]/30" : "text-gray-400 hover:text-white"
                   }`}
                 >
-                  Key Highlights
+                  Highlights
                 </button>
                 <button
                   onClick={() => setCurrentTab2("process")}
-                  className={`px-3 py-1.5 transition-all text-xs rounded  font-bold tracking-wider ${
+                  className={`flex-1 md:flex-none text-center px-2 md:px-3 py-1.5 transition-all text-xs rounded  font-bold tracking-wider ${
                     currentTab2 === "process" ? "bg-[#6366F1]/15 text-[#6366F1] border border-[#6366F1]/30" : "text-gray-400 hover:text-white"
                   }`}
                 >
-                  BIM Process
+                  Process
                 </button>
               </div>
 
@@ -424,7 +412,7 @@ export const AECWebAppsCabinet: React.FC = () => {
               {/* Stack tags */}
               <div className="flex flex-wrap gap-2 mt-6">
                 {["Node.js API", "Firestore", "React Interface", "Revit & Dynamo Integration", "ISO-19650 Compliance"].map((tag, idx) => (
-                  <span key={`${tag}-${idx}`} className="text-[9px] font-sans px-2 py-0.5 border border-white/5 text-gray-500 rounded">
+                  <span key={`${tag}-${idx}`} className="text-[10px] font-sans px-2 py-1 flex-shrink-0 border border-white/5 text-gray-500 rounded">
                     {tag}
                   </span>
                 ))}
@@ -439,7 +427,7 @@ export const AECWebAppsCabinet: React.FC = () => {
                   href="https://github.com/K-android/BIM-MetricPortal--Automated-Takeoff"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 md:flex-none font-sans text-xs px-3 py-2 bg-gray-800/50 hover:bg-gray-700 border border-white/10 text-white rounded font-bold transition-all flex items-center justify-center gap-1.5 active:scale-95"
+                  className="flex-1 md:flex-none font-sans text-xs px-2 md:px-3 py-2 bg-gray-800/50 hover:bg-gray-700 border border-white/10 text-white rounded font-bold transition-all flex items-center justify-center gap-1.5 active:scale-95"
                 >
                   <Github className="w-3.5 h-3.5" />
                   <span>Repo</span>
@@ -448,7 +436,7 @@ export const AECWebAppsCabinet: React.FC = () => {
                   href="https://bim-metric-portal-boqs-tracker-111136556527.asia-southeast1.run.app/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 md:flex-none font-sans text-xs px-3 py-2 bg-neon-cyan/15 hover:bg-neon-cyan border border-white/10/30 text-[#3B82F6] hover:text-black rounded font-bold transition-all flex items-center justify-center gap-1.5 shadow-[0_0_15px_rgba(0,242,255,0.1)] active:scale-95"
+                  className="flex-1 md:flex-none font-sans text-xs px-2 md:px-3 py-2 bg-neon-cyan/15 hover:bg-neon-cyan border border-white/10/30 text-[#3B82F6] hover:text-black rounded font-bold transition-all flex items-center justify-center gap-1.5 shadow-[0_0_15px_rgba(0,242,255,0.1)] active:scale-95"
                 >
                   <Globe className="w-3.5 h-3.5" />
                   <span>Live App</span>
@@ -475,10 +463,7 @@ export const AECWebAppsCabinet: React.FC = () => {
           <div className="h-1.5 w-full transition-all duration-700 bg-[#b4ff39] opacity-20 group-hover:opacity-100" />
           
           <div className="p-5 flex flex-col relative z-10">
-            <div className="flex justify-between items-start mb-3">
-              <span className="text-[9px] md:text-xs font-sans font-bold px-2 py-0.5 rounded tracking-widest  transition-colors duration-700 text-[#b4ff39] bg-[#b4ff39]/10 border border-[#b4ff39]/20">
-                APP
-              </span>
+            <div className="flex justify-end items-start mb-3">
               <span className="text-xs font-sans tracking-widest text-gray-500">
                 DESK_APP_03
               </span>
@@ -490,7 +475,7 @@ export const AECWebAppsCabinet: React.FC = () => {
           </div>
 
           {/* Hero Image Column */}
-          <div className="relative aspect-[16/8] overflow-hidden group border-b border-white/10 bg-black/95">
+          <div className="relative max-h-[180px] md:max-h-none aspect-video md:aspect-[16/8] overflow-hidden group border-b border-white/10 bg-black/95">
             <div className="absolute inset-0 bg-grid-pattern opacity-[0.06] pointer-events-none z-10" />
             <img loading="lazy" 
               src="https://lh3.googleusercontent.com/d/1eQ88zcWYH9cjK0eHaem8THzK3w1_o83Y"
@@ -511,10 +496,10 @@ export const AECWebAppsCabinet: React.FC = () => {
           <div className="p-6 md:p-8 flex-grow flex flex-col justify-between">
             <div>
               {/* App Navigation Tab Buttons */}
-              <div className="flex bg-black/90 border border-white/10 p-1 rounded font-sans text-xs mb-6 inline-flex max-w-xs">
+              <div className="flex w-full md:inline-flex md:w-auto bg-black/90 border border-white/10 p-1 rounded font-sans text-xs mb-6 font-bold leading-none">
                 <button
                   onClick={() => setCurrentTab3("desc")}
-                  className={`px-3 py-1.5 transition-all text-xs rounded  font-bold tracking-wider ${
+                  className={`flex-1 md:flex-none text-center px-2 md:px-3 py-1.5 transition-all text-xs rounded  font-bold tracking-wider ${
                     currentTab3 === "desc" ? "bg-[#b4ff39]/15 text-[#b4ff39] border border-[#b4ff39]/20" : "text-gray-400 hover:text-white"
                   }`}
                 >
@@ -522,15 +507,15 @@ export const AECWebAppsCabinet: React.FC = () => {
                 </button>
                 <button
                   onClick={() => setCurrentTab3("features")}
-                  className={`px-3 py-1.5 transition-all text-xs rounded  font-bold tracking-wider ${
+                  className={`flex-1 md:flex-none text-center px-2 md:px-3 py-1.5 transition-all text-xs rounded  font-bold tracking-wider ${
                     currentTab3 === "features" ? "bg-[#b4ff39]/15 text-[#b4ff39] border border-[#b4ff39]/20" : "text-gray-400 hover:text-white"
                   }`}
                 >
-                  Key Highlights
+                  Highlights
                 </button>
                 <button
                   onClick={() => setCurrentTab3("process")}
-                  className={`px-3 py-1.5 transition-all text-xs rounded  font-bold tracking-wider ${
+                  className={`flex-1 md:flex-none text-center px-2 md:px-3 py-1.5 transition-all text-xs rounded  font-bold tracking-wider ${
                     currentTab3 === "process" ? "bg-[#b4ff39]/15 text-[#b4ff39] border border-[#b4ff39]/20" : "text-gray-400 hover:text-white"
                   }`}
                 >
@@ -612,7 +597,7 @@ export const AECWebAppsCabinet: React.FC = () => {
               {/* Stack tags */}
               <div className="flex flex-wrap gap-2 mt-6">
                 {["Rhino.Compute", "Grasshopper", "REST API", "ngrok", "React Web UI", "Parametric Models"].map((tag, idx) => (
-                  <span key={`${tag}-${idx}`} className="text-[9px] font-sans px-2 py-0.5 border border-white/5 text-gray-500 rounded">
+                  <span key={`${tag}-${idx}`} className="text-[10px] font-sans px-2 py-1 flex-shrink-0 border border-white/5 text-gray-500 rounded">
                     {tag}
                   </span>
                 ))}
@@ -627,7 +612,7 @@ export const AECWebAppsCabinet: React.FC = () => {
                   href="https://github.com/K-android/Rhino.GH-Sync-Web-Console"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 md:flex-none font-sans text-xs px-3 py-2 bg-gray-800/50 hover:bg-gray-700 border border-white/10 text-white rounded font-bold transition-all flex items-center justify-center gap-1.5 active:scale-95"
+                  className="flex-1 md:flex-none font-sans text-xs px-2 md:px-3 py-2 bg-gray-800/50 hover:bg-gray-700 border border-white/10 text-white rounded font-bold transition-all flex items-center justify-center gap-1.5 active:scale-95"
                 >
                   <Github className="w-3.5 h-3.5" />
                   <span>Repo</span>
@@ -636,7 +621,7 @@ export const AECWebAppsCabinet: React.FC = () => {
                   href="https://rhino-gh-sync-web-console.vercel.app/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 md:flex-none font-sans text-xs px-3 py-2 bg-[#b4ff39]/15 hover:bg-[#b4ff39] border border-[#b4ff39]/30 text-[#b4ff39] hover:text-black rounded font-bold transition-all flex items-center justify-center gap-1.5 shadow-[0_0_15px_rgba(180,255,57,0.1)] active:scale-95"
+                  className="flex-1 md:flex-none font-sans text-xs px-2 md:px-3 py-2 bg-[#b4ff39]/15 hover:bg-[#b4ff39] border border-[#b4ff39]/30 text-[#b4ff39] hover:text-black rounded font-bold transition-all flex items-center justify-center gap-1.5 shadow-[0_0_15px_rgba(180,255,57,0.1)] active:scale-95"
                 >
                   <Globe className="w-3.5 h-3.5" />
                   <span>Live App</span>
