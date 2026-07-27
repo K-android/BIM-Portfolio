@@ -1051,6 +1051,18 @@ export default function App() {
     setGalleryFilter('all');
   }, [selectedArsenalItem]);
 
+  // Lock body scroll when modals are open
+  useEffect(() => {
+    if (selectedArsenalItem || expandedMedia || isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, [selectedArsenalItem, expandedMedia, isMenuOpen]);
+
   // Comprehensive Visual Protection Layer (Block Saving, Copying, and Downloading of Media)
   useEffect(() => {
     const handleContextMenu = (e: MouseEvent) => {
@@ -1228,7 +1240,7 @@ export default function App() {
 
   const isArch = mode === 'arch';
   const [terminalMode, setTerminalMode] = useState<'bim' | 'arch'>('bim');
-  const [activeTelemetry, setActiveTelemetry] = useState(0);
+  const [activeTelemetry, setActiveTelemetry] = useState<number | null>(null);
   const telemetryDomains = [
     {
       id: 1,
@@ -2547,7 +2559,7 @@ export default function App() {
             initial={{ opacity: 0, x: "100%" }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "100%" }}
-            className={`fixed inset-0 z-[70] block p-6 transition-colors duration-700 overflow-y-auto ${
+            className={`fixed inset-0 z-[70] block p-6 transition-colors duration-700 overflow-y-auto overscroll-contain ${
               isHeaderArch ? "bg-white text-black" : "bg-[#0a0a0c] text-neon-cyan"
             }`}
           >
@@ -2799,7 +2811,7 @@ export default function App() {
                     return (
                       <div key={domain.id} className="flex flex-col">
                         <button
-                          onClick={() => setActiveTelemetry(idx)}
+                          onClick={() => setActiveTelemetry(activeTelemetry === idx ? null : idx)}
                           className={`group w-full flex items-center justify-between p-4 text-left transition-all duration-300 border-l-2 ${
                             isActive 
                               ? "bg-[#3B82F6]/10 border-[#3B82F6] text-white" 
@@ -2876,51 +2888,65 @@ export default function App() {
                 {/* Right Column: Active Domain Data */}
                 <div className="hidden md:flex md:col-span-7 lg:col-span-8 items-center">
                   <AnimatePresence mode="wait">
-                    <motion.div
-                      key={activeTelemetry}
-                      initial={{ opacity: 0, x: 10 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      exit={{ opacity: 0, x: -10 }}
-                      transition={{ duration: 0.2 }}
-                      className="w-full border border-white/5 bg-zinc-900/30 p-8 md:p-12 rounded-xl backdrop-blur-sm"
-                    >
-                      <div className="flex items-center gap-4 mb-4">
-                         <div className="p-3 bg-[#3B82F6]/10 text-[#3B82F6] rounded-lg">
-                           {telemetryDomains[activeTelemetry].icon}
-                         </div>
-                         <h3 className="font-sans font-bold text-gray-200 text-lg md:text-xl tracking-wide">
-                           {telemetryDomains[activeTelemetry].title}
-                         </h3>
-                      </div>
-                      
-                      <p className="text-gray-400 text-sm mb-8 leading-relaxed font-sans max-w-2xl">
-                        {telemetryDomains[activeTelemetry].summary}
-                      </p>
-                        
-                      <div className="space-y-6">
-                        <div>
-                          <div className="text-[10px] font-mono text-gray-500 uppercase tracking-widest mb-3">Core Software & Languages</div>
-                          <div className="flex flex-wrap gap-2">
-                            {telemetryDomains[activeTelemetry].core.map((t, idx) => (
-                              <span key={`${t}-${idx}`} className="px-2.5 py-1 bg-[#3B82F6]/10 border border-[#3B82F6]/30 rounded-md text-xs font-mono text-blue-300 shadow-sm">
-                                {t}
-                              </span>
-                            ))}
-                          </div>
+                    {activeTelemetry !== null ? (
+                      <motion.div
+                        key={activeTelemetry}
+                        initial={{ opacity: 0, x: 10 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: -10 }}
+                        transition={{ duration: 0.2 }}
+                        className="w-full border border-white/5 bg-zinc-900/30 p-8 md:p-12 rounded-xl backdrop-blur-sm"
+                      >
+                        <div className="flex items-center gap-4 mb-4">
+                           <div className="p-3 bg-[#3B82F6]/10 text-[#3B82F6] rounded-lg">
+                             {telemetryDomains[activeTelemetry].icon}
+                           </div>
+                           <h3 className="font-sans font-bold text-gray-200 text-lg md:text-xl tracking-wide">
+                             {telemetryDomains[activeTelemetry].title}
+                           </h3>
                         </div>
                         
-                        <div>
-                          <div className="text-[10px] font-mono text-gray-500 uppercase tracking-widest mb-3">Standards & Deliverables</div>
-                          <div className="flex flex-wrap gap-2">
-                            {telemetryDomains[activeTelemetry].methods.map((t, idx) => (
-                              <span key={`${t}-${idx}`} className="px-2.5 py-1 bg-black/40 border border-white/10 rounded-md text-xs font-mono text-gray-400">
-                                {t}
-                              </span>
-                            ))}
+                        <p className="text-gray-400 text-sm mb-8 leading-relaxed font-sans max-w-2xl">
+                          {telemetryDomains[activeTelemetry].summary}
+                        </p>
+                            
+                        <div className="space-y-6">
+                          <div>
+                            <div className="text-[10px] font-mono text-gray-500 uppercase tracking-widest mb-3">Core Software & Languages</div>
+                            <div className="flex flex-wrap gap-2">
+                              {telemetryDomains[activeTelemetry].core.map((t, idx) => (
+                                <span key={`${t}-${idx}`} className="px-2.5 py-1 bg-[#3B82F6]/10 border border-[#3B82F6]/30 rounded-md text-xs font-mono text-blue-300 shadow-sm">
+                                  {t}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+                            
+                          <div>
+                            <div className="text-[10px] font-mono text-gray-500 uppercase tracking-widest mb-3">Standards & Deliverables</div>
+                            <div className="flex flex-wrap gap-2">
+                              {telemetryDomains[activeTelemetry].methods.map((t, idx) => (
+                                <span key={`${t}-${idx}`} className="px-2.5 py-1 bg-black/40 border border-white/10 rounded-md text-xs font-mono text-gray-400">
+                                  {t}
+                                </span>
+                              ))}
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    </motion.div>
+                      </motion.div>
+                    ) : (
+                      <motion.div
+                        key="empty-telemetry"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="w-full h-full min-h-[300px] border border-white/5 bg-zinc-900/30 border-dashed rounded-xl flex items-center justify-center"
+                      >
+                        <div className="text-gray-500 font-mono text-sm tracking-widest uppercase">
+                          Select a domain to view stack
+                        </div>
+                      </motion.div>
+                    )}
                   </AnimatePresence>
                 </div>
               </div>
@@ -3287,7 +3313,7 @@ export default function App() {
               </div>
 
               {/* Modal Content */}
-              <div className="flex-grow overflow-y-auto p-4 md:p-8">
+              <div className="flex-grow overflow-y-auto overscroll-contain p-4 md:p-8">
                 <div className="grid grid-cols-1 lg:grid-cols-[1.25fr_1fr] gap-8 md:gap-12">
                   {/* Left: Media & Workflow */}
                   <div className="space-y-8">

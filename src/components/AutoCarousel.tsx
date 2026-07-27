@@ -13,6 +13,19 @@ export const AutoCarousel: React.FC<AutoCarouselProps> = ({ images, titles, isAr
   const [selectedImg, setSelectedImg] = useState<{ url: string; title?: string } | null>(null);
   const [isPaused, setIsPaused] = useState(false);
 
+  // Lock body scroll when modal is open
+  useEffect(() => {
+    if (selectedImg) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [selectedImg]);
+
+
   // Auto-scroll logic
   useEffect(() => {
     if (isPaused) return;
