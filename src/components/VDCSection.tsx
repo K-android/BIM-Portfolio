@@ -152,7 +152,7 @@ export default function VDCSection({
                   // EXPERIMENTAL AUTOMATION LAB
                 </div>
                 <div className="flex flex-col border border-white/10 rounded-xl bg-[#0a0a0c] overflow-hidden">
-                  {bimArsenal.filter((item: any) => ["BIM_08", "BIM_07", "BIM_01", "BIM_05"].includes(item.id)).map((item: any, index: number, arr: any[]) => (
+                  {bimArsenal.filter((item: any) => ["BIM_08", "BIM_10", "BIM_07", "BIM_01", "BIM_05"].includes(item.id)).map((item: any, index: number, arr: any[]) => (
                     <div 
                       key={`tier3-${item.id}`}
                       onClick={() => setSelectedArsenalItem(item)}

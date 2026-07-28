@@ -29,198 +29,236 @@
     <!-- JSON-LD Structured Data Schema for AI and Search Engine Crawlers (Schema.org) -->
     <script type="application/ld+json">
     {
-      "@context": "https://schema.org",
-      "@graph": [
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://des-portfolio-sepia.vercel.app/#person",
+      "name": "Karthikraj V Nadar",
+      "alternateName": [
+        "Karthikraj Nadar",
+        "Karthikraj V. Nadar"
+      ],
+      "jobTitle": "Computational Design Technologist, VDC Data Engineer & BIM Developer",
+      "description": "Enterprise Virtual Design & Construction Data Engineer and Computational Designer specializing in BIM automation, Python/Dynamo scripting, Revit/Rhino API development, and ISO 19650 compliance.",
+      "image": "https://lh3.googleusercontent.com/d/1_Gcehq-yN--25n8qKIkSLTGIleQGQqve",
+      "url": "https://des-portfolio-sepia.vercel.app/",
+      "sameAs": [
+        "https://github.com/karthikraj-nadar",
+        "https://www.linkedin.com/in/karthikraj-nadar/"
+      ],
+      "knowsAbout": [
+        "Computational Design",
+        "Virtual Design and Construction (VDC)",
+        "Building Information Modeling (BIM)",
+        "BIM Automation",
+        "Python",
+        "Dynamo scripting",
+        "Grasshopper 3D",
+        "Revit API",
+        "Rhino Common API",
+        "ISO 19650 Standards",
+        "MEP Coordination",
+        "Full-Stack Web Development",
+        "React",
+        "TypeScript",
+        "Tailwind CSS"
+      ],
+      "award": [
+        "Solar Decathlon India Grand Winner"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://des-portfolio-sepia.vercel.app/#website",
+      "url": "https://des-portfolio-sepia.vercel.app/",
+      "name": "Karthikraj Nadar - Portfolio & AEC Automation Dashboard",
+      "description": "High-tech developer dashboard portfolio for an Enterprise Virtual Design & Construction Data Engineer.",
+      "publisher": {
+        "@id": "https://des-portfolio-sepia.vercel.app/#person"
+      }
+    },
+    {
+      "@type": "ProfilePage",
+      "@id": "https://des-portfolio-sepia.vercel.app/#profilepage",
+      "url": "https://des-portfolio-sepia.vercel.app/",
+      "name": "Karthikraj Nadar Portfolio",
+      "isPartOf": {
+        "@id": "https://des-portfolio-sepia.vercel.app/#website"
+      },
+      "about": {
+        "@id": "https://des-portfolio-sepia.vercel.app/#person"
+      },
+      "mainEntity": {
+        "@id": "https://des-portfolio-sepia.vercel.app/#person"
+      }
+    },
+    {
+      "@type": "ItemList",
+      "@id": "https://des-portfolio-sepia.vercel.app/#portfolio-items",
+      "name": "Karthikraj Nadar Portfolio Projects",
+      "numberOfItems": 12,
+      "itemListElement": [
         {
-          "@type": "Person",
-          "@id": "https://des-portfolio-sepia.vercel.app/#person",
-          "name": "Karthikraj V Nadar",
-          "alternateName": ["Karthikraj Nadar", "Karthikraj V. Nadar"],
-          "jobTitle": "Computational Design Technologist, VDC Data Engineer & BIM Developer",
-          "description": "Enterprise Virtual Design & Construction Data Engineer and Computational Designer specializing in BIM automation, Python/Dynamo scripting, Revit/Rhino API development, and ISO 19650 compliance.",
-          "image": "https://lh3.googleusercontent.com/d/1_Gcehq-yN--25n8qKIkSLTGIleQGQqve",
-          "url": "https://des-portfolio-sepia.vercel.app/",
-          "sameAs": [
-            "https://github.com/karthikraj-nadar",
-            "https://www.linkedin.com/in/karthikraj-nadar/"
-          ],
-          "knowsAbout": [
-            "Computational Design",
-            "Virtual Design and Construction (VDC)",
-            "Building Information Modeling (BIM)",
-            "BIM Automation",
-            "Python",
-            "Dynamo scripting",
-            "Grasshopper 3D",
-            "Revit API",
-            "Rhino Common API",
-            "ISO 19650 Standards",
-            "MEP Coordination",
-            "Full-Stack Web Development",
-            "React",
-            "TypeScript",
-            "Tailwind CSS"
-          ],
-          "award": [
-            "Solar Decathlon India Grand Winner"
-          ]
-        },
-        {
-          "@type": "WebSite",
-          "@id": "https://des-portfolio-sepia.vercel.app/#website",
-          "url": "https://des-portfolio-sepia.vercel.app/",
-          "name": "Karthikraj Nadar - Portfolio & AEC Automation Dashboard",
-          "description": "High-tech developer dashboard portfolio for an Enterprise Virtual Design & Construction Data Engineer.",
-          "publisher": {
-            "@id": "https://des-portfolio-sepia.vercel.app/#person"
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@type": "CreativeWork",
+            "name": "The LLM Fabrication Engine",
+            "creator": {
+              "@id": "https://des-portfolio-sepia.vercel.app/#person"
+            },
+            "description": "A high-performance computational fabrication engine utilizing LLMs for generating buildable machine parts and coordinates directly in architectural workflows.",
+            "genre": "BIM Automation"
           }
         },
         {
-          "@type": "ProfilePage",
-          "@id": "https://des-portfolio-sepia.vercel.app/#profilepage",
-          "url": "https://des-portfolio-sepia.vercel.app/",
-          "name": "Karthikraj Nadar Portfolio",
-          "isPartOf": {
-            "@id": "https://des-portfolio-sepia.vercel.app/#website"
-          },
-          "about": {
-            "@id": "https://des-portfolio-sepia.vercel.app/#person"
-          },
-          "mainEntity": {
-            "@id": "https://des-portfolio-sepia.vercel.app/#person"
+          "@type": "ListItem",
+          "position": 2,
+          "item": {
+            "@type": "CreativeWork",
+            "name": "The Generative Documentation Engine",
+            "creator": {
+              "@id": "https://des-portfolio-sepia.vercel.app/#person"
+            },
+            "description": "Automated BIM model to 2D documentation generator using Revit API and Dynamo.",
+            "genre": "BIM Automation"
           }
         },
         {
-          "@type": "ItemList",
-          "@id": "https://des-portfolio-sepia.vercel.app/#portfolio-items",
-          "name": "Karthikraj Nadar Portfolio Projects",
-          "numberOfItems": 11,
-          "itemListElement": [
-            {
-              "@type": "ListItem",
-              "position": 1,
-              "item": {
-                "@type": "CreativeWork",
-                "name": "The LLM Fabrication Engine",
-                "creator": { "@id": "https://des-portfolio-sepia.vercel.app/#person" },
-                "description": "A high-performance computational fabrication engine utilizing LLMs for generating buildable machine parts and coordinates directly in architectural workflows.",
-                "genre": "BIM Automation"
-              }
+          "@type": "ListItem",
+          "position": 3,
+          "item": {
+            "@type": "CreativeWork",
+            "name": "The 5D Data Harvester",
+            "creator": {
+              "@id": "https://des-portfolio-sepia.vercel.app/#person"
             },
-            {
-              "@type": "ListItem",
-              "position": 2,
-              "item": {
-                "@type": "CreativeWork",
-                "name": "The Generative Documentation Engine",
-                "creator": { "@id": "https://des-portfolio-sepia.vercel.app/#person" },
-                "description": "Automated BIM model to 2D documentation generator using Revit API and Dynamo.",
-                "genre": "BIM Automation"
-              }
+            "description": "VDC data pipeline designed for programmatically extracting real-time quantities, costs, and estimation metadata from 3D BIM assets.",
+            "genre": "VDC Engineering"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "item": {
+            "@type": "CreativeWork",
+            "name": "The Clash Matrix Pipeline",
+            "creator": {
+              "@id": "https://des-portfolio-sepia.vercel.app/#person"
             },
-            {
-              "@type": "ListItem",
-              "position": 3,
-              "item": {
-                "@type": "CreativeWork",
-                "name": "The 5D Data Harvester",
-                "creator": { "@id": "https://des-portfolio-sepia.vercel.app/#person" },
-                "description": "VDC data pipeline designed for programmatically extracting real-time quantities, costs, and estimation metadata from 3D BIM assets.",
-                "genre": "VDC Engineering"
-              }
+            "description": "A structured virtual design and construction (VDC) coordination pipeline engineered to manage and resolve multi-disciplinary geometric hard and soft clashes across federated models.",
+            "genre": "BIM Coordination"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "item": {
+            "@type": "CreativeWork",
+            "name": "Spatial Centroid Component Automator",
+            "creator": {
+              "@id": "https://des-portfolio-sepia.vercel.app/#person"
             },
-            {
-              "@type": "ListItem",
-              "position": 4,
-              "item": {
-                "@type": "CreativeWork",
-                "name": "The Clash Matrix Pipeline",
-                "creator": { "@id": "https://des-portfolio-sepia.vercel.app/#person" },
-                "description": "A structured virtual design and construction (VDC) coordination pipeline engineered to manage and resolve multi-disciplinary geometric hard and soft clashes across federated models.",
-                "genre": "BIM Coordination"
-              }
+            "description": "An automated Vectorworks Marionette script designed to instantly locate space boundaries and place a designated BIM component at the exact centroid of every room across the model.",
+            "genre": "VDC Engineering"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 6,
+          "item": {
+            "@type": "CreativeWork",
+            "name": "The 4D Matrix (TimeLiner)",
+            "creator": {
+              "@id": "https://des-portfolio-sepia.vercel.app/#person"
             },
-            {
-              "@type": "ListItem",
-              "position": 5,
-              "item": {
-                "@type": "CreativeWork",
-                "name": "Spatial Centroid Component Automator",
-                "creator": { "@id": "https://des-portfolio-sepia.vercel.app/#person" },
-                "description": "An automated Vectorworks Marionette script designed to instantly locate space boundaries and place a designated BIM component at the exact centroid of every room across the model.",
-                "genre": "VDC Engineering"
-              }
+            "description": "A Virtual Design & Construction (VDC) simulation pipeline that integrates critical path scheduling parameters into federated 3D geometry to construct a dynamic, time-linked 4D visual environment.",
+            "genre": "Construction Simulation"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 7,
+          "item": {
+            "@type": "CreativeWork",
+            "name": "The Multi-Objective Eco-Parametric Solver",
+            "creator": {
+              "@id": "https://des-portfolio-sepia.vercel.app/#person"
             },
-            {
-              "@type": "ListItem",
-              "position": 6,
-              "item": {
-                "@type": "CreativeWork",
-                "name": "The 4D Matrix (TimeLiner)",
-                "creator": { "@id": "https://des-portfolio-sepia.vercel.app/#person" },
-                "description": "A Virtual Design & Construction (VDC) simulation pipeline that integrates critical path scheduling parameters into federated 3D geometry to construct a dynamic, time-linked 4D visual environment.",
-                "genre": "Construction Simulation"
-              }
+            "description": "Computational optimization tool balancing architectural shading, daylight, and structural weight in real-time.",
+            "genre": "Computational Design"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 8,
+          "item": {
+            "@type": "CreativeWork",
+            "name": "Agent-Based Space Planning & Structural Solver",
+            "creator": {
+              "@id": "https://des-portfolio-sepia.vercel.app/#person"
             },
-            {
-              "@type": "ListItem",
-              "position": 7,
-              "item": {
-                "@type": "CreativeWork",
-                "name": "The Multi-Objective Eco-Parametric Solver",
-                "creator": { "@id": "https://des-portfolio-sepia.vercel.app/#person" },
-                "description": "Computational optimization tool balancing architectural shading, daylight, and structural weight in real-time.",
-                "genre": "Computational Design"
-              }
+            "description": "Generative design tool utilizing agent-based physics models to organize room layouts and generate matching structural beam lattices.",
+            "genre": "Computational Design"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 9,
+          "item": {
+            "@type": "CreativeWork",
+            "name": "Morpho-Performance | Generative Masterplanning Engine",
+            "creator": {
+              "@id": "https://des-portfolio-sepia.vercel.app/#person"
             },
-            {
-              "@type": "ListItem",
-              "position": 8,
-              "item": {
-                "@type": "CreativeWork",
-                "name": "Agent-Based Space Planning & Structural Solver",
-                "creator": { "@id": "https://des-portfolio-sepia.vercel.app/#person" },
-                "description": "Generative design tool utilizing agent-based physics models to organize room layouts and generate matching structural beam lattices.",
-                "genre": "Computational Design"
-              }
+            "description": "Engineered a multi-objective evolutionary optimization engine using Python, Grasshopper, and Wallacei to evaluate 99 urban configurations across 9 generations.",
+            "genre": "Computational Design"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 10,
+          "item": {
+            "@type": "CreativeWork",
+            "name": "Rhino-to-Revit API Interoperability Pipeline",
+            "creator": {
+              "@id": "https://des-portfolio-sepia.vercel.app/#person"
             },
-            {
-              "@type": "ListItem",
-              "position": 9,
-              "item": {
-                "@type": "CreativeWork",
-                "name": "Rhino-to-Revit API Interoperability Pipeline",
-                "creator": { "@id": "https://des-portfolio-sepia.vercel.app/#person" },
-                "description": "High-fidelity geometry and metadata transfer pipeline connecting Rhino Common to native Revit elements with Dynamo.",
-                "genre": "BIM Automation"
-              }
+            "description": "High-fidelity geometry and metadata transfer pipeline connecting Rhino Common to native Revit elements with Dynamo.",
+            "genre": "BIM Automation"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 11,
+          "item": {
+            "@type": "CreativeWork",
+            "name": "Luxury Villas Development in Alibaug",
+            "creator": {
+              "@id": "https://des-portfolio-sepia.vercel.app/#person"
             },
-            {
-              "@type": "ListItem",
-              "position": 10,
-              "item": {
-                "@type": "CreativeWork",
-                "name": "Luxury Villas Development in Alibaug",
-                "creator": { "@id": "https://des-portfolio-sepia.vercel.app/#person" },
-                "description": "Comprehensive BIM documentation and MEP coordination for a series of high-end private villas in Alibaug.",
-                "genre": "Architectural Design"
-              }
+            "description": "Comprehensive BIM documentation and MEP coordination for a series of high-end private villas in Alibaug.",
+            "genre": "Architectural Design"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 12,
+          "item": {
+            "@type": "CreativeWork",
+            "name": "Net-Zero Worker Housing",
+            "creator": {
+              "@id": "https://des-portfolio-sepia.vercel.app/#person"
             },
-            {
-              "@type": "ListItem",
-              "position": 11,
-              "item": {
-                "@type": "CreativeWork",
-                "name": "Net-Zero Worker Housing",
-                "creator": { "@id": "https://des-portfolio-sepia.vercel.app/#person" },
-                "description": "Sustainable housing design optimized with solar path simulations, passive cooling strategies, and low carbon materials.",
-                "genre": "Architectural Design"
-              }
-            }
-          ]
+            "description": "Sustainable housing design optimized with solar path simulations, passive cooling strategies, and low carbon materials.",
+            "genre": "Architectural Design"
+          }
         }
       ]
     }
+  ]
+}
     </script>
   </head>
   <body>

@@ -376,6 +376,13 @@ const getSimLogsForProject = (id: string, stepIdx: number) => {
         ">> Dispatching Wallacei Pareto optimization (Independent dual targets)...\n>> Generation 50 computed. Mapping non-dominated design spaces.\n>> Pareto Front generated with 34 distinct optimal candidate structures.",
         ">> Benchmarking solvers. Wallacei selection achieved further 18% weight savings vs Galapagos at same solar shade rating.\n>> Pipeline complete. Data charts synchronized successfully."
       ][stepIdx];
+    case "BIM_10":
+      return [
+        ">> Defining dynamic building footprint, height, and setback variables as genes within Grasshopper...",
+        ">> Calculating solar exposure vector scores alongside real-time FAR/volume indices in parallel using custom Python and Grasshopper logic.",
+        ">> Running the Cyclops evolutionary engine across 9 generations to map the trade-off Pareto front.",
+        ">> Extracting the winning Pareto-optimal massing state directly into native Revit and Vectorworks geometry containers."
+      ][stepIdx];
     case "BIM_09":
       return [
         ">> Voronoi algorithm executing on point clouds.\n>> Generating Biomimetic Space Frame shell.\n>> Total count: 5,124 nodes processed.",
@@ -453,39 +460,42 @@ const WorkloadGif = ({
     }
   }, [active, isVideo]);
 
-  if (isVideo && isInModal) {
-    const googleDriveId = getDriveId(src);
-    if (googleDriveId) {
-      return (
-        <div 
-          className="w-full h-full relative"
-          onMouseEnter={() => setIsInternalHovered(true)}
-          onMouseLeave={() => setIsInternalHovered(false)}
-        >
-          {active ? (
-            <iframe
-              src={`https://drive.google.com/file/d/${googleDriveId}/preview?autoplay=1&mute=1`}
-              className={`${className} border-0 pointer-events-auto`}
-              allow="autoplay; encrypted-media"
-              allowFullScreen
-            />
-          ) : (
-            <img loading="lazy" 
-              src={staticUrl} 
-              alt={alt}
-              referrerPolicy="no-referrer"
-              className={className}
-              onContextMenu={(e) => e.preventDefault()}
-              onDragStart={(e) => e.preventDefault()}
-            />
-          )}
-        </div>
-      );
+  if (isVideo) {
+    if (isInModal) {
+      const googleDriveId = getDriveId(src);
+      if (googleDriveId) {
+        return (
+          <div 
+            className="w-full h-full relative"
+            onMouseEnter={() => setIsInternalHovered(true)}
+            onMouseLeave={() => setIsInternalHovered(false)}
+          >
+            {active ? (
+              <iframe
+                src={`https://drive.google.com/file/d/${googleDriveId}/preview?autoplay=1&mute=1`}
+                className={`${className} border-0 pointer-events-auto`}
+                allow="autoplay; encrypted-media"
+                allowFullScreen
+              />
+            ) : (
+              <img loading="lazy" 
+                src={staticUrl} 
+                alt={alt}
+                referrerPolicy="no-referrer"
+                className={className}
+                onContextMenu={(e) => e.preventDefault()}
+                onDragStart={(e) => e.preventDefault()}
+              />
+            )}
+          </div>
+        );
+      }
     }
+    
     const cleanSrc = getPlayableVideoUrl(src);
     return (
       <div 
-        className="w-full h-full relative"
+        className="w-full h-full relative overflow-hidden"
         onMouseEnter={() => setIsInternalHovered(true)}
         onMouseLeave={() => setIsInternalHovered(false)}
       >
@@ -495,8 +505,9 @@ const WorkloadGif = ({
           loop 
           muted 
           playsInline
-          className={className}
+          className={className?.includes('object-contain') ? `${className} object-contain` : `${className} object-cover`}
           poster={staticUrl}
+          style={{ pointerEvents: 'none' }}
         />
       </div>
     );
@@ -1868,6 +1879,51 @@ export default function App() {
           "https://lh3.googleusercontent.com/d/1Tr8vZlSXrsEa7LiN4-Y3DNvBFq_n-hxY",
           "https://lh3.googleusercontent.com/d/1vSOTIYB045RMebKu-dYVgODfRVHDBD4s"
         ]
+      }
+    },
+    {
+      id: "BIM_10",
+      title: "Morpho-Performance | Generative Masterplanning Engine",
+      domain: "COMPUTATIONAL RESEARCH // PYTHON, GRASSHOPPER & WALLACEI",
+      intel: "Engineered a multi-objective evolutionary optimization engine using Python, Grasshopper, and Wallacei to evaluate 99 urban configurations across 9 generations—extracting the optimal Pareto front balancing solar exposure against FAR/density.",
+      role: "COMPUTATIONAL RESEARCH // PYTHON, GRASSHOPPER & WALLACEI",
+      problem: "Masterplanners often make early massing decisions based on intuition, locking in a neighborhood's energy performance and density limits without quantitative analysis.",
+      solution: "Engineered a multi-objective evolutionary optimization engine using Python, Grasshopper, and Wallacei to evaluate 99 urban configurations across 9 generations—extracting the optimal Pareto front balancing solar exposure against FAR/density.",
+      icon: <Layers className="w-6 h-6 text-neon-purple" />,
+      color: "neon-purple",
+      metric: "Generative",
+      gifUrl: "https://lh3.googleusercontent.com/d/1Kw93jB1df5JVmr6SKjNQLP5ZoHnV1pzw#video",
+      tags: ["Python", "Grasshopper", "Wallacei", "Cyclops Tools", "Revit Interop"],
+      ledger: {
+        inputs: "Urban site boundary polygons, target FAR/density constraints, solar vectors/epw solar parameters.",
+        engine: "Grasshopper, Python, Cyclops Multi-Objective Evolutionary Solver.",
+        outputs: "Pareto-optimal 3D massing geometry, solar exposure score matrix, direct Revit/Vectorworks BIM geometry export."
+      },
+      workflow: {
+        screenshotUrl: "https://picsum.photos/seed/workflow-masterplan/800/450?grayscale",
+        steps: [
+          "Define dynamic building footprint, height, and setback variables as genes within Grasshopper.",
+          "Calculate solar exposure vector scores alongside real-time FAR/volume indices in parallel using custom Python and Grasshopper logic.",
+          "Run the Cyclops evolutionary engine across 9 generations to map the trade-off Pareto front.",
+          "Extract the winning Pareto-optimal massing state directly into native Revit and Vectorworks geometry containers."
+        ]
+      },
+      details: {
+        images: [
+          "https://lh3.googleusercontent.com/d/1XQ54NM5a801h0RrDCpUEBGYNkuXd0VdN",
+          "https://lh3.googleusercontent.com/d/1hp0NV0r48IdvUdXpO4qNepric6MzXK2a",
+          "https://lh3.googleusercontent.com/d/1OpG-luSajdW_lODfTcnm1gxynjCDB2kH",
+          "https://lh3.googleusercontent.com/d/1Za7I3xjTrkEFyotAlMvGYeU75aaUS9Qb",
+          "https://lh3.googleusercontent.com/d/1J_7DIfI41wqagxnPkM2LMqsq6kjy3b4t",
+          "https://lh3.googleusercontent.com/d/1rXtskRHI0_t2NSokSWPVnX2NSyT2ywVa",
+          "https://lh3.googleusercontent.com/d/132HIqxOov5auLlab8dpe3mfbEv-ucUrR",
+          "https://lh3.googleusercontent.com/d/17gMWOD6far_NoGobHOm6FCzr2WCytTgP"
+        ],
+        videoUrl: "https://drive.google.com/file/d/1xF7X47XL1Im3vkymiHef56dotjYGV-Ub/view?usp=sharing",
+
+        overview: "A multi-objective generative masterplanning engine designed to eliminate intuition-based early-stage massing decisions. By framing urban massing as a computational optimization problem, the system balances two fundamentally competing performance metrics—maximizing total solar radiation across facades while simultaneously maximizing floor area ratio (FAR)—to discover mathematically optimal urban forms.",
+        challenge: "In conventional masterplanning, massing decisions made during initial design phases permanently lock in a neighborhood's microclimate, daylight potential, and operational energy performance for decades. Furthermore, daylight performance and urban density inherently conflict: maximizing FAR usually creates mutual shading, while maximizing solar exposure flattens density.",
+        solution: "Configured an evolutionary optimization workflow using Python, Grasshopper, and the Cyclops solver to evaluate 99 urban configurations across 9 generations. By executing a Pareto front search, the system identified the optimal trade-off solution (Generation 9, Individual 5), achieving a balanced Solar Exposure Score of 296,956 alongside a high-density FAR of 9.1, complete with direct interoperability to downstream BIM environments (Revit and Vectorworks)."
       }
     },
     {
@@ -4363,9 +4419,14 @@ export default function App() {
               ) : (
                 (() => {
                   const googleDriveId = getDriveId(expandedMedia.src);
-                  const fullSrc = googleDriveId 
+                  let fullSrc = googleDriveId 
                     ? `https://lh3.googleusercontent.com/d/${googleDriveId}` 
                     : expandedMedia.src.split('#')[0];
+                    
+                  if (expandedMedia.isGif) {
+                    fullSrc = getWsrvGifUrl(expandedMedia.src);
+                  }
+                  
                   return (
                     <div className="w-full h-full relative select-none">
                       <img loading="lazy" 
