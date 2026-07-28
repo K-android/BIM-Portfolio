@@ -1,5 +1,2 @@
 User-agent: *
 Allow: /
-Disallow: /api/
-
-Sitemap: https://des-portfolio-sepia.vercel.app/sitemap.xml
