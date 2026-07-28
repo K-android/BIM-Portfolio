@@ -2119,31 +2119,31 @@ export default function App() {
       id: "BIM_04",
       title: "The Clash Matrix Pipeline",
       role: "BIM COORDINATOR",
-      problem: "Multidisciplinary model coordination requires tedious manual visual inspection, missing critical overlaps between structural and MEP elements.",
-      solution: "Engineered a collision checker that audits steel structures against utility models, automatically flagging and categorizing coordination issues.",
+      problem: "Raw clash detection across multi-disciplinary models generates thousands of non-actionable errors, overwhelming trade engineers.",
+      solution: "Architected a multi-layered clash matrix that groups conflicts by trade and tolerance, routing only high-priority issues to leads.",
       icon: <Activity className="w-6 h-6 text-neon-cyan" />,
       color: "neon-cyan",
       metric: "ZERO ERRORS",
       gifUrl: "https://lh3.googleusercontent.com/d/1G_5-CuXFQuIf9mft1d6CauX29EmntKOE",
       tags: ["Navisworks", "Revit", "Clash Detection"],
       ledger: {
-        inputs: "Structural frame files, plumbing pipes files, rule matching checklists",
-        engine: "Clash check solvers and automated view filters",
-        outputs: "High-priority coordination lists, interactive error logs"
+        inputs: "Multi-disciplinary federated models (Structural steel/concrete, MEP trade models), custom search sets, clash matrix rule sets",
+        engine: "Navisworks Manage Clash Detective & XML Search Set Automation",
+        outputs: "Filtered clash groups, prioritized coordination matrix logs, trade-specific HTML/BCF clash reports"
       },
       workflow: {
         screenshotUrl: "https://picsum.photos/seed/workflow-4/800/450?grayscale",
         steps: [
-          "Load the structural frames and duct files together.",
-          "Filter out minor issues and focus on big structure blocks.",
-          "Color-code overlap spots so engineers can spot them fast.",
-          "Create interactive reports for the construction superintendent."
+          "Import structural, architectural, and MEP NWD/NWC models into a unified CDE coordination space.",
+          "Apply predefined search sets and clash rules to isolate specific trade intersections (e.g., Structure vs. HVAC).",
+          "Run automated clash tests using strict clearance tolerances, automatically grouping micro-clashes by level and grid sector.",
+          "Generate actionable BCF/HTML coordination reports with assigned responsibility tags for trade resolution meetings."
         ]
       },
       details: {
-        overview: "A critical BIM coordination system engineered to prevent costly on-site design clashes between structural frames and MEP systems before concrete is poured. The automated 3D collision checker audits steel structures against pipes and ducts, intelligently grouping and color-coding spatial conflicts to prioritize major structural layout resolutions.",
-        challenge: "Sifting through thousands of accidental overlap alerts between small wires and concrete panels.",
-        solution: "Established clear rule layers that group alerts by major systems (like main columns vs. water ducts), letting designers solve major layout conflicts first.",
+        overview: "A structured virtual design and construction (VDC) coordination pipeline engineered to manage and resolve multi-disciplinary geometric hard and soft clashes across federated models. By establishing automated search sets and a structured clash matrix in Navisworks Manage, the workflow replaces chaotic raw collision detection with a streamlined, noise-free coordination hierarchy.",
+        challenge: "Unfiltered collision detection across complex structural and MEP models generates thousands of raw clash alerts—most of which are minor clearance noise, modeling overlaps, or non-actionable errors that overwhelm trade engineers and stall project coordination.",
+        solution: "Architected a multi-layered clash matrix and rule-based filtering system. By grouping clashes by trade, zone, and element tolerance (e.g., clearance around ductwork vs. major structural steel penetrations), the pipeline filters out background noise and routes high-priority constructability issues directly to responsible trade leads.",
         reportUrl: "https://drive.google.com/file/d/1LetvlyhbGmUM-43bKoJR2OVGJQCNutWJ/view?usp=sharing",
         videoUrl: "https://drive.google.com/file/d/18k015r2LpCsmPb_POW3cQBtCoSXsIQ27/view?usp=sharing"
       }
@@ -2152,31 +2152,31 @@ export default function App() {
       id: "BIM_06",
       title: "The 4D Matrix (TimeLiner)",
       role: "SIMULATION LEAD",
-      problem: "Static Gantt charts fail to communicate spatial logistics and complex construction sequences over time.",
-      solution: "Developed a 4D scheduling tool that links MS Project timelines directly to 3D model elements, simulating building phases dynamically.",
+      problem: "Detecting spatial bottlenecks and trade congestion is nearly impossible using flat spreadsheets and static 2D phasing drawings.",
+      solution: "Engineered a 4D parameter-mapping pipeline linking MS Project tasks to 3D geometry for dynamic, time-linked site simulation.",
       icon: <ShieldCheck className="w-6 h-6 text-neon-blue" />,
       color: "neon-blue",
       metric: "4D SIMULATION",
       gifUrl: "https://lh3.googleusercontent.com/d/1qpMsNkw8HaPhf97qubs7GEV1BkZKsydz",
       tags: ["Navisworks", "TimeLiner", "MS Project"],
       ledger: {
-        inputs: "3D Revit building model, MS Project build schedule",
-        engine: "Timeline player and date linking rules",
-        outputs: "Day-by-day construction video, sequence log files"
+        inputs: "Multi-disciplinary federated 3D models (Revit/NWD), CPM construction schedule data (MS Project / Primavera P6 CSV)",
+        engine: "Navisworks TimeLiner, Task Rules Engine, Selection/Search Set Automation",
+        outputs: "Phased 4D simulation video sequences, site logistics logs, spatial trade-stacking reports"
       },
       workflow: {
         screenshotUrl: "https://picsum.photos/seed/workflow-6/800/450?grayscale",
         steps: [
-          "Import the building schedule spreadsheet.",
-          "Link specific dates to individual columns and walls.",
-          "Color-code items by their stage (built, mock, active).",
-          "Play the animation to catch schedule conflicts early."
+          "Import and normalize CPM schedule hierarchies from MS Project/P6 into the CDE.",
+          "Map structural and MEP search sets to specific schedule WBS task IDs via rule-based linking.",
+          "Apply appearance profiles (e.g., active build, planned, late) to visualize daily site installation phases.",
+          "Run timeline playback to identify spatial trade stacking, crane reach conflicts, and staging room constraints."
         ]
       },
       details: {
-        overview: "An advanced 4D scheduling tool that links traditional calendar milestones with 3D structural models to generate an interactive, virtual timeline. This dynamic simulation allows contractors and project managers to watch daily building progress virtually, effectively coordinating logistics, crane positioning, and crew arrivals to avoid site blockages.",
-        challenge: "Catching schedule mistakes (such as pouring a floor before the supporting steel columns arrive) in flat spreadsheet cells is extremely difficult.",
-        solution: "Paired schedule spreadsheets directly with 3D building pieces to animate the full timeline, solving multi-million-dollar sequence mistakes in the office.",
+        overview: "A Virtual Design & Construction (VDC) simulation pipeline that integrates critical path scheduling parameters into federated 3D geometry to construct a dynamic, time-linked 4D visual environment. The workflow transforms static Gantt chart data into an interactive construction sequence model for analyzing site logistics, crane coverage, and temporal trade conflicts.",
+        challenge: "Detecting temporal logic errors and spatial bottlenecks—such as site access obstruction, concurrent trade congestion, or premature concrete pour sequencing—is nearly impossible when reviewing flat spreadsheet schedules and 2D phasing drawings in isolation.",
+        solution: "Configured an automated 4D parameter-mapping framework linking MS Project tasks directly to Navisworks search sets using defined rule configurations. The pipeline dynamically simulates phased assembly, visually categorizing elements by construction state (Construct, Demolish, Temporary) to validate constructability before site mobilization.",
         videoUrl: "https://drive.google.com/file/d/1lEe6jypAKbT_Fe0CXXVDaV3yXgarNeeF/view?usp=sharing"
       }
     }
