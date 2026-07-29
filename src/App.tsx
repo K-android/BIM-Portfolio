@@ -2008,6 +2008,7 @@ export default function App() {
         challenge: "Getting clean, precise, and buildable machine parts from unpredictable AI chat answers.",
         solution: "Wrote custom Python parser scripts that force the AI model to output verified numbers. The script then builds, rotates, and flattens the pieces perfectly.",
         images: [
+          "https://lh3.googleusercontent.com/d/1U50XtgxeuNMeUKTCtTcUIjKMBy06z7Cw",
           "https://lh3.googleusercontent.com/d/12OMyHxHu87uIA87fmB3QJI-tMzHIi-yP",
           "https://lh3.googleusercontent.com/d/1OcgT2rCg6SVvVPYAgdgDyYfOwD2FybaL",
           "https://lh3.googleusercontent.com/d/1IUveGylPhmxyzS9J_zx8uIraB55FaoF2",
