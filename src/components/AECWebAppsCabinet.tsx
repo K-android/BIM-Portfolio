@@ -14,15 +14,17 @@ import {
   Workflow, 
   RefreshCw,
   FolderOpen,
-  Github
+  Github, Play
 } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { AECWorkflowHub } from "./AECWorkflowHub.tsx";
 
-export const AECWebAppsCabinet: React.FC = () => {
+export const AECWebAppsCabinet: React.FC<{ onShowVideo?: (url: string, title: string) => void }> = ({ onShowVideo }) => {
   const [currentTab1, setCurrentTab1] = useState<"desc" | "features" | "process">("desc");
   const [currentTab2, setCurrentTab2] = useState<"desc" | "features" | "process">("desc");
   const [currentTab3, setCurrentTab3] = useState<"desc" | "features" | "process">("desc");
+  const [currentImage3, setCurrentImage3] = useState(0);
+
   
   // Real-time animation states for the BIM Metric Portal visualizer
   const [telemetryLogs, setTelemetryLogs] = useState<string[]>([
@@ -57,6 +59,18 @@ export const AECWebAppsCabinet: React.FC = () => {
     
     return () => clearInterval(interval);
   }, []);
+
+  const rhinoImages = [
+    "https://lh3.googleusercontent.com/d/1eQ88zcWYH9cjK0eHaem8THzK3w1_o83Y",
+    "https://lh3.googleusercontent.com/d/1XQ54NM5a801h0RrDCpUEBGYNkuXd0VdN",
+    "https://lh3.googleusercontent.com/d/1hp0NV0r48IdvUdXpO4qNepric6MzXK2a",
+    "https://lh3.googleusercontent.com/d/1OpG-luSajdW_lODfTcnm1gxynjCDB2kH",
+    "https://lh3.googleusercontent.com/d/1Za7I3xjTrkEFyotAlMvGYeU75aaUS9Qb",
+    "https://lh3.googleusercontent.com/d/1J_7DIfI41wqagxnPkM2LMqsq6kjy3b4t",
+    "https://lh3.googleusercontent.com/d/1rXtskRHI0_t2NSokSWPVnX2NSyT2ywVa",
+    "https://lh3.googleusercontent.com/d/132HIqxOov5auLlab8dpe3mfbEv-ucUrR",
+    "https://lh3.googleusercontent.com/d/17gMWOD6far_NoGobHOm6FCzr2WCytTgP"
+  ];
 
   return (
     <div className="space-y-16">
@@ -478,13 +492,48 @@ export const AECWebAppsCabinet: React.FC = () => {
           <div className="relative max-h-[180px] md:max-h-none aspect-video md:aspect-[16/8] overflow-hidden group border-b border-white/10 bg-black/95">
             <div className="absolute inset-0 bg-grid-pattern opacity-[0.06] pointer-events-none z-10" />
             <img loading="lazy" 
-              src="https://lh3.googleusercontent.com/d/1eQ88zcWYH9cjK0eHaem8THzK3w1_o83Y"
+              src={rhinoImages[currentImage3]}
               alt="Rhino Sync Web Console Preview"
               referrerPolicy="no-referrer"
               className="w-full h-full object-cover opacity-85 group-hover:opacity-100 group-hover:scale-[1.03] transition-all duration-700 filter saturate-[0.85] pointer-events-none select-none"
               onContextMenu={(e) => e.preventDefault()}
               onDragStart={(e) => e.preventDefault()}
             />
+            
+            {/* Gallery Navigation */}
+            <div className="absolute inset-x-0 bottom-0 p-2 flex justify-center gap-1.5 z-20 bg-gradient-to-t from-black/80 to-transparent">
+              {rhinoImages.map((_, i) => (
+                <button
+                  key={`rhino-img-${i}`}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setCurrentImage3(i);
+                  }}
+                  className={`w-1.5 h-1.5 rounded-full transition-all ${
+                    currentImage3 === i ? "bg-[#b4ff39] w-3" : "bg-white/30 hover:bg-white/60"
+                  }`}
+                />
+              ))}
+            </div>
+            
+            <button 
+              onClick={(e) => {
+                e.stopPropagation();
+                setCurrentImage3((prev) => (prev > 0 ? prev - 1 : rhinoImages.length - 1));
+              }}
+              className="absolute left-2 top-1/2 -translate-y-1/2 w-6 h-6 bg-black/50 hover:bg-[#b4ff39]/20 border border-white/10 hover:border-[#b4ff39]/50 rounded flex items-center justify-center text-white/50 hover:text-[#b4ff39] z-20 backdrop-blur-sm transition-all"
+            >
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+            </button>
+            <button 
+              onClick={(e) => {
+                e.stopPropagation();
+                setCurrentImage3((prev) => (prev < rhinoImages.length - 1 ? prev + 1 : 0));
+              }}
+              className="absolute right-2 top-1/2 -translate-y-1/2 w-6 h-6 bg-black/50 hover:bg-[#b4ff39]/20 border border-white/10 hover:border-[#b4ff39]/50 rounded flex items-center justify-center text-white/50 hover:text-[#b4ff39] z-20 backdrop-blur-sm transition-all"
+            >
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+            </button>
             <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent z-10 pointer-events-none" />
             <div className="absolute top-3 left-3 z-20 bg-black/80 backdrop-blur-sm border border-white/10 px-2.5 py-1 rounded text-[9.5px] font-sans text-gray-300  tracking-wider flex items-center gap-1.5 font-semibold">
               <span className="w-1.5 h-1.5 bg-[#b4ff39] rounded-full animate-pulse" />
@@ -608,6 +657,17 @@ export const AECWebAppsCabinet: React.FC = () => {
             <div className="mt-8 pt-4 border-t border-white/10 flex flex-col xl:flex-row gap-4 items-center justify-between">
               <span className="text-xs text-gray-500 font-sans tracking-wider">// VERCEL HOSTED</span>
               <div className="flex gap-2 w-full xl:w-auto">
+                <button
+                  onClick={() => {
+                    if (onShowVideo) {
+                      onShowVideo("https://drive.google.com/file/d/1QInSkhlr6mNmVVfQod1YmzG56FCljnAS/view?usp=sharing", "Rhino Sync Web Console");
+                    }
+                  }}
+                  className="flex-none font-sans text-xs px-2 md:px-3 py-2 bg-gray-800/50 hover:bg-gray-700 border border-white/10 text-white rounded font-bold transition-all flex items-center justify-center gap-1.5 active:scale-95"
+                >
+                  <Play className="w-3.5 h-3.5" />
+                  <span className="hidden md:inline">Video</span>
+                </button>
                 <a
                   href="https://github.com/K-android/Rhino.GH-Sync-Web-Console"
                   target="_blank"

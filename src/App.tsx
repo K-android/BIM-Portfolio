@@ -1909,16 +1909,7 @@ export default function App() {
         ]
       },
       details: {
-        images: [
-          "https://lh3.googleusercontent.com/d/1XQ54NM5a801h0RrDCpUEBGYNkuXd0VdN",
-          "https://lh3.googleusercontent.com/d/1hp0NV0r48IdvUdXpO4qNepric6MzXK2a",
-          "https://lh3.googleusercontent.com/d/1OpG-luSajdW_lODfTcnm1gxynjCDB2kH",
-          "https://lh3.googleusercontent.com/d/1Za7I3xjTrkEFyotAlMvGYeU75aaUS9Qb",
-          "https://lh3.googleusercontent.com/d/1J_7DIfI41wqagxnPkM2LMqsq6kjy3b4t",
-          "https://lh3.googleusercontent.com/d/1rXtskRHI0_t2NSokSWPVnX2NSyT2ywVa",
-          "https://lh3.googleusercontent.com/d/132HIqxOov5auLlab8dpe3mfbEv-ucUrR",
-          "https://lh3.googleusercontent.com/d/17gMWOD6far_NoGobHOm6FCzr2WCytTgP"
-        ],
+        
         videoUrl: "https://drive.google.com/file/d/1xF7X47XL1Im3vkymiHef56dotjYGV-Ub/view?usp=sharing",
 
         overview: "A multi-objective generative masterplanning engine designed to eliminate intuition-based early-stage massing decisions. By framing urban massing as a computational optimization problem, the system balances two fundamentally competing performance metrics—maximizing total solar radiation across facades while simultaneously maximizing floor area ratio (FAR)—to discover mathematically optimal urban forms.",

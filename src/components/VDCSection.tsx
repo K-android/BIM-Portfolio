@@ -192,7 +192,7 @@ export default function VDCSection({
               </h3>
             </div>
 
-            <AECWebAppsCabinet />
+            <AECWebAppsCabinet onShowVideo={(url: string, title: string) => setExpandedMedia({ src: url, isVideo: true, googleDriveId: getDriveId(url), alt: title })} />
           </div>
 
           {/* VDC CAREER HISTORY */}
