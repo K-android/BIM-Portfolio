@@ -245,18 +245,18 @@ export const PyRevitToolbar = ({ onShowVideo }: { onShowVideo?: () => void }) =>
                      <h4 className="text-sm font-bold text-gray-200 font-mono tracking-widest uppercase flex items-center gap-3">
                        <Terminal className="w-4 h-4 text-neon-cyan" /> Technical Stack
                      </h4>
-                     <ul className="text-xs text-gray-400 space-y-4 font-mono">
+                     <ul className="text-xs text-gray-200 space-y-4 font-mono">
                         <li className="flex items-start gap-3">
                           <span className="text-gray-600 mt-0.5">&gt;</span>
-                          <div><span className="text-gray-300">Environment:</span><br/>Revit, PyRevit</div>
+                          <div><span className="text-white font-semibold">Environment:</span><br/>Revit, PyRevit</div>
                         </li>
                         <li className="flex items-start gap-3">
                           <span className="text-gray-600 mt-0.5">&gt;</span>
-                          <div><span className="text-gray-300">Languages:</span><br/>Python, C# (.NET Framework)</div>
+                          <div><span className="text-white font-semibold">Languages:</span><br/>Python, C# (.NET Framework)</div>
                         </li>
                         <li className="flex items-start gap-3">
                           <span className="text-gray-600 mt-0.5">&gt;</span>
-                          <div><span className="text-gray-300">API Integration:</span><br/>Autodesk Revit API, Google Gemini 2.5 Flash REST API</div>
+                          <div><span className="text-white font-semibold">API Integration:</span><br/>Autodesk Revit API, Google Gemini 2.5 Flash REST API</div>
                         </li>
                      </ul>
                   </div>
@@ -264,7 +264,7 @@ export const PyRevitToolbar = ({ onShowVideo }: { onShowVideo?: () => void }) =>
                      <h4 className="text-sm font-bold text-gray-200 font-mono tracking-widest uppercase flex items-center gap-3">
                        <ClipboardCheck className="w-4 h-4 text-[#10B981]" /> Installation
                      </h4>
-                     <ul className="text-[13px] text-gray-400 space-y-4">
+                     <ul className="text-[13px] text-gray-200 space-y-4">
                         <li className="flex items-start gap-3">
                           <div className="w-1.5 h-1.5 rounded-full bg-gray-600 mt-1.5 shrink-0" />
                           <p className="leading-relaxed">Install PyRevit and add the cloned extension folder via settings.</p>

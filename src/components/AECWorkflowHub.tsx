@@ -585,19 +585,19 @@ export const AECWorkflowHub: React.FC = () => {
                             <div className="bg-black/35 p-2 rounded">
                               <span className="text-gray-500 block text-[9px] mb-0.5">CURRENT MATERIAL</span>
                               <span className="text-white font-bold tracking-tight text-[11px]">
-                                {selectedConcept.simulation.steps[simStepIdx].material}
+                                {(selectedConcept.simulation.steps[simStepIdx] as any).material}
                               </span>
                             </div>
                             <div className="bg-black/35 p-2 rounded">
                               <span className="text-gray-500 block text-[9px] mb-0.5">ESTIMATED CO₂ kg</span>
                               <span className="text-[#3B82F6] font-bold block text-[11px]">
-                                {selectedConcept.simulation.steps[simStepIdx].carbon} kgCO2e
+                                {(selectedConcept.simulation.steps[simStepIdx] as any).carbon} kgCO2e
                               </span>
                             </div>
                             <div className="bg-black/35 p-2 rounded">
                               <span className="text-gray-500 block text-[9px] mb-0.5">CARBON OFFSET</span>
                               <span className="text-neon-orange font-bold block text-[11px]">
-                                {selectedConcept.simulation.steps[simStepIdx].offsetPercentage}% Reduced
+                                {(selectedConcept.simulation.steps[simStepIdx] as any).offsetPercentage}% Reduced
                               </span>
                             </div>
                           </>
@@ -608,19 +608,19 @@ export const AECWorkflowHub: React.FC = () => {
                             <div className="bg-black/35 p-2 rounded">
                               <span className="text-gray-500 block text-[9px] mb-0.5">BIM DOORS EVALUATED</span>
                               <span className="text-white font-bold block text-[11px]">
-                                {selectedConcept.simulation.steps[simStepIdx].doorsChecked} elements
+                                {(selectedConcept.simulation.steps[simStepIdx] as any).doorsChecked} elements
                               </span>
                             </div>
                             <div className="bg-black/35 p-2 rounded">
                               <span className="text-gray-500 block text-[9px] mb-0.5">CODE DEVIATIONS</span>
                               <span className="text-red-400 font-bold block text-[11px] animate-pulse">
-                                {selectedConcept.simulation.steps[simStepIdx].violations.length} warnings
+                                {(selectedConcept.simulation.steps[simStepIdx] as any).violations.length} warnings
                               </span>
                             </div>
                             <div className="bg-black/35 p-2 rounded">
                               <span className="text-gray-500 block text-[9px] mb-0.5">COMPLIANCE INDEX</span>
                               <span className="text-[#3B82F6] font-bold block text-[11px]">
-                                {selectedConcept.simulation.steps[simStepIdx].complianceRate}% Compliant
+                                {(selectedConcept.simulation.steps[simStepIdx] as any).complianceRate}% Compliant
                               </span>
                             </div>
                           </>
@@ -631,19 +631,19 @@ export const AECWorkflowHub: React.FC = () => {
                             <div className="bg-black/35 p-2 rounded">
                               <span className="text-gray-500 block text-[9px] mb-0.5">SCAN STREAM COVERAGE</span>
                               <span className="text-white font-bold block text-[11px]">
-                                {selectedConcept.simulation.steps[simStepIdx].scanCoverage}%
+                                {(selectedConcept.simulation.steps[simStepIdx] as any).scanCoverage}%
                               </span>
                             </div>
                             <div className="bg-black/35 p-2 rounded">
                               <span className="text-gray-500 block text-[9px] mb-0.5">CV MATCH POINTS</span>
                               <span className="text-[#3B82F6] font-bold block text-[11px]">
-                                {selectedConcept.simulation.steps[simStepIdx].matchingPoints} pts
+                                {(selectedConcept.simulation.steps[simStepIdx] as any).matchingPoints} pts
                               </span>
                             </div>
                             <div className="bg-black/35 p-2 rounded">
                               <span className="text-gray-500 block text-[9px] mb-0.5">INTEGRATION STATE</span>
                               <span className="text-neon-orange font-bold  block text-xs truncate">
-                                {selectedConcept.simulation.steps[simStepIdx].status}
+                                {(selectedConcept.simulation.steps[simStepIdx] as any).status}
                               </span>
                             </div>
                           </>

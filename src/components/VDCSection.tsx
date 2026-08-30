@@ -3,6 +3,7 @@ import { motion, useScroll, useSpring } from 'motion/react';
 import { Activity, ChevronRight, Download, Terminal, Database, Code2, Layers, Workflow, CheckCircle2, ChevronDown, ShieldCheck } from 'lucide-react';
 import { AECWebAppsCabinet } from './AECWebAppsCabinet';
 import { PyRevitToolbar } from './PyRevitToolbar';
+import { BIMHeroModel } from './BIMHeroModel';
 
 export default function VDCSection({ 
   bimArsenal, 
@@ -68,27 +69,8 @@ export default function VDCSection({
               </div>
 
               {/* Hero Image Component for VDC */}
-              <div className="relative aspect-video lg:aspect-square border border-white/10 bg-[#0a0a0c] overflow-hidden min-h-[350px] md:min-h-[450px] mx-auto w-full max-w-xl lg:max-w-none">
-                <div className="absolute top-0 right-0 p-4 font-sans text-[8px] text-[#3B82F6]/20 text-right leading-tight z-0">
-                  BIM_DATA_STREAM_8829<br/>
-                  COORD_SYS: WGS84<br/>
-                  LOD: 400
-                </div>
-                <div className="absolute inset-x-0 top-1/2 h-[1px] bg-neon-cyan/20 shadow-[0_0_15px_rgba(0,242,255,0.3)] animate-scan z-20 pointer-events-none" />
-                
-                <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
-                  <div className="relative w-full h-full group">
-                    <img loading="lazy" 
-                      src="https://lh3.googleusercontent.com/d/1KWO0JcGakYmARq4aDTMo6BG7CoK1Kt33" 
-                      alt="BIM Hero GIF"
-                      referrerPolicy="no-referrer"
-                      className="w-full h-full object-cover opacity-100 transition-all duration-1000 pointer-events-none select-none animate-fadeIn"
-                    />
-                  </div>
-                </div>
-                <div className="absolute bottom-4 left-4 font-sans text-xs text-[#3B82F6]/60 z-30">
-                  [CORE_VD_v2.4_ENGINE]
-                </div>
+              <div className="relative aspect-video lg:aspect-square border border-white/10 bg-[#0a0a0c] overflow-hidden min-h-[350px] md:min-h-[450px] mx-auto w-full max-w-xl lg:max-w-none rounded-xl">
+                <BIMHeroModel />
               </div>
             </div>
 

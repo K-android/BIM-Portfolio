@@ -76,7 +76,7 @@ const SoftwareStack = ({ isArch }: { isArch: boolean }) => {
       opacity: 1,
       transition: {
         staggerChildren: 0.05
-      }
+      } as any
     }
   };
 
@@ -572,7 +572,7 @@ const ProjectCard = ({
       whileHover={{ 
         y: -10, 
         scale: 1.015,
-        transition: { duration: 0.3, ease: [0.16, 1, 0.3, 1] }
+        transition: { duration: 0.3, ease: [0.16, 1, 0.3, 1] } as any
       }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -877,7 +877,7 @@ const DataTable = () => (
           ["VDC_004", "15.4", "$1,540"],
         ].map(([id, vol, cost], i) => (
           <tr key={`cost-${i}`} className="border-bottom border-white/10">
-            <td className="p-2 text-gray-400">{id}</td>
+            <td className="p-2 text-gray-100">{id}</td>
             <td className="p-2 text-neon-cyan">{vol}</td>
             <td className="p-2 text-white">{cost}</td>
           </tr>
@@ -2457,7 +2457,7 @@ export default function App() {
     initial: { opacity: 1 },
     exit: { 
       opacity: 0,
-      transition: { duration: 0.8, ease: "circOut" }
+      transition: { duration: 0.8, ease: "linear" as any }
     }
   };
 
@@ -2468,13 +2468,13 @@ export default function App() {
       transition: {
         staggerChildren: 0.1,
         delayChildren: 0.2
-      }
+      } as any
     }
   };
 
   const fadeInUp = {
     hidden: { opacity: 0, y: 30 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
+    show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "linear" as any } }
   };
 
   const isModalArch = selectedArsenalItem ? (selectedArsenalItem.id.startsWith("ARCH") || selectedArsenalItem.category === "Fabrication") : false;
@@ -2493,12 +2493,12 @@ export default function App() {
             <div className="w-12 h-12 relative mb-6">
               <motion.div 
                 animate={{ rotate: 360 }}
-                transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                transition={{ duration: 2, repeat: Infinity, ease: "linear" as any as any }}
                 className="absolute inset-0 border-2 border-white/10 rounded-full"
               />
               <motion.div 
                 animate={{ rotate: -360 }}
-                transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                transition={{ duration: 3, repeat: Infinity, ease: "linear" as any as any }}
                 className="absolute inset-1 border-2 border-neon-orange/40 rounded-full border-t-transparent"
               />
               <div className="absolute inset-0 flex items-center justify-center">
@@ -2517,7 +2517,7 @@ export default function App() {
               <motion.div 
                 initial={{ width: 0 }}
                 animate={{ width: "100%" }}
-                transition={{ duration: 1.8, ease: "easeInOut" }}
+                transition={{ duration: 1.8, ease: "linear" as any as any }}
                 className="h-full bg-neon-cyan shadow-[0_0_10px_rgba(0,255,255,0.5)]"
               />
             </div>
@@ -2778,7 +2778,7 @@ export default function App() {
           <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 flex flex-col justify-center min-h-screen pt-36 md:pt-48 pb-12">
             <h1 className="text-4xl sm:text-5xl md:text-5xl lg:text-6xl xl:text-7xl font-sans font-black tracking-tighter text-white leading-[1.1] mb-6">
               Automating Architecture.<br/>
-              <span className="text-gray-400">Engineering Compliant</span><br/>
+              <span className="text-gray-100">Engineering Compliant</span><br/>
               <span className="text-[#3B82F6]">BIM Pipelines.</span>
             </h1>
             
@@ -2833,7 +2833,7 @@ export default function App() {
               
               <div className="hidden md:flex flex-wrap gap-2 mb-8 pb-3 md:pb-0">
                 {['Python', 'Dynamo', 'Revit API', 'Rhino.Inside', 'React', 'TypeScript', 'Node.js', 'Vectorworks'].map((tech, idx) => (
-                  <span key={`${tech}-${idx}`} className="px-2.5 py-1 bg-white/5 border border-white/10 rounded text-[10px] font-mono text-gray-400">
+                  <span key={`${tech}-${idx}`} className="px-2.5 py-1 bg-white/5 border border-white/10 rounded text-[10px] font-mono text-gray-100">
                     {tech}
                   </span>
                 ))}
@@ -2841,7 +2841,7 @@ export default function App() {
               <div className="md:hidden overflow-hidden w-full mb-8 relative" style={{ WebkitMaskImage: "linear-gradient(to right, transparent, black 5%, black 95%, transparent)" }}>
                 <div className="carousel-track flex gap-2 w-max" style={{ animationDuration: "15s" }}>
                   {[...['Python', 'Dynamo', 'Revit API', 'Rhino.Inside', 'React', 'TypeScript', 'Node.js', 'Vectorworks'], ...['Python', 'Dynamo', 'Revit API', 'Rhino.Inside', 'React', 'TypeScript', 'Node.js', 'Vectorworks']].map((tech, idx) => (
-                    <span key={`mobile-${tech}-${idx}`} className="shrink-0 px-2.5 py-1 bg-white/5 border border-white/10 rounded text-[10px] font-mono text-gray-400">
+                    <span key={`mobile-${tech}-${idx}`} className="shrink-0 px-2.5 py-1 bg-white/5 border border-white/10 rounded text-[10px] font-mono text-gray-100">
                       {tech}
                     </span>
                   ))}
@@ -2974,7 +2974,7 @@ export default function App() {
                             <div className="text-[10px] font-mono text-gray-500 uppercase tracking-widest mb-3">Standards & Deliverables</div>
                             <div className="flex flex-wrap gap-2">
                               {telemetryDomains[activeTelemetry].methods.map((t, idx) => (
-                                <span key={`${t}-${idx}`} className="px-2.5 py-1 bg-black/40 border border-white/10 rounded-md text-xs font-mono text-gray-400">
+                                <span key={`${t}-${idx}`} className="px-2.5 py-1 bg-black/40 border border-white/10 rounded-md text-xs font-mono text-gray-100">
                                   {t}
                                 </span>
                               ))}
@@ -3057,7 +3057,7 @@ export default function App() {
             viewport={{ once: true, amount: 0.05 }}
             variants={{
               hidden: { opacity: 0, y: 10 },
-              show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+              show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "linear" as any } }
             }}
             >
             <div className={`border p-6 md:p-8 font-mono text-xs relative overflow-hidden transition-all duration-700 ${
@@ -3267,7 +3267,7 @@ export default function App() {
                           <>
                             <motion.div 
                               animate={{ rotate: 360 }}
-                              transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                              transition={{ duration: 1, repeat: Infinity, ease: "linear" as any as any }}
                               className="w-3 h-3 border-2 border-current border-t-transparent rounded-full"
                             />
                             Sending...
@@ -3732,7 +3732,7 @@ export default function App() {
                               // 07 . DOCUMENTATION
                             </div>
                             <div className="flex flex-wrap gap-4">
-                                {selectedArsenalItem.details?.reportUrl && (
+                                {(selectedArsenalItem.details as any)?.reportUrl && (
                                   <a 
                                     href={selectedArsenalItem.details.reportUrl}
                                     target="_blank"
@@ -3748,7 +3748,7 @@ export default function App() {
                                   </a>
                                 )}
 
-                              {selectedArsenalItem.details?.sheetsUrl && (
+                              {(selectedArsenalItem.details as any)?.sheetsUrl && (
                                 <a 
                                   href={selectedArsenalItem.details.sheetsUrl}
                                   target="_blank"
@@ -3764,7 +3764,7 @@ export default function App() {
                                 </a>
                               )}
 
-                              {selectedArsenalItem.details?.videoUrl && (
+                              {(selectedArsenalItem.details as any)?.videoUrl && (
                                 <button 
                                   onClick={() => {
                                     setExpandedMedia({
@@ -3942,7 +3942,7 @@ export default function App() {
 
                 {/* Full-width Thesis Presentation Sheets */}
                 {selectedArsenalItem.id === "ARCH_05" && (() => {
-                  const sheetsUrl = selectedArsenalItem.details?.sheetsUrl || "https://drive.google.com/file/d/1G2zBH44ll0Yq8nb-djHHUwc14fW4jXAp/view?usp=sharing";
+                  const sheetsUrl = (selectedArsenalItem.details as any)?.sheetsUrl || "https://drive.google.com/file/d/1G2zBH44ll0Yq8nb-djHHUwc14fW4jXAp/view?usp=sharing";
                   const isFolder = sheetsUrl.includes('/folders/') || sheetsUrl.includes('embeddedfolderview');
                   const sheetDriveId = getDriveId(sheetsUrl);
                   const embedSrc = isFolder 
@@ -3999,7 +3999,7 @@ export default function App() {
                 })()}
 
                 {/* Full-width Technical Gallery */}
-                {selectedArsenalItem.id !== "ARCH_05" && selectedArsenalItem.details?.images && selectedArsenalItem.details.images.length > 0 && (
+                {selectedArsenalItem.id !== "ARCH_05" && (selectedArsenalItem.details as any)?.images && selectedArsenalItem.details.images.length > 0 && (
                   <div className={`space-y-6 pt-10 mt-10 border-t transition-all duration-700 ${isArch ? "border-gray-200" : "border-white/10"}`}>
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b pb-3">
                       <div className={`text-[10px] font-mono uppercase tracking-widest transition-colors duration-700 ${isArch ? "text-stone-900 font-bold" : "text-neon-cyan"}`}>
@@ -4106,7 +4106,7 @@ export default function App() {
                                     src: img,
                                     isVideo,
                                     googleDriveId,
-                                    alt: selectedArsenalItem.details?.captions?.[idx] || (type === 'drawing' ? `Technical Drawing Details ${idx + 1}` : `High Quality Render ${idx + 1}`)
+                                    alt: (selectedArsenalItem.details as any)?.captions?.[idx] || (type === 'drawing' ? `Technical Drawing Details ${idx + 1}` : `High Quality Render ${idx + 1}`)
                                   });
                                 }}
                                 className={`aspect-video border relative overflow-hidden transition-all duration-700 cursor-zoom-in rounded ${
@@ -4116,7 +4116,7 @@ export default function App() {
                                 {/* Thumbnail Image */}
                                 <img loading="lazy" 
                                   src={thumbSrc} 
-                                  alt={selectedArsenalItem.details?.captions?.[idx] || (type === 'drawing' ? `Technical Drawing details ${idx + 1}` : `Rendering ${idx + 1}`)}
+                                  alt={(selectedArsenalItem.details as any)?.captions?.[idx] || (type === 'drawing' ? `Technical Drawing details ${idx + 1}` : `Rendering ${idx + 1}`)}
                                   onContextMenu={(e) => e.preventDefault()}
                                   onDragStart={(e) => e.preventDefault()}
                                   className={`w-full h-full object-cover transition-all duration-700 select-none pointer-events-none ${
@@ -4151,7 +4151,7 @@ export default function App() {
                               </div>
                               
                               {/* Optional Caption */}
-                              {selectedArsenalItem.details?.captions && selectedArsenalItem.details.captions[idx] && (
+                              {(selectedArsenalItem.details as any)?.captions && selectedArsenalItem.details.captions[idx] && (
                                 <div className={`text-[10px] md:text-xs font-serif ${isArch ? "text-gray-600" : "text-gray-400 font-mono"} text-center px-2 pb-2 leading-tight`}>
                                   {selectedArsenalItem.details.captions[idx]}
                                 </div>
@@ -4165,13 +4165,13 @@ export default function App() {
                 )}
 
                 {/* Embedded Folders Section */}
-                {selectedArsenalItem.details?.embeddedFolders && selectedArsenalItem.details.embeddedFolders.length > 0 && (
+                {(selectedArsenalItem.details as any)?.embeddedFolders && ((selectedArsenalItem.details as any).embeddedFolders as any[]).length > 0 && (
                   <div className={`space-y-6 pt-10 mt-10 border-t transition-all duration-700 ${isArch ? "border-gray-200" : "border-white/10"}`}>
                     <div className={`text-[10px] font-mono uppercase tracking-widest transition-colors duration-700 border-b pb-3 ${isArch ? "text-stone-900 font-bold" : "text-neon-cyan"}`}>
                       // 11.5 . {isArch ? "DOCUMENTATION FOLDERS" : "DATA REPOSITORIES"}
                     </div>
                     <div className="space-y-8">
-                      {selectedArsenalItem.details.embeddedFolders.map((folder, idx) => (
+                      {((selectedArsenalItem.details as any).embeddedFolders as any[]).map((folder, idx) => (
                         <div key={"folder-" + idx} className="space-y-3">
                           <h4 className={`text-xs font-bold ${isArch ? "text-stone-800" : "text-gray-200"}`}>
                             {folder.title}
@@ -4191,7 +4191,7 @@ export default function App() {
                 )}
 
                 {/* Auto Carousels Section */}
-                {selectedArsenalItem.details?.autoCarousels && selectedArsenalItem.details.autoCarousels.length > 0 && (
+                {(selectedArsenalItem.details as any)?.autoCarousels && selectedArsenalItem.details.autoCarousels.length > 0 && (
                   <div className={`space-y-6 pt-10 mt-10 border-t transition-all duration-700 ${isArch ? "border-gray-200" : "border-white/10"}`}>
                     <div className={`text-[10px] font-mono uppercase tracking-widest transition-colors duration-700 border-b pb-3 ${isArch ? "text-stone-900 font-bold" : "text-neon-cyan"}`}>
                       // 11.6 . {isArch ? "DRAWINGS CAROUSEL" : "DATA CAROUSEL"}
@@ -4215,7 +4215,7 @@ export default function App() {
                 )}
 
                 {/* Presentation Grids Section */}
-                {selectedArsenalItem.details?.presentationGrids && selectedArsenalItem.details.presentationGrids.length > 0 && (
+                {(selectedArsenalItem.details as any)?.presentationGrids && selectedArsenalItem.details.presentationGrids.length > 0 && (
                   <div className={"space-y-4 pt-10 mt-10 border-t transition-all duration-700 " + (isArch ? "border-gray-200" : "border-white/10")}>
                     <div className={"text-[10px] font-mono uppercase tracking-widest border-b pb-3 transition-colors duration-700 " + (isArch ? "text-stone-900 font-bold" : "text-neon-cyan")}>
                       // 12 . {isArch ? "DETAILED DRAWINGS & PRESENTATIONS" : "EXECUTIVE BRIEFINGS"}
@@ -4247,7 +4247,7 @@ export default function App() {
                 )}
 
                 {/* Slide Decks Section */}
-                {selectedArsenalItem.details?.slideDecks && selectedArsenalItem.details.slideDecks.length > 0 && (
+                {(selectedArsenalItem.details as any)?.slideDecks && selectedArsenalItem.details.slideDecks.length > 0 && (
                   <div className={"space-y-8 pt-10 mt-10 border-t transition-all duration-700 " + (isArch ? "border-gray-200" : "border-white/10")}>
                     <div className={"text-[10px] font-mono uppercase tracking-widest border-b pb-3 transition-colors duration-700 " + (isArch ? "text-stone-900 font-bold" : "text-neon-cyan")}>
                       // 13 . {isArch ? "SITE VISITS & PROGRESS" : "EXECUTIVE BRIEFINGS"}
